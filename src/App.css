@@ -1,0 +1,20 @@
+.pusher {
+  width: calc(100% - 260px);
+}
+.pusher .items {
+  padding: 0 20px;
+  padding-top: 70px;
+}
+.ui.vertical.sidebar {
+  top: 48px;
+}
+
+.item .counter {
+  display: inline-block;
+}
+.item .counter i.up:hover {
+ color: green !important;
+}
+.item .counter i.down:hover {
+ color: red !important;
+}

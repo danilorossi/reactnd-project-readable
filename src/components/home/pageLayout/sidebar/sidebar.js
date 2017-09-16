@@ -14,13 +14,13 @@ class Sidebar extends Component {
 
         <NavLink activeClassName="active" exact to='/posts/all' className="item">
           All categories
-           <div className={`ui label ${countTagClass("all")}`}>20</div>
+           <div className={`ui label ${countTagClass("all")}`}>?</div>
         </NavLink>
 
         { this.props.categories.list.map( category => (
           <NavLink key={category.name} activeClassName="active" to={`/posts/${category.path}`} className="item">
             # {category.name}
-            <div className={`ui label ${countTagClass(category.path)}`}>5</div>
+            <div className={`ui label ${countTagClass(category.path)}`}>?</div>
           </NavLink>
         ))}
 

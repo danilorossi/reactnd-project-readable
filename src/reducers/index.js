@@ -3,13 +3,13 @@
 import { combineReducers } from 'redux';
 
 import categories from './categoryReducers';
-import posts from './postReducers';
+import postsByCategory from './postReducers';
 // import authors from './authorReducers';
 // import ajaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
     categories,
-    posts
+    postsByCategory // NOTE looks like this must match the initial state key 
     // ajaxCallsInProgress
 });
 

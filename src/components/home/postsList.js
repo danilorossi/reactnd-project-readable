@@ -2,27 +2,34 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { updateCurrentCategory } from '../../actions/categoryActions'
+import { updateCurrentCategory } from '../../actions/categoryActions';
+import { loadPostsByCategory } from '../../actions/postActions';
+
 import ListItem from './listItem';
+import NoResults from './noResults';
 
 class PostsList extends Component {
 
-  constructor(props) {
-      super(props);
-      this.props.categorySelected(this.props.categoryId);
-  }
-
-  componentDidUpdate() {
-    this.props.categorySelected(this.props.categoryId);
-  }
-
   render() {
     return (
-      <div className="ui divided items">
-        <ListItem currentCategoryId={this.props.categoryId}/>
+      <div>
+        { this.props.posts && this.props.posts.length === 0 && <NoResults categoryId={this.props.categoryId} /> }
+        { this.props.posts && this.props.posts.length > 0 && (
+          <div className="ui divided items">
+            {this.props.posts.map( post => (
+              <ListItem
+                key={post.id}
+                data={post}
+                currentCategoryId={this.props.categoryId}
+              />
+            ))}
+
+          </div>
+        )}
       </div>
     );
   }
+
 }
 
 PostsList.PropTypes = {
@@ -33,13 +40,14 @@ PropTypes.defaultProps = {
   categoryId: 'all'
 };
 
-function mapDispatchToProps (dispatch) {
-  return {
-    categorySelected: (category) => dispatch(updateCurrentCategory(category)),
-  }
+function mapStateToProps(state, ownProps) {
+    // returns the store state props that we'd like to see
+    // exposed on our component
+    return {
+        posts: state.postsByCategory[state.categories.current]
+    };
 }
 
 export default connect (
-  null,
-  mapDispatchToProps
+  mapStateToProps
 )(PostsList);

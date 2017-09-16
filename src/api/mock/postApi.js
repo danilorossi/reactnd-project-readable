@@ -35,6 +35,34 @@ class PostApi {
 
   };
 
+  static getPostsByCategory(category) {
+    return new Promise((resolve, reject) => setTimeout(
+        () => {
+
+          const keys = Object.keys(DEFAULT_DATA);
+
+          switch(category) {
+            case 'all':
+              resolve(DEFAULT_DATA);
+              break;
+
+            case 'react':
+              resolve({ [keys[0]]: DEFAULT_DATA[keys[0]] });
+              break;
+
+            case 'redux':
+              // resolve(DEFAULT_DATA['6ni6ok3ym7mf1p33lnez']);
+              resolve({ [keys[1]]: DEFAULT_DATA[keys[1]] });
+              break;
+
+            default: resolve([]);
+          }
+
+        }, MOCKED_API_DELAY)
+    );
+
+  }
+
 }
 
 export default PostApi;

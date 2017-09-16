@@ -10,7 +10,7 @@
     "redux": "^3.7.2",
     "redux-immutable-state-invariant": "^2.0.0",
     "redux-thunk": "^2.2.0",
-    "semantic-ui": "^2.2.13"
+    "semantic-ui": "2.2.13"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,5 +1,4 @@
-
-const MOCK_DELAY = 3000;
+import { MOCKED_API_DELAY } from './delay';
 
 class CategoryApi {
 
@@ -21,7 +20,7 @@ class CategoryApi {
                 path: 'udacity'
               }
           ]
-      }), MOCK_DELAY)
+      }), MOCKED_API_DELAY)
     );
 
   };

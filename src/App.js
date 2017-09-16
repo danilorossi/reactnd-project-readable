@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import './App.css';
 
 import { loadCategories } from './actions/categoryActions';
+import { loadPostsByCategory } from './actions/postActions';
 import configureStore from './store/configureStore';
 
 import HomePage from './components/home/homePage';
@@ -16,6 +17,7 @@ import HomePage from './components/home/homePage';
 const store = configureStore();
 
 store.dispatch(loadCategories());
+store.dispatch(loadPostsByCategory('all'));
 
 class App extends Component {
   render() {

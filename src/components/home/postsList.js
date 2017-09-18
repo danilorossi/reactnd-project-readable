@@ -16,7 +16,7 @@ class PostsList extends Component {
         { this.props.posts && this.props.posts.length === 0 && <NoResults categoryId={this.props.categoryId} /> }
         { this.props.posts && this.props.posts.length > 0 && (
           <div className="ui divided items">
-            {this.props.posts.map( post => (
+            {this.props.posts.map( (post, index) => (
               <ListItem
                 key={post.id}
                 data={post}

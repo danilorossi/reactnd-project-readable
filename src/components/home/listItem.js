@@ -15,9 +15,12 @@ class ListItem extends Component {
     return (
 
         <div className="item">
+
           <div className="content">
 
-            <a className="header">{postData.title}</a>
+            <a className="header">
+              {postData.title}
+            </a>
 
 
             <div className="counter">
@@ -46,7 +49,7 @@ class ListItem extends Component {
             }
 
 
-              <Link to="/post/23" className="ui right floated basic very tiny orange button">
+              <Link to={`/post/${postData.id}`} className="ui right floated basic very tiny orange button">
                 Read
               </Link>
 

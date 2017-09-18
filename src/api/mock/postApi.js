@@ -27,6 +27,7 @@ const DEFAULT_DATA = {
 
 class PostApi {
 
+// TODO this is not managing the DELETE prop
   static getAllPosts() {
 
     return new Promise((resolve, reject) => setTimeout(

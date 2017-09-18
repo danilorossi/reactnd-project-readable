@@ -20,6 +20,7 @@ class PostDetailsHeader extends Component {
         </Link>
 
       </div>
+ 
 
         <div className="item right aligned">
 

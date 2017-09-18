@@ -3,5 +3,6 @@ export default {
     current: 'all',
     list: []
   },
-  postsByCategory: {}
+  postsByCategory: {},
+  commentsByParentId: {}
 }

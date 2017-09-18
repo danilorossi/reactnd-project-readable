@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import CommentItem from './commentItem';
+import Loader from '../common/loader';
 
 class Comments extends Component {
 
@@ -13,7 +14,7 @@ class Comments extends Component {
 
         <h4 className="ui dividing header">{this.props.comments === null ? '-' : this.props.comments.length} comment(s)</h4>
 
-        {!this.props.comments && <h3>LOADING</h3>}
+        {!this.props.comments && <Loader message={"Loading"} />}
 
         <div className="ui comments">
 

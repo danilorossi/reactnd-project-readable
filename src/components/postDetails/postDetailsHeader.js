@@ -20,11 +20,11 @@ class PostDetailsHeader extends Component {
         </Link>
 
       </div>
- 
+
 
         <div className="item right aligned">
 
-        <Link to="/new-post" className="ui vertical right  floated teal animated button" tabIndex="0">
+        <Link to={`/manage/${this.props.postId}`} className="ui vertical right  floated teal animated button" tabIndex="0">
           <div className="hidden content">
           <i className="edit icon"></i>
           </div>

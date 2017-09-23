@@ -28,14 +28,21 @@ class Comments extends Component {
 
         </div>
         {this.props.comments &&
+            <div>
+          <h4 className="ui dividing header">Leave a comment:</h4>
+
           <form className="ui reply form">
             <div className="field">
-              <textarea rows="2"></textarea>
+              <textarea placeholder="Your comment here!" rows="3"></textarea>
+            </div>
+            <div className="field">
+             <input type="text" placeholder="Leave your name!" name="name" />
             </div>
             <div className="ui teal labeled submit icon button">
               <i className="icon save"></i> Add comment
             </div>
           </form>
+            </div>
         }
 
       </div>

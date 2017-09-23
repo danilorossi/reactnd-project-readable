@@ -16,6 +16,7 @@ import { loadCategories } from './actions/categoryActions';
 import configureStore from './store/configureStore';
 
 import HomePage from './components/home/homePage';
+import PostDetailsPage from './components/postDetails/postDetailsPage';
 
 const store = configureStore();
 
@@ -31,9 +32,11 @@ class App extends Component {
         <Router history={history}>
           <div>
             <Route path='/new-post' render={() => <h3>FORM</h3>} />
-            <Route path='/post/:postId' render={({match}) => <h3>POST {match.params.postId} DETAILS</h3>} />
+            {/*<Route path='/post/:postId' render={({match}) => <h3>POST {match.params.postId} DETAILS</h3>} />*/}
+            <Route path='/post/:postId'  render={({match}) => <PostDetailsPage postId={match.params.postId}/>}/>
             <Route exact path='/' render={() => <Redirect to="/posts/all"/>} />
-            <Route path="/posts" component={withRouter(HomePage)} />
+            {/*<Route path="/posts" component={withRouter(HomePage)} />*/}
+            <Route path="/posts" component={HomePage} />
           </div>
         </Router>
       </Provider>

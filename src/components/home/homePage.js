@@ -6,7 +6,7 @@ import { updateCurrentCategory } from '../../actions/categoryActions';
 import { loadPostsByCategory } from '../../actions/postActions';
 
 import PostsList from './postsList';
-import Navbar from './pageLayout/navbar';
+import HomeHeader from './pageLayout/homeHeader';
 import Sidebar from './pageLayout/sidebar/sidebar';
 
 class HomePage extends Component {
@@ -28,7 +28,7 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <HomeHeader />
         <Sidebar currentCategoryId={this.props.currentCategoryId} />
         <div className="pusher">
           <Route exact path='/posts/' render={() => <Redirect to="/posts/all"/>} />

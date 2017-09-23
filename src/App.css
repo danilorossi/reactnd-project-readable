@@ -18,3 +18,18 @@
 .item .counter i.down:hover {
  color: red !important;
 }
+
+.riei-field {
+  width: 100% !important;
+}
+span.riei-field:hover {
+  background-color: rgba(0, 181, 173, 0.20);
+}
+
+
+.toastify--top-right {
+  top: 65px !important;
+}
+.toastify-content {
+  background: #00b5ad !important;
+}

@@ -14,7 +14,7 @@ class HomeHeader extends Component {
 
         <div className="item right aligned">
 
-          <Link to="/new-post" className="ui vertical right  floated teal animated button" tabIndex="0">
+          <Link to="/manage/new" className="ui vertical right  floated teal animated button" tabIndex="0">
             <div className="hidden content">
             <i className="plus icon"></i>
             </div>

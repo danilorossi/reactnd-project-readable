@@ -57,22 +57,22 @@ class PostDetailsPage extends Component {
         <div className="ui grid">
 
         <div className="four wide column">
-            <Votes voteScore={postDetails.voteScore}/> 
+
         </div>
 
           <div className="eight wide column">
 
             <PostDetailsHeader postId={postDetails.id} onEditPost={this.onEditPost}/>
 
+            <Votes voteScore={postDetails.voteScore}/>
+
             <h3 className="ui dividing header">
-              ({postDetails.voteScore}) {postDetails.title}
-
-
+              {postDetails.title}
             </h3>
 
             <div className="meta" style={authorStyle}>
 
-              <span className="cinema">@{postDetails.author},</span>
+              <span className="cinema">@{postDetails.author}, </span>
               <span className="cinema"><TimeAgo date={postDetails.timestamp} /></span>
               <span> in <Link to={`/posts/${postDetails.category}`}>#{postDetails.category}</Link></span>
             </div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import TimeAgo from 'react-timeago';
 
 import { RIETextArea } from 'riek';
+import Votes from '../common/votes';
 
 class CommentItem extends Component {
 
@@ -28,9 +29,11 @@ class CommentItem extends Component {
            <img src="/assets/defaultUserAvatar.small.png" />
          </a>
             <div className="content">
-              <a className="author"><span>VOTES: {comment.voteScore} - </span> @{comment.author}</a>
+
               <div className="metadata">
+              <a className="author">@{comment.author},</a>
                <div className="date"><TimeAgo date={comment.timestamp} /></div>
+
              </div>
 
                 <div className="text">
@@ -45,7 +48,9 @@ class CommentItem extends Component {
                 </div>
 
               <div className="actions">
+               <Votes size="small" voteScore={comment.voteScore}/>
                   <a className="reply">Delete</a>
+
               </div>
 
             </div>

@@ -1,6 +1,23 @@
 import React from 'react';
 
-const Votes = ({ voteScore }) => {
+const Votes = ({ size, voteScore }) => {
+
+  let counterStyle = {};
+
+  switch(size) {
+
+    case 'small':
+      counterStyle = { padding: '3px 7px' };
+      break;
+
+    default:
+      counterStyle = {
+        paddingLeft: '10px',
+        paddingRight: '10px',
+      }
+
+  }
+
   return (
     <div className="right floated" style={{ display: 'inline-block'}}>
 
@@ -8,19 +25,19 @@ const Votes = ({ voteScore }) => {
       style={{
         margin: '0',
         borderTopRightRadius: '0',
-        borderBottomRightRadius: '0'
+        borderBottomRightRadius: '0',
+        background: 'transparent',
+        paddingRight: '3px'
       }}
       className="ui icon mini button">
-      <i className="minus icon"></i>
+      <i className="minus teal icon"></i>
     </button>
 
       <a
         style={{
           margin: '0',
-          borderRadius: '0',
-          paddingLeft: '10px',
-          paddingRight: '10px',
-          verticalAlign: 'middle'
+          verticalAlign: 'middle',
+          ...counterStyle,
         }}
         className="ui basic mini teal button">
         <i className="heart icon"></i>
@@ -31,10 +48,12 @@ const Votes = ({ voteScore }) => {
         style={{
           margin: '0',
           borderTopLeftRadius: '0',
-          borderBottomLeftRadius: '0'
+          borderBottomLeftRadius: '0',
+          background: 'transparent',
+          paddingLeft: '3px'
         }}
         className="ui icon mini button">
-        <i className="plus icon"></i>
+        <i className="plus teal icon"></i>
       </button>
 
     </div>

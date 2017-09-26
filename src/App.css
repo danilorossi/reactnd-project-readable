@@ -9,15 +9,6 @@
   top: 48px;
 }
 
-.item .counter {
-  display: inline-block;
-}
-.item .counter i.up:hover {
- color: green !important;
-}
-.item .counter i.down:hover {
- color: red !important;
-}
 
 .riei-field {
   width: 100% !important;

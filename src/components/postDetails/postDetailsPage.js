@@ -13,6 +13,7 @@ import { editPost } from '../../actions/postFormActions';
 import PostDetailsHeader from './postDetailsHeader';
 import Comments from './comments';
 import PostForm from '../common/postForm';
+import Votes from '../common/votes';
 
 class PostDetailsPage extends Component {
 
@@ -56,7 +57,7 @@ class PostDetailsPage extends Component {
         <div className="ui grid">
 
         <div className="four wide column">
-
+            <Votes voteScore={postDetails.voteScore}/> 
         </div>
 
           <div className="eight wide column">
@@ -65,14 +66,15 @@ class PostDetailsPage extends Component {
 
             <h3 className="ui dividing header">
               ({postDetails.voteScore}) {postDetails.title}
-              <Link to={`/posts/${postDetails.category}`} className="ui teal small label"># {postDetails.category}</Link>
+
 
             </h3>
 
             <div className="meta" style={authorStyle}>
 
-              <span className="cinema">@{postDetails.author}, </span>
-              <span className="cinema"><TimeAgo date={postDetails.timestamp} />.</span>
+              <span className="cinema">@{postDetails.author},</span>
+              <span className="cinema"><TimeAgo date={postDetails.timestamp} /></span>
+              <span> in <Link to={`/posts/${postDetails.category}`}>#{postDetails.category}</Link></span>
             </div>
 
             <p>{postDetails.body}</p>

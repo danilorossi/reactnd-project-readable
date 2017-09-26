@@ -17,7 +17,7 @@ const NoResults = ({ categoryId }) => {
         <h2 className="ui sub header">
           Sorry!
         </h2>
-        <span>No posts found in <strong># {categoryId}</strong></span>
+        <span>No posts found in <strong>#{categoryId}</strong></span>
 
       </div>
 

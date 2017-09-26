@@ -14,13 +14,18 @@ class Sidebar extends Component {
 
         <NavLink activeClassName="active" exact to='/posts/all' className="item">
           All categories
-           <div className={`ui label ${countTagClass("all")}`}>?</div>
+          {'all' === this.props.categories.current &&
+           <div className={`ui label ${countTagClass("all")}`}>{this.props.currentCount}</div>
+           }
         </NavLink>
 
         { this.props.categories.list.map( category => (
           <NavLink key={category.name} activeClassName="active" to={`/posts/${category.path}`} className="item">
             # {category.name}
-            <div className={`ui label ${countTagClass(category.path)}`}>?</div>
+            {category.name === this.props.categories.current &&
+              <div className={`ui label ${countTagClass(category.path)}`}>{this.props.currentCount}</div>
+            }
+
           </NavLink>
         ))}
 
@@ -43,9 +48,11 @@ Sidebar.defaultProps = {
   }
 }
 
-function mapStateToProps({ categories }, ownProps) {
+function mapStateToProps({ categories, postsByCategory}, ownProps) {
+  const posts = postsByCategory[categories.current];
   return {
-      categories
+      categories,
+      currentCount: posts ? posts.length : '-'
   };
 }
 

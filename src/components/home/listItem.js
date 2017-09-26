@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TimeAgo from 'react-timeago';
 
+import Votes from '../common/votes';
+
 class ListItem extends Component {
   render() {
 
@@ -22,35 +24,43 @@ class ListItem extends Component {
               {postData.title}
             </a>
 
-
-            <div className="counter">
+            <Votes voteScore={postData.voteScore}/>
+            {/*<div className="counter">
 
               <a><i className="chevron up grey icon"></i></a>
               <a className="tiny orange ui label">2</a>
               <a><i className="chevron down grey icon"></i></a>
-            </div>
+            </div>*/}
 
             <div className="meta" style={authorStyle}>
-              <span className="cinema">@{postData.author}, </span>
-              <span className="cinema"><TimeAgo date={postData.timestamp} />.</span>
+
+
+              <span className="cinema">@{postData.author},</span>
+              <span className="cinema"><TimeAgo date={postData.timestamp} /></span>
+
+              {this.props.currentCategoryId === 'all' &&
+                <span>in <Link to={`/posts/${postData.category}`}>#{postData.category}</Link></span>
+
+              }
+
             </div>
 
 
 
 
-                        <div className="description">
+                        <div className="ui message">
                           <p>{postData.body}</p>
                         </div>
 
 
             <div className="extra">
-            {this.props.currentCategoryId === 'all' &&
-              <Link to={`/posts/${postData.category}`} className="ui teal small label"># {postData.category}</Link>
-            }
+            {/*this.props.currentCategoryId === 'all' &&
+              <Link to={`/posts/${postData.category}`} className="ui purple small label"># {postData.category}</Link>
+            */}
 
 
-              <Link to={`/post/${postData.id}`} className="ui right floated basic very tiny orange button">
-                Read
+              <Link to={`/post/${postData.id}`} className="ui left floated mini orange button">
+                View post
               </Link>
 
             </div>

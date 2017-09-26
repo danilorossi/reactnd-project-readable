@@ -6,6 +6,7 @@ import 'semantic-ui/dist/components/transition.min.js';
 import { connect } from 'react-redux';
 import { closePostForm } from '../../actions/postFormActions';
 
+// TODO switch to portal implementation
 // https://github.com/ryanflorence/react-training/blob/gh-pages/lessons/05-wrapping-dom-libs.md#portals
 class PostForm extends React.Component {
 
@@ -14,45 +15,62 @@ class PostForm extends React.Component {
   }
 
   componentWillReceiveProps() {
-    var modal = window.$(this.modal).modal('show');
-    window.$(this.modal).modal({
+    const $modal = window.$(this.modal);
+    $modal.modal('show');
+    $modal.modal({
       onHide: () => {
         // this.props.closePostForm()
+        // TODO reset redux state
   		}
     })
   }
 
   render() {
-
+    const postData = this.props.data;
     return (
       <div ref={(modal) => { this.modal = modal; }} className="ui modal">
+
         <i className="close icon"></i>
-        <div className="header">
-          Profile Picture
-        </div>
-        <div className="content">
-          <div className="ui medium image">
-            <img src="/images/avatar/large/chris.jpg" />
-          </div>
-          <div className="description">
-            <div className="ui header">We have auto-chosen a profile image for you.</div>
-            <p>We have grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-            <p>Is it okay to use this photo?</p>
-          </div>
-        </div>
+
+        <ModalHeader message={postData.id ? 'Edit post' : 'New post'} />
+
+        <PostInnerForm data={postData} />
+
         <div className="actions">
-          <div className="ui black deny button">
-            Nope
+          <div className="ui red deny button">
+            Cancel
           </div>
-          <div className="ui positive right labeled icon button">
-            Yep, that is me
+          <div className="ui teal right labeled icon button">
+            Save
             <i className="checkmark icon"></i>
           </div>
         </div>
+
       </div>
     );
   }
 
+}
+
+const ModalHeader = ({ message }) => {
+  return (
+    <div className="header">
+      <span>{message}</span>
+    </div>
+  );
+}
+
+const PostInnerForm = ({ data }) => {
+  return (
+    <div className="content">
+
+      <p>{data.body}</p>
+      <div className="description">
+         <p>{data.body}</p>
+      </div>
+
+    </div>
+  );
 }
 
 function mapDispatchToProps (dispatch) {

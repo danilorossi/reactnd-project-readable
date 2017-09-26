@@ -3,7 +3,7 @@ import * as types from '../actions/types';
 import initialState from './initialState';
 
 const POST_TEMPLATE = {
-  id: -1,
+  id: null,
   timestamp: null,
   title: '',
   body: '',

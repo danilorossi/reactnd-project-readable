@@ -4,5 +4,9 @@ export default {
     list: []
   },
   postsByCategory: {},
-  commentsByParentId: {}
+  commentsByParentId: {},
+  postForm: {
+    visible: false,
+    data: {}
+  }
 }

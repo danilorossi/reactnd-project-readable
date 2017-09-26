@@ -14,14 +14,14 @@ class HomeHeader extends Component {
 
         <div className="item right aligned">
 
-          <Link to="/manage/new" className="ui vertical right  floated teal animated button" tabIndex="0">
+          <a onClick={this.props.createPost} className="ui vertical right  floated teal animated button" tabIndex="0">
             <div className="hidden content">
             <i className="plus icon"></i>
             </div>
             <div className="visible content">
               New Post
             </div>
-          </Link>
+          </a>
 
         </div>
 

@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateCurrentCategory } from '../../actions/categoryActions';
-
 import { loadPostsByCategory } from '../../actions/postActions';
+import { createPost } from '../../actions/postFormActions';
+
 
 import PostsList from './postsList';
 import HomeHeader from './pageLayout/homeHeader';
 import Sidebar from './pageLayout/sidebar/sidebar';
+import PostForm from '../common/postForm';
 
 class HomePage extends Component {
 
@@ -28,12 +30,13 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <HomeHeader />
+        <HomeHeader createPost={this.props.newPost}/>
         <Sidebar currentCategoryId={this.props.currentCategoryId} />
         <div className="pusher">
           <Route exact path='/posts/' render={() => <Redirect to="/posts/all"/>} />
           <Route path='/posts/:categoryId' render={() => <PostsList categoryId={this.props.currentCategoryId} />} />
         </div>
+        { this.props.postForm.visible && <PostForm data={this.props.postForm.data}/> }
       </div>
     );
   }
@@ -42,14 +45,16 @@ class HomePage extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-      currentCategoryId: state.categories.current
+      currentCategoryId: state.categories.current,
+      postForm: state.postForm,
   };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     loadPosts: (category) => dispatch(loadPostsByCategory(category)),
-    changeCategory: (category) => dispatch(updateCurrentCategory(category))
+    changeCategory: (category) => dispatch(updateCurrentCategory(category)),
+    newPost: () => dispatch(createPost())
   }
 }
 

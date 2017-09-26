@@ -8,25 +8,18 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { RIETextArea } from 'riek';
 
 import { loadCommentsByParent } from '../../actions/commentActions';
+import { editPost } from '../../actions/postFormActions';
 
 import PostDetailsHeader from './postDetailsHeader';
 import Comments from './comments';
+import PostForm from '../common/postForm';
 
 class PostDetailsPage extends Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     postBody: (props.postDetails && props.postDetails.body ) || ''
-  //   }
-  //   this.updatePostBody = this.updatePostBody.bind(this);
-  // }
-
-  // updatePostBody(data) {
-  //   this.setState({postBody: data.postBody});
-  //   console.log('updatePostBody', arguments);
-  // }
-
+  constructor(props) {
+    super(props);
+    this.onEditPost = this.onEditPost.bind(this);
+  }
   componentDidMount() {
     this.props.loadComments(this.props.postDetails.id);
     setTimeout(() => {
@@ -34,6 +27,9 @@ class PostDetailsPage extends Component {
     }, 2000);
   }
 
+  onEditPost() {
+    this.props.editPost(Object.assign({}, this.props.postDetails));
+  }
   render() {
 
     const authorStyle = {
@@ -55,6 +51,8 @@ class PostDetailsPage extends Component {
           pauseOnHover
         />
 
+        { this.props.postForm.visible && <PostForm data={this.props.postForm.data}/> }
+
         <div className="ui grid">
 
         <div className="four wide column">
@@ -63,7 +61,7 @@ class PostDetailsPage extends Component {
 
           <div className="eight wide column">
 
-            <PostDetailsHeader postId={postDetails.id}/>
+            <PostDetailsHeader postId={postDetails.id} onEditPost={this.onEditPost}/>
 
             <h3 className="ui dividing header">
               ({postDetails.voteScore}) {postDetails.title}
@@ -105,13 +103,15 @@ class PostDetailsPage extends Component {
 function mapStateToProps(state, ownProps) {
   return { // TODO if not, GET /post/:id
       postDetails: state.postsByCategory.all.filter(post => (post.id === ownProps.postId))[0] || null,
-      comments: state.commentsByParentId[ownProps.postId] || null
+      comments: state.commentsByParentId[ownProps.postId] || null,
+      postForm: state.postForm
   };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    loadComments: (parentId) => dispatch(loadCommentsByParent(parentId))
+    loadComments: (parentId) => dispatch(loadCommentsByParent(parentId)),
+    editPost: (postData) => dispatch(editPost(postData))
   }
 }
 

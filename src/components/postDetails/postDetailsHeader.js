@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class PostDetailsHeader extends Component {
+
   render() {
     return (
 
@@ -24,14 +25,14 @@ class PostDetailsHeader extends Component {
 
         <div className="item right aligned">
 
-        <Link to={`/manage/${this.props.postId}`} className="ui vertical right  floated teal animated button" tabIndex="0">
+        <a onClick={this.props.onEditPost} to={`/manage/${this.props.postId}`} className="ui vertical right  floated teal animated button" tabIndex="0">
           <div className="hidden content">
           <i className="edit icon"></i>
           </div>
           <div className="visible content">
             Edit
           </div>
-        </Link>
+        </a>
 
         </div>
 

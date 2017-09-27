@@ -32,8 +32,8 @@ const DEFAULT_DATA = {
     deleted: false,
     parentDeleted: false
   },
-  "asdasdasd": {
-    id: 'asdasdasd',
+  "xxxxxx": {
+    id: 'xxxxxx',
     parentId: "8xf0y6ziyjabvozdd253nd",
     timestamp: 1469479767190,
     body: 'This is another fake comment!',
@@ -41,7 +41,20 @@ const DEFAULT_DATA = {
     voteScore: 0,
     deleted: false,
     parentDeleted: false
+  },
+  "yyyyyy": {
+    id: 'yyyyyy',
+    parentId: "6ni6ok3ym7mf1p33lnez",
+    timestamp: 1469479767190,
+    body: 'This is a fake comment!',
+    author: 'thingone',
+    voteScore: -101,
+    deleted: false,
+    parentDeleted: false
   }
+
+
+
 };
 
 

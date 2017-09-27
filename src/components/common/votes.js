@@ -23,7 +23,10 @@ const Votes = ({ type, voteScore, style }) => {
       showIcon = false;
       if(score > 100) {
         counterStyle = { padding: '5px' };
-        score = '99+';
+        score = '> 99';
+      } else if(score < -100) {
+        counterStyle = { padding: '5px' };
+        score = '< 99';
       }
       break;
 

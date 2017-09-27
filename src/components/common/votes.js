@@ -1,25 +1,41 @@
 import React from 'react';
 
-const Votes = ({ size, voteScore }) => {
+const Votes = ({ type, voteScore, style }) => {
 
   let counterStyle = {};
+  let buttonLeft = {};
+  let buttonRight = {};
+  let showIcon = true;
+  let score = +voteScore;
+  let mainColor = 'green';
+  if(score === 0) {
+    mainColor = 'grey';
+  } else if(score < 0) {
+    mainColor = 'red';
+  }
 
-  switch(size) {
+  switch(type) {
 
-    case 'small':
-      counterStyle = { padding: '3px 7px' };
+    case 'vertical':
+      counterStyle = { padding: '3px 10px' };
+      buttonLeft = { padding: '0' };
+      buttonRight = { padding: '0' };
+      showIcon = false;
+      if(score > 100) {
+        counterStyle = { padding: '5px' };
+        score = '99+';
+      }
       break;
 
     default:
-      counterStyle = {
-        paddingLeft: '10px',
-        paddingRight: '10px',
-      }
+      counterStyle = { padding: '5px 7px' };
+      buttonLeft = { paddingRight: '3px' };
+      buttonRight = { paddingLeft: '3px' };
 
   }
 
   return (
-    <div className="right floated" style={{ display: 'inline-block'}}>
+    <div title={`${voteScore} votes`} className="right floated" style={{ display: 'inline-block', textAlign: 'center', ...(style || {}) }}>
 
     <button
       style={{
@@ -27,10 +43,10 @@ const Votes = ({ size, voteScore }) => {
         borderTopRightRadius: '0',
         borderBottomRightRadius: '0',
         background: 'transparent',
-        paddingRight: '3px'
+        ...buttonLeft
       }}
       className="ui icon mini button">
-      <i className="minus teal icon"></i>
+      <i className={`plus ${mainColor} icon`}></i>
     </button>
 
       <a
@@ -39,9 +55,9 @@ const Votes = ({ size, voteScore }) => {
           verticalAlign: 'middle',
           ...counterStyle,
         }}
-        className="ui basic mini teal button">
-        <i className="heart icon"></i>
-        {voteScore}
+        className={`ui basic mini button ${mainColor}`}>
+        {showIcon && <i className="heart icon"></i>}
+        {score}
       </a>
 
       <button
@@ -50,10 +66,10 @@ const Votes = ({ size, voteScore }) => {
           borderTopLeftRadius: '0',
           borderBottomLeftRadius: '0',
           background: 'transparent',
-          paddingLeft: '3px'
+          ...buttonRight
         }}
         className="ui icon mini button">
-        <i className="plus teal icon"></i>
+        <i className={`minus ${mainColor} icon`}></i>
       </button>
 
     </div>

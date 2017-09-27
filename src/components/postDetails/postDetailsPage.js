@@ -57,6 +57,14 @@ class PostDetailsPage extends Component {
         <div className="ui grid">
 
         <div className="four wide column">
+        
+          <Votes
+            voteScore={postDetails.voteScore}
+            style={{
+              position: 'absolute',
+              right: '0',
+              top: '37px'
+            }}/>
 
         </div>
 
@@ -64,7 +72,6 @@ class PostDetailsPage extends Component {
 
             <PostDetailsHeader postId={postDetails.id} onEditPost={this.onEditPost}/>
 
-            <Votes voteScore={postDetails.voteScore}/>
 
             <h3 className="ui dividing header">
               {postDetails.title}
@@ -77,7 +84,7 @@ class PostDetailsPage extends Component {
               <span> in <Link to={`/posts/${postDetails.category}`}>#{postDetails.category}</Link></span>
             </div>
 
-            <p>{postDetails.body}</p>
+            <div className="ui message">{postDetails.body}</div>
           {/*  <p>
               <RIETextArea
                 rows="4"
@@ -89,6 +96,7 @@ class PostDetailsPage extends Component {
               />
             </p>*/}
 
+            <br />
             <Comments postId={postDetails.id} comments={this.props.comments}/>
 
 

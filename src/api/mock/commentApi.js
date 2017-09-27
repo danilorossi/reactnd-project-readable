@@ -21,6 +21,26 @@ const DEFAULT_DATA = {
     voteScore: -5,
     deleted: false,
     parentDeleted: false
+  },
+  "xxu4bsun805n8un48veas": {
+    id: 'xxu4bsun805n8un48veas',
+    parentId: "8xf0y6ziyjabvozdd253nd",
+    timestamp: 1469479767190,
+    body: 'This is a fake comment!',
+    author: 'thingone',
+    voteScore: 101,
+    deleted: false,
+    parentDeleted: false
+  },
+  "asdasdasd": {
+    id: 'asdasdasd',
+    parentId: "8xf0y6ziyjabvozdd253nd",
+    timestamp: 1469479767190,
+    body: 'This is another fake comment!',
+    author: 'thingone',
+    voteScore: 0,
+    deleted: false,
+    parentDeleted: false
   }
 };
 
@@ -33,7 +53,7 @@ class CommentApi {
         () => {
           const comments = Object.keys(DEFAULT_DATA)
             .map(key => DEFAULT_DATA[key])
-            .filter(comment => comment.parentId === postId && comment.deleted === false  && comment.parentDeleted === false); 
+            .filter(comment => comment.parentId === postId && comment.deleted === false  && comment.parentDeleted === false);
           resolve({ [postId]: comments });
         }, MOCKED_API_DELAY)
     );

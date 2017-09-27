@@ -25,12 +25,12 @@ class CommentItem extends Component {
     return (
         <div className="ui comments">
           <div className="comment">
-          <a className="avatar">
-           <img src="/assets/defaultUserAvatar.small.png" />
+          <a className="avatar" style={{ margin: '0' }}>
+          <Votes type="vertical" voteScore={comment.voteScore}/>
          </a>
             <div className="content">
 
-              <div className="metadata">
+              <div className="metadata" style={{ marginLeft: '0' }}>
               <a className="author">@{comment.author},</a>
                <div className="date"><TimeAgo date={comment.timestamp} /></div>
 
@@ -48,7 +48,7 @@ class CommentItem extends Component {
                 </div>
 
               <div className="actions">
-               <Votes size="small" voteScore={comment.voteScore}/>
+
                   <a className="reply">Delete</a>
 
               </div>

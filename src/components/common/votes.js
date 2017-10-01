@@ -52,7 +52,7 @@ const Votes = ({ type, voteScore, style }) => {
       <i className={`plus ${mainColor} icon`}></i>
     </button>
 
-      <a
+      <div
         style={{
           margin: '0',
           verticalAlign: 'middle',
@@ -61,7 +61,7 @@ const Votes = ({ type, voteScore, style }) => {
         className={`ui basic mini button ${mainColor}`}>
         {showIcon && <i className="heart icon"></i>}
         {score}
-      </a>
+      </div>
 
       <button
         style={{

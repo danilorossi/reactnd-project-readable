@@ -52,12 +52,12 @@ class PostDetailsPage extends Component {
           pauseOnHover
         />
 
-        { this.props.postForm.visible && <PostForm data={this.props.postForm.data}/> }
+        <PostForm show={this.props.postForm.visible} data={this.props.postForm.data}/>
 
         <div className="ui grid">
 
         <div className="four wide column">
-        
+
           <Votes
             voteScore={postDetails.voteScore}
             style={{

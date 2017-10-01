@@ -36,7 +36,7 @@ class HomePage extends Component {
           <Route exact path='/posts/' render={() => <Redirect to="/posts/all"/>} />
           <Route path='/posts/:categoryId' render={() => <PostsList categoryId={this.props.currentCategoryId} />} />
         </div>
-        { this.props.postForm.visible && <PostForm data={this.props.postForm.data}/> }
+       <PostForm show={this.props.postForm.visible} data={this.props.postForm.data}/>  
       </div>
     );
   }

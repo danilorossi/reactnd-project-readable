@@ -14,13 +14,19 @@ class PostForm extends React.Component {
     super(props);
   }
 
-  componentWillReceiveProps() {
+  componentWillMount() {
+  }
+  componentWillReceiveProps(props) {
+    props.show && console.log('PostForm modal componentWillReceiveProps: ', props);
+    props.show && this.activateModal();
+  }
+
+  activateModal() {
     const $modal = window.$(this.modal);
     $modal.modal('show');
     $modal.modal({
       onHide: () => {
-        // this.props.closePostForm()
-        // TODO reset redux state
+        this.props.closePostForm()
   		}
     })
   }

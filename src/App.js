@@ -31,7 +31,7 @@ class App extends Component {
       <Provider store={store}>
         <Router history={history}>
           <div>
-            <Route exact path='/manage/:postId' render={({match}) => <h3>FORM for post {match.params.postId}</h3>} />
+            {/*<Route exact path='/manage/:postId' render={({match}) => <h3>FORM for post {match.params.postId}</h3>} />*/}
             {/*<Route path='/post/:postId' render={({match}) => <h3>POST {match.params.postId} DETAILS</h3>} />*/}
             <Route path='/post/:postId'  render={({match}) => <PostDetailsPage postId={match.params.postId}/>}/>
             <Route exact path='/' render={() => <Redirect to="/posts/all"/>} />

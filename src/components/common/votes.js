@@ -38,9 +38,10 @@ const Votes = ({ type, voteScore, style }) => {
   }
 
   return (
-    <div title={`${voteScore} votes`} className="right floated" style={{ display: 'inline-block', textAlign: 'center', ...(style || {}) }}>
+    <div className="right floated" style={{ display: 'inline-block', textAlign: 'center', ...(style || {}) }}>
 
     <button
+      title="Vote up"
       style={{
         margin: '0',
         borderTopRightRadius: '0',
@@ -53,6 +54,7 @@ const Votes = ({ type, voteScore, style }) => {
     </button>
 
       <div
+        title={`${voteScore} votes`}
         style={{
           margin: '0',
           verticalAlign: 'middle',
@@ -64,6 +66,7 @@ const Votes = ({ type, voteScore, style }) => {
       </div>
 
       <button
+        title="Vote down"
         style={{
           margin: '0',
           borderTopLeftRadius: '0',

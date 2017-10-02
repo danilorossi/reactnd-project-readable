@@ -10,7 +10,7 @@ export default function postReducer(state = initialState.postsByCategory, action
             ...state,
             [action.category]: action.posts
           };
-
+        
         default:
             return state;
 

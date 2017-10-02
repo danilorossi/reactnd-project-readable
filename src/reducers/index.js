@@ -6,12 +6,14 @@ import categories from './categoryReducers';
 import postsByCategory from './postReducers';
 import commentsByParentId from './commentReducers';
 import postForm from './postFormReducers';
+import ajaxStatus from './ajaxStatusReducers';
 
 const rootReducer = combineReducers({
   categories,
   postsByCategory,
   commentsByParentId,
-  postForm
+  postForm,
+  ajaxStatus
 });
 
 export default rootReducer;

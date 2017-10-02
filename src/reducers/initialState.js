@@ -8,5 +8,8 @@ export default {
   postForm: {
     visible: false,
     data: {}
+  },
+  ajaxStatus: {
+    votes: {}
   }
 }

@@ -8,7 +8,13 @@ import Loader from '../common/loader';
 class Comments extends Component {
 
   render() {
+
     console.log(this.props.comments);
+    const commentVoteScoreAttrs = {
+      voteUp: this.props.voteUp,
+      voteDown: this.props.voteDown,
+      loadingStatus: this.props.loadingStatus
+    };
     return (
       <div>
 
@@ -23,7 +29,10 @@ class Comments extends Component {
           }
 
           {this.props.comments && this.props.comments.map(comment => (
-            <CommentItem key={comment.id} comment={comment} />
+            <CommentItem
+              {...commentVoteScoreAttrs}
+              key={comment.id}
+              comment={comment} />
           ))}
 
         </div>

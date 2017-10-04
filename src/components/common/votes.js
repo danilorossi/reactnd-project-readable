@@ -17,7 +17,6 @@ const Votes = ({ type, voteScore, style, loading, voteUp, voteDown, postId }) =>
   switch(type) {
 
     case 'vertical':
-      counterStyle = { padding: '3px 10px' };
       buttonLeft = { padding: '0' };
       buttonRight = { padding: '0' };
       showIcon = false;
@@ -27,6 +26,8 @@ const Votes = ({ type, voteScore, style, loading, voteUp, voteDown, postId }) =>
       } else if(score < -100) {
         counterStyle = { padding: '5px' };
         score = '< 99';
+      } else {
+        counterStyle = { padding: `${loading?'2px':'3px'} ${loading?'5px':'10px'}`  };
       }
       break;
 
@@ -39,7 +40,7 @@ const Votes = ({ type, voteScore, style, loading, voteUp, voteDown, postId }) =>
 
   const spinnerStyle={
     display: 'inline-block',
-    marginRight: '6px'
+    marginRight: type === 'vertical' ? '0' : '6px'
   };
 
   const buttonExtraAttrs = {};
@@ -74,7 +75,7 @@ const Votes = ({ type, voteScore, style, loading, voteUp, voteDown, postId }) =>
         {!loading && showIcon && <i className="heart icon"></i>}
         {loading && <div style={spinnerStyle} className={`ui active mini ${mainColor} centered inline loader`}></div>}
         {!loading && score}
-        {loading && '-'}
+        {loading && showIcon && '-'}
 
       </div>
 

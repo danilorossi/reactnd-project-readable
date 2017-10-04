@@ -7,7 +7,17 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import { RIETextArea } from 'riek';
 
-import { loadCommentsByParent } from '../../actions/commentActions';
+import {
+  loadCommentsByParent,
+  voteUp as voteCommentUpAPI,
+  voteDown as voteCommentDownAPI
+} from '../../actions/commentActions';
+
+import {
+  voteUp as votePostUpAPI,
+  voteDown as votePostDownAPI
+} from '../../actions/postActions';
+
 import { editPost } from '../../actions/postFormActions';
 
 import PostDetailsHeader from './postDetailsHeader';
@@ -59,12 +69,16 @@ class PostDetailsPage extends Component {
         <div className="four wide column">
 
           <Votes
+            postId={postDetails.id}
+            voteDown={this.props.votePostDown}
+            voteUp={this.props.votePostUp}
+            loading={this.props.votesAjaxStatus.postVotes[postDetails.id] || false}
             voteScore={postDetails.voteScore}
             style={{
               position: 'absolute',
               right: '0',
               top: '37px'
-            }}/>
+          }}/>
 
         </div>
 
@@ -97,7 +111,13 @@ class PostDetailsPage extends Component {
             </p>*/}
 
             <br />
-            <Comments postId={postDetails.id} comments={this.props.comments}/>
+            <Comments
+              voteUp={this.props.voteCommentUp}
+              voteDown={this.props.voteCommentDown}
+              loadingStatus={this.props.votesAjaxStatus.commentVotes}
+              postId={postDetails.id}
+              comments={this.props.comments}
+            />
 
 
           </div>
@@ -114,14 +134,20 @@ function mapStateToProps(state, ownProps) {
   return { // TODO if not, GET /post/:id
       postDetails: state.postsByCategory.all.filter(post => (post.id === ownProps.postId))[0] || null,
       comments: state.commentsByParentId[ownProps.postId] || null,
-      postForm: state.postForm
+      postForm: state.postForm,
+      // TODO change once store is normalized
+      votesAjaxStatus: state.ajaxStatus
   };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     loadComments: (parentId) => dispatch(loadCommentsByParent(parentId)),
-    editPost: (postData) => dispatch(editPost(postData))
+    editPost: (postData) => dispatch(editPost(postData)),
+    voteCommentUp: (commentId) => dispatch(voteCommentUpAPI(commentId)),
+    voteCommentDown: (commentId) => dispatch(voteCommentDownAPI(commentId)),
+    votePostUp: (postId) => dispatch(votePostUpAPI(postId)),
+    votePostDown: (postId) => dispatch(votePostDownAPI(postId))
   }
 }
 

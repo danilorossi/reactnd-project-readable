@@ -15,6 +15,9 @@ export const CANCEL_FORM_POST = Symbol('CancelFromPost');
 export const BEGIN_VOTE_POST = Symbol('BeginVotePost');
 export const VOTE_POST_SUCCESS = Symbol('VotePostSuccess');
 
+export const BEGIN_VOTE_COMMENT = Symbol('BeginVoteComment');
+export const VOTE_COMMENT_SUCCESS = Symbol('VoteCommentSuccess');
+
 
 // export const VOTE_POST_UP = Symbol('VotePostUp');
 // export const VOTE_POST_DOWN = Symbol('VotePostDown');

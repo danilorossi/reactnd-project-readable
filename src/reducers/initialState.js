@@ -10,6 +10,7 @@ export default {
     data: {}
   },
   ajaxStatus: {
-    votes: {}
+    postVotes: {},
+    commentVotes: {}
   }
 }

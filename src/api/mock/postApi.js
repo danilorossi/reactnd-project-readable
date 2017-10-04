@@ -64,12 +64,14 @@ class PostApi {
   }
 
   static votePostUp(postId) {
+    console.warn('TODO: postApi.votePostUp...');
     return new Promise((resolve, reject) => setTimeout(
         () => resolve('TODO: testing API...'), MOCKED_API_DELAY)
     );
   }
 
   static votePostDown(postId) {
+    console.warn('TODO: postApi.votePostDown...');
     return new Promise((resolve, reject) => setTimeout(
         () => resolve('TODO: testing API...'), MOCKED_API_DELAY)
     );

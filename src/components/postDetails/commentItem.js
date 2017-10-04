@@ -26,7 +26,14 @@ class CommentItem extends Component {
         <div className="ui comments">
           <div className="comment">
           <a className="avatar" style={{ margin: '0' }}>
-          <Votes type="vertical" voteScore={comment.voteScore}/>
+          <Votes
+            type="vertical"
+            postId={this.props.comment.id}
+            voteDown={this.props.voteDown}
+            voteUp={this.props.voteUp}
+            loading={this.props.loadingStatus[comment.id]}
+            voteScore={comment.voteScore}
+          />
          </a>
             <div className="content">
 

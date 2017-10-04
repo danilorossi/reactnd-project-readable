@@ -73,6 +73,20 @@ class CommentApi {
 
   };
 
+  static voteCommentUp(commentId) {
+    console.warn('TODO: commentApi.voteCommentUp...');
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve('TODO: testing API...'), MOCKED_API_DELAY)
+    );
+  }
+
+  static voteCommentDown(commentId) {
+    console.warn('TODO: commentApi.voteCommentDown...');
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve('TODO: testing API...'), MOCKED_API_DELAY)
+    );
+  }
+
 
 }
 

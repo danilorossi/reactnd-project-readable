@@ -67,7 +67,7 @@ function mapStateToProps(state, ownProps) {
     return {
         posts: state.postsByCategory[state.categories.current],
         // TODO change once store is normalized
-        votesAjaxStatus: state.ajaxStatus.votes
+        votesAjaxStatus: state.ajaxStatus.postVotes
     };
 }
 

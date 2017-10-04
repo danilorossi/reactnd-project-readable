@@ -8,21 +8,36 @@ export default function ajaxStatusReducer(state = initialState.ajaxStatus, actio
         case types.BEGIN_VOTE_POST:
           return {
             ...state,
-            votes: {
-              ...state.votes,
+            postVotes: {
+              ...state.postVotes,
               [action.postId]: true
             }
           };
 
         case types.VOTE_POST_SUCCESS:
-          // const newState = Object.assign({}, state});
-          // delete newState.votes[action.postId];
-          // return newState;
           return {
             ...state,
-            votes: {
-              ...state.votes,
+            postVotes: {
+              ...state.postVotes,
               [action.postId]: false
+            }
+          };
+
+        case types.BEGIN_VOTE_COMMENT:
+          return {
+            ...state,
+            commentVotes: {
+              ...state.commentVotes,
+              [action.commentId]: true
+            }
+          };
+
+        case types.VOTE_COMMENT_SUCCESS:
+          return {
+            ...state,
+            commentVotes: {
+              ...state.commentVotes,
+              [action.commentId]: false
             }
           };
 

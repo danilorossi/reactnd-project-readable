@@ -11,12 +11,6 @@ export function beginVotePost(postId) {
 export function votePostSuccess(postId) {
   return { type: types.VOTE_POST_SUCCESS, postId };
 }
-// export function votePostUP(postId) {
-//   return { type: types.VOTE_POST_UP, postId };
-// }
-// export function votePostDOWN(postId) {
-//   return { type: types.VOTE_POST_DOWN, postId };
-// }
 
 
 // THUNKs
@@ -37,26 +31,25 @@ export function loadPostsByCategory(category = 'all') {
 
 
 export function voteUp(postId) {
-  console.log('VOTE UP', postId)
   return function(dispatch) {
     dispatch(beginVotePost(postId));
-    PostApi.votePostUp(postId).then(() => {
-      dispatch(votePostSuccess(postId));
-    }).catch(error => {
-        throw(error);
-    });
+    PostApi
+      .votePostUp(postId).then(() => {
+        dispatch(votePostSuccess(postId));
+      }).catch(error => {
+          throw(error);
+      });
   };
 }
 
 export function voteDown(postId) {
-
-  console.log('VOTE DOWN', postId)
   return function(dispatch) {
     dispatch(beginVotePost(postId));
-    PostApi.votePostDown(postId).then(() => {
-      dispatch(votePostSuccess(postId));
-    }).catch(error => {
-        throw(error);
-    });
+    PostApi
+      .votePostDown(postId).then(() => {
+        dispatch(votePostSuccess(postId));
+      }).catch(error => {
+          throw(error);
+      });
   };
 }

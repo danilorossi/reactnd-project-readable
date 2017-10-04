@@ -1,4 +1,5 @@
 import * as types from './types';
+import PostApi from '../api/mock/postApi';
 
 export function startEditPost(postData) {
   return {
@@ -6,11 +7,9 @@ export function startEditPost(postData) {
     postData
   };
 }
-
 export function startCreatePost() {
   return { type: types.START_CREATE_POST };
 }
-
 export function cancelFormPost() {
   return { type: types.CANCEL_FORM_POST };
 }
@@ -28,7 +27,6 @@ export function createPost() {
     dispatch(startCreatePost());
   };
 }
-
 export function closePostForm() {
   return function(dispatch) {
     dispatch(cancelFormPost());

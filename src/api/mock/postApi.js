@@ -64,11 +64,15 @@ class PostApi {
   }
 
   static votePostUp(postId) {
-
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve('TODO: testing API...'), MOCKED_API_DELAY)
+    );
   }
 
   static votePostDown(postId) {
-
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve('TODO: testing API...'), MOCKED_API_DELAY)
+    );
   }
 }
 

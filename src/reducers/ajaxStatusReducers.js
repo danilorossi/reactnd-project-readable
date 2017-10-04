@@ -15,9 +15,16 @@ export default function ajaxStatusReducer(state = initialState.ajaxStatus, actio
           };
 
         case types.VOTE_POST_SUCCESS:
-          const newState = Object.assign({}, state);
-          delete newState.votes[action.postId];
-          return newState;
+          // const newState = Object.assign({}, state});
+          // delete newState.votes[action.postId];
+          // return newState;
+          return {
+            ...state,
+            votes: {
+              ...state.votes,
+              [action.postId]: false
+            }
+          };
 
         default:
           return state;

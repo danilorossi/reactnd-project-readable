@@ -5,6 +5,19 @@ import PostApi from '../api/mock/postApi';
 export function loadPostsByCategorySuccess(category, posts) {
   return { type: types.LOAD_POSTS_SUCCESS, category, posts };
 }
+export function beginVotePost(postId) {
+  return { type: types.BEGIN_VOTE_POST, postId };
+}
+export function votePostSuccess(postId) {
+  return { type: types.VOTE_POST_SUCCESS, postId };
+}
+// export function votePostUP(postId) {
+//   return { type: types.VOTE_POST_UP, postId };
+// }
+// export function votePostDOWN(postId) {
+//   return { type: types.VOTE_POST_DOWN, postId };
+// }
+
 
 // THUNKs
 export function loadPostsByCategory(category = 'all') {
@@ -19,4 +32,31 @@ export function loadPostsByCategory(category = 'all') {
       });
 
     };
+}
+
+
+
+export function voteUp(postId) {
+  console.log('VOTE UP', postId)
+  return function(dispatch) {
+    dispatch(beginVotePost(postId));
+    PostApi.votePostUp(postId).then(() => {
+      dispatch(votePostSuccess(postId));
+    }).catch(error => {
+        throw(error);
+    });
+  };
+}
+
+export function voteDown(postId) {
+
+  console.log('VOTE DOWN', postId)
+  return function(dispatch) {
+    dispatch(beginVotePost(postId));
+    PostApi.votePostDown(postId).then(() => {
+      dispatch(votePostSuccess(postId));
+    }).catch(error => {
+        throw(error);
+    });
+  };
 }

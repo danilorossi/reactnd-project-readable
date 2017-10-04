@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Votes = ({ type, voteScore, style }) => {
+const Votes = ({ type, voteScore, style, loading, voteUp, voteDown, postId }) => {
 
   let counterStyle = {};
   let buttonLeft = {};
@@ -31,17 +31,27 @@ const Votes = ({ type, voteScore, style }) => {
       break;
 
     default:
-      counterStyle = { padding: '5px 7px' };
+      counterStyle = { padding: `${loading?'4px':'5px'} 7px`};
       buttonLeft = { paddingRight: '3px' };
       buttonRight = { paddingLeft: '3px' };
 
   }
 
+  const spinnerStyle={
+    display: 'inline-block',
+    marginRight: '6px'
+  };
+
+  const buttonExtraAttrs = {};
+  if(loading) buttonExtraAttrs.disabled = true;
+
   return (
     <div className="right floated" style={{ display: 'inline-block', textAlign: 'center', ...(style || {}) }}>
 
     <button
+      {...buttonExtraAttrs}
       title="Vote up"
+      onClick={() => voteUp(postId)}
       style={{
         margin: '0',
         borderTopRightRadius: '0',
@@ -61,12 +71,17 @@ const Votes = ({ type, voteScore, style }) => {
           ...counterStyle,
         }}
         className={`ui basic mini button ${mainColor}`}>
-        {showIcon && <i className="heart icon"></i>}
-        {score}
+        {!loading && showIcon && <i className="heart icon"></i>}
+        {loading && <div style={spinnerStyle} className={`ui active mini ${mainColor} centered inline loader`}></div>}
+        {!loading && score}
+        {loading && '-'}
+
       </div>
 
       <button
+        {...buttonExtraAttrs}
         title="Vote down"
+        onClick={() => voteDown(postId)}
         style={{
           margin: '0',
           borderTopLeftRadius: '0',

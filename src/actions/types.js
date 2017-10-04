@@ -16,5 +16,5 @@ export const BEGIN_VOTE_POST = Symbol('BeginVotePost');
 export const VOTE_POST_SUCCESS = Symbol('VotePostSuccess');
 
 
-export const VOTE_POST_UP = Symbol('VotePostUp');
-export const VOTE_POST_DOWN = Symbol('VotePostDown');
+// export const VOTE_POST_UP = Symbol('VotePostUp');
+// export const VOTE_POST_DOWN = Symbol('VotePostDown');

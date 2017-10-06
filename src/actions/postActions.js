@@ -20,7 +20,7 @@ export function loadPostsByCategory(category = 'all') {
       const postsPromise = category === 'all' ? PostApi.getAllPosts() : /* TODO */ PostApi.getPostsByCategory(category);
 
       postsPromise.then(result => {
-          dispatch(loadPostsByCategorySuccess(category, Object.values(result)));
+          dispatch(loadPostsByCategorySuccess(category, result));
       }).catch(error => {
           throw(error);
       });

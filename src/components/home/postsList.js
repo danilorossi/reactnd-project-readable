@@ -9,6 +9,10 @@ import {
   voteDown
 } from '../../actions/postActions';
 
+import {
+  selectByCategory
+} from '../../selectors/postsSelector';
+
 import ListItem from './listItem';
 import NoResults from './noResults';
 
@@ -65,7 +69,8 @@ function mapStateToProps(state, ownProps) {
     // returns the store state props that we'd like to see
     // exposed on our component
     return {
-        posts: state.postsByCategory[state.categories.current],
+      //  posts: state.posts.byCategory[state.categories.current],
+        posts: selectByCategory(state.posts.store, state.posts.byCategory[state.categories.current]),
         // TODO change once store is normalized
         votesAjaxStatus: state.ajaxStatus.postVotes
     };

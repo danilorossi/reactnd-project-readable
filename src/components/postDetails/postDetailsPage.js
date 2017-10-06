@@ -132,7 +132,8 @@ class PostDetailsPage extends Component {
 
 function mapStateToProps(state, ownProps) {
   return { // TODO if not, GET /post/:id
-      postDetails: state.postsByCategory.all.filter(post => (post.id === ownProps.postId))[0] || null,
+      //postDetails: state.postsByCategory.all.filter(post => (post.id === ownProps.postId))[0] || null,
+      postDetails: state.posts.store[ownProps.postId] || null,
       comments: state.commentsByParentId[ownProps.postId] || null,
       postForm: state.postForm,
       // TODO change once store is normalized

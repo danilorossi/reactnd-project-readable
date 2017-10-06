@@ -3,7 +3,14 @@ export default {
     current: 'all',
     list: []
   },
-  postsByCategory: {},
+  posts: {
+    store: {
+
+    },
+    byCategory: {
+      // 'all': [id1, id2, id3],
+    }
+  },
   commentsByParentId: {},
   postForm: {
     visible: false,

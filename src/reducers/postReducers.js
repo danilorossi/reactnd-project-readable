@@ -7,10 +7,7 @@ export default function postReducer(state = initialState.posts, action) {
     switch(action.type) {
 
         case types.LOAD_POSTS_SUCCESS:
-          // return {
-          //   ...state,
-          //   [action.category]: action.posts
-          // };
+
           return {
             ...state,
             store: {
@@ -22,6 +19,15 @@ export default function postReducer(state = initialState.posts, action) {
               [action.category]: Object.keys(action.posts)
             }
           };
+
+        case types.VOTE_POST_SUCCESS:
+          return {
+            ...state,
+            store: {
+              ...state.store,
+              [action.post.id]: action.post
+            }
+          }
 
         default:
             return state;

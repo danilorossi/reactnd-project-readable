@@ -5,10 +5,11 @@ export default {
   },
   posts: {
     store: {
-
+      // 'postId': { ...postDetails },
     },
     byCategory: {
       // 'all': [id1, id2, id3],
+      // 'redux': [id1],
     }
   },
   commentsByParentId: {},

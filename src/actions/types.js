@@ -13,6 +13,8 @@ export const START_CREATE_POST = Symbol('StartCreatePost');
 export const CANCEL_FORM_POST = Symbol('CancelFromPost');
 
 export const BEGIN_VOTE_POST = Symbol('BeginVotePost');
+export const END_VOTE_POST = Symbol('EndVotePost');
+
 export const VOTE_POST_SUCCESS = Symbol('VotePostSuccess');
 
 export const BEGIN_VOTE_COMMENT = Symbol('BeginVoteComment');

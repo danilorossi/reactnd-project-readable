@@ -1,7 +1,7 @@
 
 import { MOCKED_API_DELAY } from './delay';
 
-const DEFAULT_DATA = {
+let DEFAULT_DATA = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
@@ -63,17 +63,32 @@ class PostApi {
 
   }
 
+
   static votePostUp(postId) {
-    console.warn('TODO: postApi.votePostUp...');
+    const oldScore = DEFAULT_DATA[postId].voteScore;
+    const newData = Object.assign({}, DEFAULT_DATA, {
+      [postId]: {
+        ...DEFAULT_DATA[postId],
+        voteScore: (oldScore + 1)
+      }
+    });
+    DEFAULT_DATA = {...newData};
     return new Promise((resolve, reject) => setTimeout(
-        () => resolve('TODO: testing API...'), MOCKED_API_DELAY)
+        () => resolve({ post: DEFAULT_DATA[postId]}), MOCKED_API_DELAY)
     );
   }
 
   static votePostDown(postId) {
-    console.warn('TODO: postApi.votePostDown...');
+    const oldScore = DEFAULT_DATA[postId].voteScore;
+    const newData = Object.assign({}, DEFAULT_DATA, {
+      [postId]: {
+        ...DEFAULT_DATA[postId],
+        voteScore: (oldScore - 1)
+      }
+    });
+    DEFAULT_DATA = {...newData};
     return new Promise((resolve, reject) => setTimeout(
-        () => resolve('TODO: testing API...'), MOCKED_API_DELAY)
+      () => resolve({ post: DEFAULT_DATA[postId]}), MOCKED_API_DELAY)
     );
   }
 }

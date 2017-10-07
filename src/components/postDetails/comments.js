@@ -9,7 +9,6 @@ class Comments extends Component {
 
   render() {
 
-    console.log(this.props.comments);
     const commentVoteScoreAttrs = {
       voteUp: this.props.voteUp,
       voteDown: this.props.voteDown,

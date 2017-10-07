@@ -32,7 +32,7 @@ export default function ajaxStatusReducer(state = initialState.ajaxStatus, actio
             }
           };
 
-        case types.VOTE_COMMENT_SUCCESS:
+        case types.END_VOTE_COMMENT:
           return {
             ...state,
             commentVotes: {

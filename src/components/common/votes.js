@@ -20,12 +20,12 @@ const Votes = ({ type, voteScore, style, loading, voteUp, voteDown, postId }) =>
       buttonLeft = { padding: '0' };
       buttonRight = { padding: '0' };
       showIcon = false;
-      if(score > 100) {
+      if(score >= 10) {
         counterStyle = { padding: '5px' };
-        score = '> 99';
-      } else if(score < -100) {
+        score = '> 9';
+      } else if(score <= -10) {
         counterStyle = { padding: '5px' };
-        score = '< 99';
+        score = '< -9';
       } else {
         counterStyle = { padding: `${loading?'2px':'3px'} ${loading?'5px':'10px'}`  };
       }

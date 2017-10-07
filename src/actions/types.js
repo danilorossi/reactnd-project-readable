@@ -18,6 +18,8 @@ export const END_VOTE_POST = Symbol('EndVotePost');
 export const VOTE_POST_SUCCESS = Symbol('VotePostSuccess');
 
 export const BEGIN_VOTE_COMMENT = Symbol('BeginVoteComment');
+export const END_VOTE_COMMENT = Symbol('EndVoteComment');
+
 export const VOTE_COMMENT_SUCCESS = Symbol('VoteCommentSuccess');
 
 

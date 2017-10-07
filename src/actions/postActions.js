@@ -16,7 +16,6 @@ export function votePostSuccess(post) {
 }
 
 
-
 // THUNKs
 export function loadPostsByCategory(category = 'all') {
     return function(dispatch) {
@@ -31,8 +30,6 @@ export function loadPostsByCategory(category = 'all') {
 
     };
 }
-
-
 
 export function voteUp(postId) {
   return function(dispatch) {

@@ -11,6 +11,12 @@ export default function postReducer(state = initialState.commentsByParentId, act
             [action.parentId]: action.comments
           };
 
+        case types.VOTE_COMMENT_SUCCESS:
+          return {
+            ...state,
+            [action.comment.parentId]: state[action.comment.parentId].map(item => item.id === action.comment.id ? action.comment : item)
+          };
+
         default:
             return state;
 

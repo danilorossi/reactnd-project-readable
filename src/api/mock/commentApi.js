@@ -1,7 +1,7 @@
 
 import { MOCKED_API_DELAY } from './delay';
 
-const DEFAULT_DATA = {
+let DEFAULT_DATA = {
   "894tuq4ut84ut8v4t8wun89g": {
     id: '894tuq4ut84ut8v4t8wun89g',
     parentId: "8xf0y6ziyjabvozdd253nd",
@@ -72,6 +72,34 @@ class CommentApi {
     );
 
   };
+
+  static voteCommentUp(commentId) {
+    const oldScore = DEFAULT_DATA[commentId].voteScore;
+    const newData = Object.assign({}, DEFAULT_DATA, {
+      [commentId]: {
+        ...DEFAULT_DATA[commentId],
+        voteScore: (oldScore + 1)
+      }
+    });
+    DEFAULT_DATA = {...newData};
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve({ comment: DEFAULT_DATA[commentId]}), MOCKED_API_DELAY)
+    );
+  }
+
+  static voteCommentDown(commentId) {
+    const oldScore = DEFAULT_DATA[commentId].voteScore;
+    const newData = Object.assign({}, DEFAULT_DATA, {
+      [commentId]: {
+        ...DEFAULT_DATA[commentId],
+        voteScore: (oldScore - 1)
+      }
+    });
+    DEFAULT_DATA = {...newData};
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve({ comment: DEFAULT_DATA[commentId]}), MOCKED_API_DELAY)
+    );
+  }
 
 
 }

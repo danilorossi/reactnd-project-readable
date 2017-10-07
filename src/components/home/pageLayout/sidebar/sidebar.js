@@ -48,11 +48,11 @@ Sidebar.defaultProps = {
   }
 }
 
-function mapStateToProps({ categories, postsByCategory}, ownProps) {
-  const posts = postsByCategory[categories.current];
+function mapStateToProps({ categories, posts}, ownProps) {
+  const list = posts.byCategory[categories.current];
   return {
       categories,
-      currentCount: posts ? posts.length : '-'
+      currentCount: list ? list.length : '-'
   };
 }
 

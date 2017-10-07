@@ -14,6 +14,10 @@ class ListItem extends Component {
       margin: '0 0 1em'
     };
 
+    // voteUp={this.props.voteUp}
+    // voteDown={this.props.voteDown}
+    // loading
+    //
     return (
 
         <div className="item">
@@ -22,15 +26,15 @@ class ListItem extends Component {
 
             <a className="header">
               {postData.title}
+
             </a>
 
-            <Votes voteScore={postData.voteScore}/>
-            {/*<div className="counter">
-
-              <a><i className="chevron up grey icon"></i></a>
-              <a className="tiny orange ui label">2</a>
-              <a><i className="chevron down grey icon"></i></a>
-            </div>*/}
+            <Votes
+              postId={postData.id}
+              voteDown={this.props.voteDown}
+              voteUp={this.props.voteUp}
+              loading={this.props.loading}
+              voteScore={postData.voteScore}/>
 
             <div className="meta" style={authorStyle}>
 
@@ -48,16 +52,12 @@ class ListItem extends Component {
 
 
 
-                        <div className="ui message">
-                          <p>{postData.body}</p>
-                        </div>
+            <div className="ui message">
+              <p>{postData.body}</p>
+            </div>
 
 
             <div className="extra">
-            {/*this.props.currentCategoryId === 'all' &&
-              <Link to={`/posts/${postData.category}`} className="ui purple small label"># {postData.category}</Link>
-            */}
-
 
               <Link to={`/post/${postData.id}`} className="ui left floated mini orange button">
                 View post

@@ -1,13 +1,27 @@
-export const UPDATE_CURRENT_CATEGORY = 'UPDATE_CURRENT_CATEGORY';
-export const LOAD_CATEGORIES_SUCCESS = 'LOAD_CATEGORIES_SUCCESS';
+export const UPDATE_CURRENT_CATEGORY = Symbol('UpdateCurrentCategory');
+export const LOAD_CATEGORIES_SUCCESS = Symbol('LoadCategoriesSuccess');
 
 
-export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
+export const LOAD_POSTS_SUCCESS = Symbol('LoadPostSuccess');
 
-export const LOAD_COMMENTS_BY_PARENT_SUCCESS = 'LOAD_COMMENTS_BY_PARENT_SUCCESS';
+export const LOAD_COMMENTS_BY_PARENT_SUCCESS = Symbol('LoadCommentsByParentSuccess');
 
 
 
-export const START_EDIT_POST = 'START_EDIT_POST';
-export const START_CREATE_POST = 'START_CREATE_POST';
-export const CANCEL_FORM_POST = 'CANCEL_FORM_POST';
+export const START_EDIT_POST = Symbol('StartEditPost');
+export const START_CREATE_POST = Symbol('StartCreatePost');
+export const CANCEL_FORM_POST = Symbol('CancelFromPost');
+
+export const BEGIN_VOTE_POST = Symbol('BeginVotePost');
+export const END_VOTE_POST = Symbol('EndVotePost');
+
+export const VOTE_POST_SUCCESS = Symbol('VotePostSuccess');
+
+export const BEGIN_VOTE_COMMENT = Symbol('BeginVoteComment');
+export const END_VOTE_COMMENT = Symbol('EndVoteComment');
+
+export const VOTE_COMMENT_SUCCESS = Symbol('VoteCommentSuccess');
+
+
+// export const VOTE_POST_UP = Symbol('VotePostUp');
+// export const VOTE_POST_DOWN = Symbol('VotePostDown');

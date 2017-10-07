@@ -1,7 +1,7 @@
 
 import { MOCKED_API_DELAY } from './delay';
 
-const DEFAULT_DATA = {
+let DEFAULT_DATA = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
@@ -24,10 +24,9 @@ const DEFAULT_DATA = {
   }
 }
 
-
+// TODO this is not managing the DELETE prop
 class PostApi {
 
-// TODO this is not managing the DELETE prop
   static getAllPosts() {
 
     return new Promise((resolve, reject) => setTimeout(
@@ -64,6 +63,34 @@ class PostApi {
 
   }
 
+
+  static votePostUp(postId) {
+    const oldScore = DEFAULT_DATA[postId].voteScore;
+    const newData = Object.assign({}, DEFAULT_DATA, {
+      [postId]: {
+        ...DEFAULT_DATA[postId],
+        voteScore: (oldScore + 1)
+      }
+    });
+    DEFAULT_DATA = {...newData};
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve({ post: DEFAULT_DATA[postId]}), MOCKED_API_DELAY)
+    );
+  }
+
+  static votePostDown(postId) {
+    const oldScore = DEFAULT_DATA[postId].voteScore;
+    const newData = Object.assign({}, DEFAULT_DATA, {
+      [postId]: {
+        ...DEFAULT_DATA[postId],
+        voteScore: (oldScore - 1)
+      }
+    });
+    DEFAULT_DATA = {...newData};
+    return new Promise((resolve, reject) => setTimeout(
+      () => resolve({ post: DEFAULT_DATA[postId]}), MOCKED_API_DELAY)
+    );
+  }
 }
 
 export default PostApi;

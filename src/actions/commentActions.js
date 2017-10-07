@@ -17,6 +17,19 @@ export function endVoteComment(commentId) {
   return { type: types.END_VOTE_COMMENT, commentId };
 }
 
+
+export function beginUpdateComment(commentId) {
+  return { type: types.BEGIN_UPDATE_COMMENT, commentId };
+}
+export function updateCommentSuccess(comment) {
+  return { type: types.UPDATE_COMMENT_SUCCESS, comment };
+}
+export function endUpdateComment(commentId) {
+  return { type: types.END_UPDATE_COMMENT, commentId };
+}
+
+
+
 // THUNKs
 export function loadCommentsByParent(parentId) {
     return function(dispatch) {
@@ -45,11 +58,6 @@ export function voteUp(commentId) {
         .catch(error => {
             throw(error);
         });
-      // .voteCommentUp(commentId).then(() => {
-      //   dispatch(voteCommentSuccess(commentId));
-      // }).catch(error => {
-      //     throw(error);
-      // });
   };
 }
 
@@ -63,10 +71,19 @@ export function voteDown(commentId) {
         .catch(error => {
             throw(error);
         });
-      // .voteCommentDown(commentId).then(() => {
-      //   dispatch(voteCommentSuccess(commentId));
-      // }).catch(error => {
-      //     throw(error);
-      // });
+  };
+}
+
+
+export function updateComment(commentId, body) {
+  return function(dispatch) {
+    dispatch(beginUpdateComment(commentId));
+    CommentApi
+      .updateComment(commentId, body)
+        .then(({ comment }) => dispatch(updateCommentSuccess(comment)))
+        .then(() => dispatch(endUpdateComment(commentId)))
+        .catch(error => {
+            throw(error);
+        });
   };
 }

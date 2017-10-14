@@ -101,6 +101,16 @@ class CommentApi {
     );
   }
 
+  static updateComment(commentId, body) {
+    DEFAULT_DATA[commentId] = {
+      ...(DEFAULT_DATA[commentId]),
+      timestamp: Date.now(),
+      body
+    };
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve({ comment: DEFAULT_DATA[commentId]}), MOCKED_API_DELAY)
+    );
+  }
 
 }
 

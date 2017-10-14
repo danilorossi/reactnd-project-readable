@@ -19,6 +19,7 @@ export default {
   },
   ajaxStatus: {
     postVotes: {},
-    commentVotes: {}
+    commentVotes: {},
+    commentBodies: {}
   }
 }

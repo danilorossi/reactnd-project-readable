@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TimeAgo from 'react-timeago';
-
+import { connect } from 'react-redux';
 import { RIETextArea } from 'riek';
+
+import { updateComment } from '../../actions/commentActions';
 import Votes from '../common/votes';
 
 class CommentItem extends Component {
@@ -10,14 +12,17 @@ class CommentItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      futureCommentText: '',
       commentText: (props.comment && props.comment.body ) || ''
     }
     this.updateComment = this.updateComment.bind(this);
   }
-
+ 
   updateComment(data) {
-    this.setState({commentText: data.commentText});
-    console.log('updateComment', arguments);
+    console.log('######### TODO > future comment text?', data)
+    this.setState({
+      commentText: data.commentText
+    }, () => this.props.update(this.props.comment.id, data.commentText));
   }
   render() {
     const comment = this.props.comment;
@@ -44,6 +49,15 @@ class CommentItem extends Component {
              </div>
 
                 <div className="text">
+
+                {this.props.updateCommentAjaxStatus &&
+                  <div>
+                  <i className={`ui active mini inline loader`}> </i>
+                  <span style={{ color: 'grey' }}> {this.state.commentText}</span>
+                  </div>
+                }
+
+                {!this.props.updateCommentAjaxStatus &&
                   <RIETextArea
                     rows="4"
                     className="riei-field"
@@ -52,6 +66,7 @@ class CommentItem extends Component {
                     propName='commentText'
                     validate={(newValue) => (newValue && newValue.length > 0)}
                   />
+                }
                 </div>
 
               <div className="actions">
@@ -67,4 +82,19 @@ class CommentItem extends Component {
   }
 }
 
-export default CommentItem;
+function mapDispatchToProps (dispatch) {
+  return {
+    update: (commentId, body) => dispatch(updateComment(commentId, body)),
+  }
+}
+function mapStateToProps(state, ownProps) {
+  return {
+    updateCommentAjaxStatus: state.ajaxStatus.commentBodies[ownProps.comment.id] || false
+  };
+}
+
+export default connect (
+  mapStateToProps,
+  mapDispatchToProps
+)(CommentItem);
+// export default CommentItem;

@@ -16,6 +16,7 @@ class HomePage extends Component {
   updateStoreLocation(location) {
     if(location.pathname.startsWith('/posts/')) {
       const categoryId = location.pathname.replace('/posts/', '');
+
       this.props.changeCategory(categoryId);
       this.props.loadPosts(categoryId);
     }
@@ -36,7 +37,7 @@ class HomePage extends Component {
           <Route exact path='/posts/' render={() => <Redirect to="/posts/all"/>} />
           <Route path='/posts/:categoryId' render={() => <PostsList categoryId={this.props.currentCategoryId} />} />
         </div>
-       <PostForm show={this.props.postForm.visible} data={this.props.postForm.data}/>  
+       <PostForm show={this.props.postForm.visible} data={this.props.postForm.data}/>
       </div>
     );
   }

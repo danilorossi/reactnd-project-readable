@@ -17,19 +17,12 @@ class CommentItem extends Component {
     }
     this.updateComment = this.updateComment.bind(this);
   }
-
-  componentWillReceiveProps(props) {
-    console.log('######### TODO > should comp. update?', props)
-    this.setState({
-      commentText: (props.comment && props.comment.body ) || ''
-    });
-  }
+ 
   updateComment(data) {
     console.log('######### TODO > future comment text?', data)
     this.setState({
       commentText: data.commentText
-    });
-    this.props.update(this.props.comment.id, data.commentText);
+    }, () => this.props.update(this.props.comment.id, data.commentText));
   }
   render() {
     const comment = this.props.comment;

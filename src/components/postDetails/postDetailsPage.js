@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Route, Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-
-import { RIETextArea } from 'riek';
 
 import {
   loadCommentsByParent,
@@ -22,7 +20,7 @@ import { editPost } from '../../actions/postFormActions';
 
 import PostDetailsHeader from './postDetailsHeader';
 import Comments from './comments';
-import PostForm from '../common/postForm';
+// import PostForm from '../common/postForm';
 import Votes from '../common/votes';
 
 class PostDetailsPage extends Component {
@@ -39,7 +37,7 @@ class PostDetailsPage extends Component {
   }
 
   onEditPost() {
-    this.props.editPost(Object.assign({}, this.props.postDetails));
+    this.props.startEditPost(Object.assign({}, this.props.postDetails));
   }
   render() {
 
@@ -48,7 +46,7 @@ class PostDetailsPage extends Component {
       margin: '0 0 1em'
     };
     const postDetails = this.props.postDetails;
-
+  // <PostForm show={this.props.postForm.visible} data={this.props.postForm.data}/>
     return (
       <div style={{ padding: '60px 40px'}}>
 
@@ -62,7 +60,7 @@ class PostDetailsPage extends Component {
           pauseOnHover
         />
 
-        <PostForm show={this.props.postForm.visible} data={this.props.postForm.data}/>
+
 
         <div className="ui grid">
 
@@ -99,16 +97,6 @@ class PostDetailsPage extends Component {
             </div>
 
             <div className="ui message">{postDetails.body}</div>
-          {/*  <p>
-              <RIETextArea
-                rows="4"
-                className="riei-field"
-                value={this.state.postBody}
-                change={this.updatePostBody}
-                propName='postBody'
-                validate={(newValue) => (newValue && newValue.length > 0)}
-              />
-            </p>*/}
 
             <br />
             <Comments
@@ -135,7 +123,7 @@ function mapStateToProps(state, ownProps) {
       //postDetails: state.postsByCategory.all.filter(post => (post.id === ownProps.postId))[0] || null,
       postDetails: state.posts.store[ownProps.postId] || null,
       comments: state.commentsByParentId[ownProps.postId] || null,
-      postForm: state.postForm,
+      // postForm: state.postForm,
       // TODO change once store is normalized
       votesAjaxStatus: state.ajaxStatus
   };
@@ -144,7 +132,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps (dispatch) {
   return {
     loadComments: (parentId) => dispatch(loadCommentsByParent(parentId)),
-    editPost: (postData) => dispatch(editPost(postData)),
+    startEditPost: (postData) => dispatch(editPost(postData)),
     voteCommentUp: (commentId) => dispatch(voteCommentUpAPI(commentId)),
     voteCommentDown: (commentId) => dispatch(voteCommentDownAPI(commentId)),
     votePostUp: (postId) => dispatch(votePostUpAPI(postId)),

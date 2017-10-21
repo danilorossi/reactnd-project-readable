@@ -17,6 +17,13 @@ export default {
     visible: false,
     data: {}
   },
+  commentForm: {
+    visible: false,
+  },
+  confirmForm: {
+    visible: false,
+    data: {}
+  },
   ajaxStatus: {
     postVotes: {},
     commentVotes: {},

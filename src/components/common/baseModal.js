@@ -4,20 +4,17 @@ import 'semantic-ui/dist/components/modal.min.js';
 import 'semantic-ui/dist/components/dimmer.min.js';
 import 'semantic-ui/dist/components/transition.min.js';
 import { connect } from 'react-redux';
-import { closePostForm } from '../../actions/postFormActions';
 
 // TODO switch to portal implementation
 // https://github.com/ryanflorence/react-training/blob/gh-pages/lessons/05-wrapping-dom-libs.md#portals
-class PostForm extends React.Component {
+class BaseModal extends React.Component {
 
   constructor(props) {
     super(props);
+    this.onOkButtonClick = this.onOkButtonClick.bind(this);
   }
 
-  componentWillMount() {
-  }
   componentWillReceiveProps(props) {
-    props.show && console.log('PostForm modal componentWillReceiveProps: ', props);
     props.show && this.activateModal();
   }
 
@@ -26,30 +23,36 @@ class PostForm extends React.Component {
     $modal.modal('show');
     $modal.modal({
       onHide: () => {
-        this.props.closePostForm()
+        this.props.onFormClose()
   		}
     })
   }
-
+  onOkButtonClick() {
+    this.props.onFormSave();
+    window.$(this.modal).modal('hide');
+  }
   render() {
-    const postData = this.props.data;
+
     return (
-      <div ref={(modal) => { this.modal = modal; }} className="ui modal">
+      <div ref={(modal) => { this.modal = modal; }} className={`ui modal ${this.props.modalClassNames || ''}`}>
 
         <i className="close icon"></i>
 
-        <ModalHeader message={postData.id ? 'Edit post' : 'New post'} />
-
-        <PostInnerForm data={postData} />
+        <ModalHeader message={this.props.title} />
+        <div className="content">
+          {this.props.children}
+        </div>
 
         <div className="actions">
-          <div className="ui red deny button">
-            Cancel
+
+          <div className="ui grey deny button">
+            {this.props.koLabel || 'Cancel'}
           </div>
-          <div className="ui teal right labeled icon button">
-            Save
+          <div onClick={this.onOkButtonClick} className="ui teal right labeled icon button">
+            {this.props.okLabel || 'Save'}
             <i className="checkmark icon"></i>
           </div>
+
         </div>
 
       </div>
@@ -66,27 +69,8 @@ const ModalHeader = ({ message }) => {
   );
 }
 
-const PostInnerForm = ({ data }) => {
-  return (
-    <div className="content">
-
-      <p>{data.body}</p>
-      <div className="description">
-         <p>{data.body}</p>
-      </div>
-
-    </div>
-  );
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    closePostForm: () => dispatch(closePostForm())
-  }
-}
 
 export default connect (
   null,
-  mapDispatchToProps
-)(PostForm);
-// export default PostForm;
+  null
+)(BaseModal);

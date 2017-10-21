@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom';
-
 import CommentItem from './commentItem';
 import Loader from '../common/loader';
 
@@ -23,7 +21,7 @@ class Comments extends Component {
 
         <div className="ui comments">
 
-          {this.props.comments && this.props.comments.length == 0 &&
+          {this.props.comments && this.props.comments.length === 0 &&
             <h3>NO COMMENTS</h3>
           }
 
@@ -35,7 +33,9 @@ class Comments extends Component {
           ))}
 
         </div>
-        {this.props.comments &&
+
+
+
             <div>
           <h4 className="ui dividing header">Leave a comment:</h4>
 
@@ -46,12 +46,11 @@ class Comments extends Component {
             <div className="field">
              <input type="text" placeholder="Leave your name!" name="name" />
             </div>
-            <div className="ui teal labeled submit icon button">
+            <div className="ui tiny teal labeled submit icon button right floated">
               <i className="icon save"></i> Add comment
             </div>
           </form>
             </div>
-        }
 
       </div>
     );

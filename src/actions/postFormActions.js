@@ -1,5 +1,5 @@
 import * as types from './types';
-import PostApi from '../api/mock/postApi';
+// import PostApi from '../api/mock/postApi';
 
 export function startEditPost(postData) {
   return {

@@ -14,10 +14,6 @@ class ListItem extends Component {
       margin: '0 0 1em'
     };
 
-    // voteUp={this.props.voteUp}
-    // voteDown={this.props.voteDown}
-    // loading
-    //
     return (
 
         <div className="item">
@@ -62,6 +58,16 @@ class ListItem extends Component {
               <Link to={`/post/${postData.id}`} className="ui left floated mini orange button">
                 View post
               </Link>
+
+
+              <button onClick={this.props.onDeleteButtonClick} title="Delete post" className="ui right floated mini icon button">
+                <i className="trash icon"></i>
+              </button>
+
+              <button onClick={this.props.onEditButtonClick} title="Edit post" className="ui right floated mini icon button">
+                <i className="edit icon"></i>
+              </button>
+
 
             </div>
           </div>

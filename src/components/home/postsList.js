@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { updateCurrentCategory } from '../../actions/categoryActions';
+import { showConfirm } from '../../actions/confirmFormActions';
+
+import { editPost } from '../../actions/postFormActions';
 import {
-  loadPostsByCategory,
   voteUp,
   voteDown
 } from '../../actions/postActions';
@@ -17,7 +18,11 @@ import ListItem from './listItem';
 import NoResults from './noResults';
 
 class PostsList extends Component {
-
+  constructor(props) {
+    super(props);
+    this.onEditButtonClick = this.onEditButtonClick.bind(this);
+    this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
+  }
   render() {
 
     // console.warn(this.props.votesAjaxStatus)
@@ -33,6 +38,8 @@ class PostsList extends Component {
             {this.props.posts.map( (post, index) => (
               <ListItem
                 key={post.id}
+                onEditButtonClick={() => this.onEditButtonClick(post)}
+                onDeleteButtonClick={this.onDeleteButtonClick}
                 data={post}
                 currentCategoryId={this.props.categoryId}
                 voteUp={this.props.votePostUp}
@@ -45,6 +52,17 @@ class PostsList extends Component {
         )}
       </div>
     );
+  }
+
+  onEditButtonClick(post) {
+    this.props.showEditPostModal(post);
+  }
+
+  onDeleteButtonClick() {
+    this.props.showConfirmModal({
+      title: 'WARNING',
+      message: 'Are you sure you want to delete this?'
+    });
   }
 
 }
@@ -62,7 +80,9 @@ PropTypes.defaultProps = {
 function mapDispatchToProps (dispatch) {
   return {
     votePostUp: (postId) => dispatch(voteUp(postId)),
-    votePostDown: (postId) => dispatch(voteDown(postId))
+    votePostDown: (postId) => dispatch(voteDown(postId)),
+    showEditPostModal: (postData) => dispatch(editPost(postData)),
+    showConfirmModal: (data) => dispatch(showConfirm(data)),
   }
 }
 function mapStateToProps(state, ownProps) {

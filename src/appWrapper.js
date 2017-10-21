@@ -3,7 +3,8 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Route,
-  Redirect
+  Redirect,
+  Switch
 } from 'react-router-dom';
 
 import HomePage from './components/home/homePage';
@@ -16,15 +17,19 @@ import ConfirmModal from './components/common/confirmModal';
 
 class AppWrapper extends Component {
 
+  // <Route path='/post/:postId' render={({match}) => <PostDetailsPage postId={match.params.postId}/>}/>
+  // <Route exact path='/' render={() => <Redirect to="/posts/all"/>} />
+  // <Route path="/posts" component={HomePage} />
+  //
   render() {
     return (
       <div>
 
-        <div>
-          <Route path='/post/:postId' render={({match}) => <PostDetailsPage postId={match.params.postId}/>}/>
-          <Route exact path='/' render={() => <Redirect to="/posts/all"/>} />
-          <Route path="/posts" component={HomePage} />
-        </div>
+        <Switch>
+          <Route path='/:category/:postId' render={({match}) => <PostDetailsPage postId={match.params.postId}/>}/>
+          <Route exact path='/' render={() => <Redirect to="/all"/>} />
+          <Route path="/:category" component={HomePage} />
+        </Switch>
 
         <CommentModal show={this.props.showCommentModal}/>
         <PostModal {...this.props.postModal}/>

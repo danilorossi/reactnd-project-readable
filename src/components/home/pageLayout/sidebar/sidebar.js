@@ -12,7 +12,7 @@ class Sidebar extends Component {
 
       <div className="ui vertical inverted left visible sidebar menu">
 
-        <NavLink activeClassName="active" exact to='/posts/all' className="item">
+        <NavLink activeClassName="active" exact to='/all' className="item">
           All categories
           {'all' === this.props.categories.current &&
            <div className={`ui label ${countTagClass("all")}`}>{this.props.currentCount}</div>
@@ -20,7 +20,7 @@ class Sidebar extends Component {
         </NavLink>
 
         { this.props.categories.list.map( category => (
-          <NavLink key={category.name} activeClassName="active" to={`/posts/${category.path}`} className="item">
+          <NavLink key={category.name} activeClassName="active" to={`/${category.path}`} className="item">
             # {category.name}
             {category.name === this.props.categories.current &&
               <div className={`ui label ${countTagClass(category.path)}`}>{this.props.currentCount}</div>

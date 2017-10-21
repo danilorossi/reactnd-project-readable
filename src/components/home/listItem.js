@@ -39,7 +39,7 @@ class ListItem extends Component {
               <span className="cinema"><TimeAgo date={postData.timestamp} /></span>
 
               {this.props.currentCategoryId === 'all' &&
-                <span>in <Link to={`/posts/${postData.category}`}>#{postData.category}</Link></span>
+                <span>in <Link to={`/${postData.category}`}>#{postData.category}</Link></span>
 
               }
 
@@ -55,7 +55,7 @@ class ListItem extends Component {
 
             <div className="extra">
 
-              <Link to={`/post/${postData.id}`} className="ui left floated mini orange button">
+              <Link to={`/${postData.category}/${postData.id}`} className="ui left floated mini orange button">
                 View post
               </Link>
 

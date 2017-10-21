@@ -13,14 +13,12 @@ import Sidebar from './pageLayout/sidebar/sidebar';
 class HomePage extends Component {
 
   updateStoreLocation(location) {
-    if(location.pathname.startsWith('/posts/')) {
 
-      const categoryId = location.pathname.replace('/posts/', '');
+      const categoryId = location.pathname.replace('/', '');
 
             console.log('¡¡¡¡¡¡¡categoryId', categoryId)
       this.props.changeCategory(categoryId);
       this.props.loadPosts(categoryId);
-    }
   }
   constructor(props) {
 

@@ -15,7 +15,7 @@ export default function categoryReducer(state = initialState.categories, action)
         case types.LOAD_CATEGORIES_SUCCESS:
           return {
             ...state,
-            list: action.categories
+            list: (action.categories || [])
           };
 
         default:

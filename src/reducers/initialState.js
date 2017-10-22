@@ -40,7 +40,9 @@ export default {
     postVotes: {},
     commentVotes: {},
     savingPost: false,
-    savingComment: false
+    savingComment: false,
+    deletingPost: false,
+    deletingComment: true
     //commentBodies: {}
   }
 }

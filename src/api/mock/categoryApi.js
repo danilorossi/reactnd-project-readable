@@ -18,6 +18,18 @@ class CategoryApi {
               {
                 name: 'udacity',
                 path: 'udacity'
+              },
+              {
+                name: 'routing',
+                path: 'routing'
+              },
+              {
+                name: 'es6',
+                path: 'es6'
+              },
+              {
+                name: 'testing',
+                path: 'testing'
               }
           ]
       }), MOCKED_API_DELAY)

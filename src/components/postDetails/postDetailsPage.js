@@ -9,7 +9,8 @@ import {
   loadCommentsByParent,
   voteUp as voteCommentUpAPI,
   voteDown as voteCommentDownAPI,
-  showDeleteCommentModal
+  showDeleteCommentModal,
+  editComment
 } from '../../actions/commentActions';
 
 import {
@@ -39,6 +40,7 @@ class PostDetailsPage extends Component {
   onEditPost() {
     this.props.startEditPost(Object.assign({}, this.props.postDetails));
   }
+
   render() {
 
     const authorStyle = {
@@ -93,7 +95,7 @@ class PostDetailsPage extends Component {
 
               <span className="cinema">@{postDetails.author}, </span>
               <span className="cinema"><TimeAgo date={postDetails.timestamp} /></span>
-              <span> in <Link to={`/posts/${postDetails.category}`}>#{postDetails.category}</Link></span>
+              <span> in <Link to={`/${postDetails.category}`}>#{postDetails.category}</Link></span>
             </div>
 
             <div className="ui message">{postDetails.body}</div>
@@ -106,6 +108,7 @@ class PostDetailsPage extends Component {
               loadingStatus={this.props.votesAjaxStatus.commentVotes}
               postId={postDetails.id}
               comments={this.props.comments}
+              onEditComment={this.props.startEditComment}
             />
 
 
@@ -135,7 +138,9 @@ function mapDispatchToProps (dispatch) {
     voteCommentDown: (commentId) => dispatch(voteCommentDownAPI(commentId)),
     votePostUp: (postId) => dispatch(votePostUpAPI(postId)),
     votePostDown: (postId) => dispatch(votePostDownAPI(postId)),
-    deleteComment: (commentId) => dispatch(showDeleteCommentModal(commentId))
+    deleteComment: (commentId) => dispatch(showDeleteCommentModal(commentId)),
+    startEditComment: (commentData) => dispatch(editComment(commentData))
+
   }
 }
 

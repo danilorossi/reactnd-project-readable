@@ -36,7 +36,7 @@ class PostModal extends React.Component {
   }
 
   saveForm() {
-    console.log('saving form');
+    console.log('saving post form');
   }
 
   render() {
@@ -49,7 +49,7 @@ class PostModal extends React.Component {
       <BaseModal
         title={formData.id ? 'Edit post' : 'New post'}
         koLabel="Cancel"
-        okLabel={formData.id ? 'Save changes' : 'Create'}
+        okLabel={formData.id ? 'Save changes' : 'Publish'}
         show={show}
         onFormSave={this.saveForm}
         onFormClose={closeForm}>

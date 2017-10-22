@@ -7,17 +7,22 @@ import BaseModal from './base/baseModal';
 
 class CommentModal extends React.Component {
 
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.saveForm = this.saveForm.bind(this);
+  }
+  saveForm() {
+    console.log('saving comment form');
+  }
 
   render() {
     return (
       <BaseModal
-        title="Comment modal"
+        title="Edit comment"
         koLabel="Cancel"
-        okLabel="Save comment"
+        okLabel="Save changes"
         show={this.props.show}
+        onFormSave={this.saveForm}
         onFormClose={this.props.closeForm}>
         <div>
           <pre>{this.props.toString()}</pre>

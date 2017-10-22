@@ -13,7 +13,7 @@ class AppModals extends Component {
     const { postModal, commentModal, deletePostModal, deleteCommentModal } = this.props;
     return (
       <div>
-        <CommentModal commentModal={postModal.visible} commentModal={postModal.data}/>
+        <CommentModal show={commentModal.visible} commentModal={commentModal.data}/>
         <PostModal show={postModal.visible} data={postModal.data}/>
         <DeletePostModal show={deletePostModal.visible} postId={deletePostModal.data.postId}/>
         <DeleteCommentModal show={deleteCommentModal.visible} commentId={deleteCommentModal.data.commentId}/>

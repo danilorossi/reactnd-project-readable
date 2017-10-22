@@ -23,9 +23,9 @@ function startEditComment(commentData) {
     commentData
   };
 }
-function startCreateComment(parentId) {
-  return { type: types.START_CREATE_COMMENT, parentId };
-}
+// function startCreateComment(parentId) {
+//   return { type: types.START_CREATE_COMMENT, parentId };
+// }
 function cancelFormComment() {
   return { type: types.CANCEL_FORM_COMMENT };
 }
@@ -115,11 +115,11 @@ export function editComment(commentData) {
     dispatch(startEditComment(commentData));
   };
 }
-export function createComment(parentId) {
-  return function(dispatch) {
-    dispatch(startCreateComment(parentId));
-  };
-}
+// export function createComment(parentId) {
+//   return function(dispatch) {
+//     dispatch(startCreateComment(parentId));
+//   };
+// }
 export function closeCommentForm() {
   return function(dispatch) {
     dispatch(cancelFormComment());

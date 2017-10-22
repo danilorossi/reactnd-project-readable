@@ -31,7 +31,6 @@ export const END_VOTE_COMMENT = Symbol('EndVoteComment');
 
 
 
-export const START_CREATE_COMMENT = Symbol('StartCreateComment');
 export const START_EDIT_COMMENT = Symbol('StartEditComment');
 export const CANCEL_FORM_COMMENT = Symbol('CancelCommentForm');
 

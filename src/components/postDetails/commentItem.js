@@ -42,7 +42,7 @@ class CommentItem extends Component {
             </div>
 
             <div className="actions">
-              <a>Edit</a>
+              <a onClick={() => this.props.onEditComment(comment)}>Edit</a>
               <a onClick={() => this.props.deleteComment(comment.id)}>Delete</a>
             </div>
 

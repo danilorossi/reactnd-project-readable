@@ -6,7 +6,7 @@ import Loader from '../common/loader';
 class Comments extends Component {
 
   render() {
-    
+
     const commentVoteScoreAttrs = {
       voteUp: this.props.voteUp,
       voteDown: this.props.voteDown,
@@ -30,6 +30,7 @@ class Comments extends Component {
             <CommentItem
               {...commentVoteScoreAttrs}
               deleteComment={this.props.deleteComment}
+              onEditComment={this.props.onEditComment}
               key={comment.id}
               comment={comment} />
           ))}

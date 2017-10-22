@@ -28,21 +28,6 @@ export default function commentFormReducer(state = initialState.modals, action) 
 
   switch(action.type) {
 
-    // case types.SHOW_CONFIRM_MODAL:
-    //   return {
-    //     ...state,
-    //     visible: true,
-    //     data: {
-    //       ...action.data
-    //     }
-    //   };
-    //
-    // case types.HIDE_CONFIRM_MODAL:
-    //     return {
-    //       ...state,
-    //       visible: false,
-    //       //data: {}
-    //     };
     case types.SHOW_DELETE_COMMENT_MODAL:
       return {
         ...state,
@@ -93,22 +78,22 @@ export default function commentFormReducer(state = initialState.modals, action) 
         comment: {
           visible: true,
           data: {
-            ...action.postData
+            ...action.commentData
           }
         }
       };
 
-    case types.START_CREATE_COMMENT:
-      return {
-        ...state,
-        post: {
-          visible: true,
-          data: COMMENT_TEMPLATE,
-          data: {
-            parentId: action.parentId
-          }
-        }
-      };
+    // case types.START_CREATE_COMMENT:
+    //   return {
+    //     ...state,
+    //     post: {
+    //       visible: true,
+    //       data: COMMENT_TEMPLATE,
+    //       data: {
+    //         parentId: action.parentId
+    //       }
+    //     }
+    //   };
 
     case types.CANCEL_FORM_COMMENT:
       return {

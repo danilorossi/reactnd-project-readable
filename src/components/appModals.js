@@ -10,10 +10,17 @@ import DeleteCommentModal from './common/modals/deleteCommentModal';
 class AppModals extends Component {
 
   render() {
-    const { postModal, commentModal, deletePostModal, deleteCommentModal } = this.props;
+
+    const {
+      postModal,
+      commentModal,
+      deletePostModal,
+      deleteCommentModal
+    } = this.props;
+
     return (
       <div>
-        <CommentModal show={commentModal.visible} commentModal={commentModal.data}/>
+        <CommentModal show={commentModal.visible} data={commentModal.data}/>
         <PostModal show={postModal.visible} data={postModal.data}/>
         <DeletePostModal show={deletePostModal.visible} postId={deletePostModal.data.postId}/>
         <DeleteCommentModal show={deleteCommentModal.visible} commentId={deleteCommentModal.data.commentId}/>

@@ -83,18 +83,6 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
-    // case types.START_CREATE_COMMENT:
-    //   return {
-    //     ...state,
-    //     post: {
-    //       visible: true,
-    //       data: COMMENT_TEMPLATE,
-    //       data: {
-    //         parentId: action.parentId
-    //       }
-    //     }
-    //   };
-
     case types.CANCEL_FORM_COMMENT:
       return {
         ...state,
@@ -126,16 +114,16 @@ export default function commentFormReducer(state = initialState.modals, action) 
       };
 
     case types.CANCEL_FORM_POST:
-        return {
-          ...state,
-          post: {
-            visible: false,
-            data: {}
-          }
-        };
+      return {
+        ...state,
+        post: {
+          visible: false,
+          data: {}
+        }
+      };
 
     default:
-        return state;
+      return state;
 
   }
 

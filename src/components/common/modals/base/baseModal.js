@@ -20,35 +20,52 @@ class BaseModal extends React.Component {
 
   activateModal() {
     const $modal = window.$(this.modal);
-    $modal.modal('show');
     $modal.modal({
-      onHide: () => {
-        this.props.onFormClose()
-  		}
-    })
+        closable: false,
+        onHide: () => {
+          this.props.onFormClose()
+    		}
+     })
+     .modal('show');
+
   }
   onOkButtonClick() {
-    this.props.onFormSave && this.props.onFormSave();
-    window.$(this.modal).modal('hide');
+    if(!this.props.saving) {
+      this.props.onFormSave && this.props.onFormSave();
+      window.$(this.modal).modal('hide');
+    }
   }
   render() {
-
+    const dimmerClass = this.props.saving ? 'active' : '';
+    const buttonClass = this.props.saving ? 'disabled' : '';
     return (
       <div ref={(modal) => { this.modal = modal; }} className={`ui modal ${this.props.modalClassNames || ''}`}>
 
-        <i className="close icon"></i>
+        {!this.props.saving && <i className="close icon"></i>}
 
         <ModalHeader message={this.props.title} />
-        <div className="content">
+        <div className="content" style={{position:'relative'}}>
+
+          {this.props.saving &&
+            <div style={{
+              position:'absolute',
+              top: '0', left: '0',
+              width:'100%', height:'100%'
+            }} className="ui blurring segment">
+              <div className={`ui inverted dimmer ${dimmerClass}`}>
+                <div className="ui text loader">Please wait</div>
+              </div>
+            </div>
+          }
           {this.props.children}
         </div>
 
         <div className="actions">
 
-          <div className="ui grey deny button">
+          <div className={`ui grey deny button ${buttonClass}`}>
             {this.props.koLabel || 'Cancel'}
           </div>
-          <div onClick={this.onOkButtonClick} className="ui teal right labeled icon button">
+          <div onClick={this.onOkButtonClick} className={`ui teal right labeled icon button ${buttonClass}`}>
             {this.props.okLabel || 'Save'}
             <i className="checkmark icon"></i>
           </div>

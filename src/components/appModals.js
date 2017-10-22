@@ -21,7 +21,11 @@ class AppModals extends Component {
     return (
       <div>
         <CommentModal show={commentModal.visible} data={commentModal.data}/>
-        <PostModal show={postModal.visible} data={postModal.data}/>
+        <PostModal
+          show={postModal.visible}
+          data={postModal.data}
+          saving={postModal.saving}
+        />
         <DeletePostModal show={deletePostModal.visible} postId={deletePostModal.data.postId}/>
         <DeleteCommentModal show={deleteCommentModal.visible} commentId={deleteCommentModal.data.commentId}/>
       </div>
@@ -32,10 +36,14 @@ class AppModals extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    postModal: state.modals.post,
+    postModal: {
+      ...state.modals.post,
+      saving: state.ajaxStatus.savingPost
+    },
     commentModal: state.modals.comment,
     deletePostModal: state.modals.deletePost,
     deleteCommentModal: state.modals.deleteComment,
+
   };
 }
 

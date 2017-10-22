@@ -51,6 +51,7 @@ class PostModal extends React.Component {
         koLabel="Cancel"
         okLabel={formData.id ? 'Save changes' : 'Publish'}
         show={show}
+        saving={this.props.saving}
         onFormSave={this.saveForm}
         onFormClose={closeForm}>
         <div>

@@ -22,6 +22,7 @@ class DeletePostModal extends React.Component {
         onConfirm={this.deletePost}
         onCloseForm={this.props.hideModal}
         show={this.props.show}
+        saving={this.props.saving}
         title="DELETE POST"
         message="Are you sure you want to delete this post?"/>
     );

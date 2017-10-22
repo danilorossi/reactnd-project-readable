@@ -42,6 +42,7 @@ class CommentModal extends React.Component {
         koLabel="Cancel"
         okLabel="Save changes"
         show={this.props.show}
+        saving={this.props.saving}
         onFormSave={this.saveForm}
         onFormClose={this.props.closeForm}>
         <div>

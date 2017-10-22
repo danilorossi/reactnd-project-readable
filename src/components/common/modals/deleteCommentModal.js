@@ -22,6 +22,7 @@ class DeleteCommentModal extends React.Component {
         onConfirm={this.deleteComment}
         onCloseForm={this.props.hideModal}
         show={this.props.show}
+        saving={this.props.saving}
         title="DELETE COMMENT"
         message="Are you sure you want to delete this comment?"/>
     );

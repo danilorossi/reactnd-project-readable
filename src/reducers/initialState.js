@@ -39,23 +39,8 @@ export default {
   ajaxStatus: {
     postVotes: {},
     commentVotes: {},
+    savingPost: false,
+    savingComment: false
     //commentBodies: {}
   }
-  // postForm: {
-  //   visible: false,
-  //   data: {}
-  // },
-  // commentForm: {
-  //   visible: false,
-  //   data: {}
-  // },
-  // confirmForm: {
-  //   visible: false,
-  //   data: {}
-  // },
-  // ajaxStatus: {
-  //   postVotes: {},
-  //   commentVotes: {},
-  //   commentBodies: {}
-  // }
 }

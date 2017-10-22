@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import {
   Router,
   Route,
@@ -15,12 +15,9 @@ import './App.css';
 
 import { loadCategories } from './actions/categoryActions';
 
+import AppModals from './components/appModals';
 import HomePage from './components/home/homePage';
 import PostDetailsPage from './components/postDetails/postDetailsPage';
-
-import CommentModal from './components/common/commentModal';
-import PostModal from './components/common/postModal';
-import ConfirmModal from './components/common/confirmModal';
 
 const store = configureStore();
 
@@ -42,10 +39,7 @@ class App extends Component {
               <Route path="/:category" component={HomePage} />
             </Switch>
 
-            <CommentModal show={this.props.showCommentModal}/>
-            <PostModal {...this.props.postModal}/>
-            <ConfirmModal show={this.props.showConfirmModal} {...this.props.confirmDialogData}/>
-
+            <AppModals />
           </div>
         </Router>
       </Provider>

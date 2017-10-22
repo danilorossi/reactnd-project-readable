@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { showConfirm } from '../../actions/confirmFormActions';
+import { showDeletePostModal } from '../../actions/postActions';
 
-import { editPost } from '../../actions/postFormActions';
+import { editPost } from '../../actions/postActions';
 import {
   voteUp,
   voteDown
@@ -21,7 +21,7 @@ class PostsList extends Component {
   constructor(props) {
     super(props);
     this.onEditButtonClick = this.onEditButtonClick.bind(this);
-    this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
+    this.onDeletePostButtonClick = this.onDeletePostButtonClick.bind(this);
   }
   render() {
 
@@ -39,7 +39,7 @@ class PostsList extends Component {
               <ListItem
                 key={post.id}
                 onEditButtonClick={() => this.onEditButtonClick(post)}
-                onDeleteButtonClick={this.onDeleteButtonClick}
+                onDeletePostButtonClick={() => this.onDeletePostButtonClick(post.id)}
                 data={post}
                 currentCategoryId={this.props.categoryId}
                 voteUp={this.props.votePostUp}
@@ -58,11 +58,8 @@ class PostsList extends Component {
     this.props.showEditPostModal(post);
   }
 
-  onDeleteButtonClick() {
-    this.props.showConfirmModal({
-      title: 'WARNING',
-      message: 'Are you sure you want to delete this?'
-    });
+  onDeletePostButtonClick(postId) {
+    this.props.deletePost(postId);
   }
 
 }
@@ -82,7 +79,7 @@ function mapDispatchToProps (dispatch) {
     votePostUp: (postId) => dispatch(voteUp(postId)),
     votePostDown: (postId) => dispatch(voteDown(postId)),
     showEditPostModal: (postData) => dispatch(editPost(postData)),
-    showConfirmModal: (data) => dispatch(showConfirm(data)),
+    deletePost: (postId) => dispatch(showDeletePostModal(postId)),
   }
 }
 function mapStateToProps(state, ownProps) {

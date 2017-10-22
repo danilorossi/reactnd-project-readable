@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { showDeletePostModal } from '../../actions/postActions';
 
 class PostDetailsHeader extends Component {
 
   render() {
+
+    const { postId } = this.props;
+
     return (
 
       <div className="ui top inverted teal fixed fluid one menu">
@@ -38,9 +43,9 @@ class PostDetailsHeader extends Component {
 
         <div className="item">
 
-          <Link to="/new-post" className="ui red icon button" tabIndex="2">
+          <a onClick={() => this.props.deletePost(postId)} className="ui red icon button" tabIndex="2">
             <i className="delete icon"></i> Delete
-          </Link>
+          </a>
 
         </div>
 
@@ -50,4 +55,14 @@ class PostDetailsHeader extends Component {
   }
 }
 
-export default PostDetailsHeader;
+// export default PostDetailsHeader;
+function mapDispatchToProps (dispatch) {
+  return {
+    deletePost: (data) => dispatch(showDeletePostModal(data)),
+  }
+}
+
+export default connect (
+  null,
+  mapDispatchToProps
+)(PostDetailsHeader);

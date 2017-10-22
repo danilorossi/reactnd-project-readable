@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateCurrentCategory } from '../../actions/categoryActions';
-import { loadPostsByCategory } from '../../actions/postActions';
-import { createPost } from '../../actions/postFormActions';
+import { loadPostsByCategory, createPost } from '../../actions/postActions';
 
 import PostsList from './postsList';
 import HomeHeader from './pageLayout/homeHeader';
@@ -16,7 +15,7 @@ class HomePage extends Component {
 
       const categoryId = location.pathname.replace('/', '');
 
-            console.log('¡¡¡¡¡¡¡categoryId', categoryId)
+            console.log('¡¡¡¡use match param¡¡¡categoryId', categoryId)
       this.props.changeCategory(categoryId);
       this.props.loadPosts(categoryId);
   }

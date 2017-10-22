@@ -20,10 +20,9 @@ class ListItem extends Component {
 
           <div className="content">
 
-            <a className="header">
+            <Link to={`/${postData.category}/${postData.id}`} title="View post details" className="header">
               {postData.title}
-
-            </a>
+            </Link>
 
             <Votes
               postId={postData.id}
@@ -56,11 +55,11 @@ class ListItem extends Component {
             <div className="extra">
 
               <Link to={`/${postData.category}/${postData.id}`} className="ui left floated mini orange button">
-                View post
+                View
               </Link>
 
 
-              <button onClick={this.props.onDeleteButtonClick} title="Delete post" className="ui right floated mini icon button">
+              <button onClick={this.props.onDeletePostButtonClick} title="Delete post" className="ui right floated mini icon button">
                 <i className="trash icon"></i>
               </button>
 

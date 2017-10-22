@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { hideConfirmModal } from '../../actions/confirmFormActions';
+// import { hideConfirmModal } from '../../actions/confirmFormActions';
 
 import BaseModal from './baseModal';
 
@@ -18,7 +18,8 @@ class ConfirmModal extends React.Component {
         koLabel="No"
         okLabel="Yes"
         show={this.props.show}
-        onFormClose={this.props.closeForm}
+        onFormSave={this.props.onConfirm}
+        onFormClose={this.props.onCloseForm}
         modalClassNames="mini"
       >
         <p>{this.props.message}</p>
@@ -28,13 +29,15 @@ class ConfirmModal extends React.Component {
 
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    closeForm: () => dispatch(hideConfirmModal())
-  }
-}
+// function mapDispatchToProps (dispatch) {
+//   return {
+//     closeForm: () => dispatch(hideConfirmModal())
+//   }
+// }
+//
+// export default connect (
+//   null,
+//   mapDispatchToProps
+// )(ConfirmModal);
 
-export default connect (
-  null,
-  mapDispatchToProps
-)(ConfirmModal);
+export default ConfirmModal;

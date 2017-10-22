@@ -1,9 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { closeCommentForm } from '../../actions/commentFormActions';
+import { closeCommentForm } from '../../../actions/commentActions';
 
-import BaseModal from './baseModal';
+import BaseModal from './base/baseModal';
 
 class CommentModal extends React.Component {
 

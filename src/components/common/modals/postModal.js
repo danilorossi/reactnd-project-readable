@@ -1,10 +1,10 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { closePostForm } from '../../actions/postFormActions';
+import { closePostForm } from '../../../actions/postActions';
 import 'semantic-ui/dist/components/dropdown.min.js';
 
-import BaseModal from './baseModal';
+import BaseModal from './base/baseModal';
 
 class PostModal extends React.Component {
 

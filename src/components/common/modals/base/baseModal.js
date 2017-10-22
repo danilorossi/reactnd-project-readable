@@ -28,7 +28,7 @@ class BaseModal extends React.Component {
     })
   }
   onOkButtonClick() {
-    this.props.onFormSave();
+    this.props.onFormSave && this.props.onFormSave();
     window.$(this.modal).modal('hide');
   }
   render() {

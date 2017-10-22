@@ -24,15 +24,21 @@ export const VOTE_COMMENT_SUCCESS = Symbol('VoteCommentSuccess');
 export const END_VOTE_COMMENT = Symbol('EndVoteComment');
 
 // [update comment]
-export const BEGIN_UPDATE_COMMENT = Symbol('BeginUpdateComment');
-export const UPDATE_COMMENT_SUCCESS = Symbol('UpdateCommentSuccess');
-export const END_UPDATE_COMMENT = Symbol('EndUpdateComment');
+// export const BEGIN_UPDATE_COMMENT = Symbol('BeginUpdateComment');
+// export const UPDATE_COMMENT_SUCCESS = Symbol('UpdateCommentSuccess');
+// export const END_UPDATE_COMMENT = Symbol('EndUpdateComment');
 
 
 
 
 export const START_CREATE_COMMENT = Symbol('StartCreateComment');
-export const CANCEL_COMMENT_POST = Symbol('CancelCommentForm');
+export const START_EDIT_COMMENT = Symbol('StartEditComment');
+export const CANCEL_FORM_COMMENT = Symbol('CancelCommentForm');
 
-export const HIDE_CONFIRM_MODAL = Symbol('HideConfirmModal');
-export const SHOW_CONFIRM_MODAL = Symbol('showConfirmModal');
+
+
+export const SHOW_DELETE_POST_MODAL = Symbol('ShowDeletePostModal');
+export const HIDE_DELETE_POST_MODAL = Symbol('HideDeletePostModal');
+
+export const SHOW_DELETE_COMMENT_MODAL = Symbol('ShowDeleteCommentModal');
+export const HIDE_DELETE_COMMENT_MODAL = Symbol('HideDeleteCommentModal');

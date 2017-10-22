@@ -41,23 +41,23 @@ export default function ajaxStatusReducer(state = initialState.ajaxStatus, actio
             }
           };
 
-        case types.BEGIN_UPDATE_COMMENT:
-          return {
-            ...state,
-            commentBodies: {
-              ...state.commentBodies,
-              [action.commentId]: true
-            }
-          };
-
-        case types.END_UPDATE_COMMENT:
-          return {
-            ...state,
-            commentBodies: {
-              ...state.commentBodies,
-              [action.commentId]: false
-            }
-          };
+        // case types.BEGIN_UPDATE_COMMENT:
+        //   return {
+        //     ...state,
+        //     commentBodies: {
+        //       ...state.commentBodies,
+        //       [action.commentId]: true
+        //     }
+        //   };
+        //
+        // case types.END_UPDATE_COMMENT:
+        //   return {
+        //     ...state,
+        //     commentBodies: {
+        //       ...state.commentBodies,
+        //       [action.commentId]: false
+        //     }
+        //   };
 
         default:
           return state;

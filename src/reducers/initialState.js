@@ -13,20 +13,49 @@ export default {
     }
   },
   commentsByParentId: {},
-  postForm: {
-    visible: false,
-    data: {}
-  },
-  commentForm: {
-    visible: false,
-  },
-  confirmForm: {
-    visible: false,
-    data: {}
+
+  modals: {
+    post: {
+      visible: false,
+      data: {}
+    },
+    comment: {
+      visible: false,
+      data: {}
+    },
+    deletePost: {
+      visible: false,
+      data: {
+        postId: null
+      }
+    },
+    deleteComment: {
+      visible: false,
+      data: {
+        commentId: null
+      }
+    }
   },
   ajaxStatus: {
     postVotes: {},
     commentVotes: {},
-    commentBodies: {}
+    //commentBodies: {}
   }
+  // postForm: {
+  //   visible: false,
+  //   data: {}
+  // },
+  // commentForm: {
+  //   visible: false,
+  //   data: {}
+  // },
+  // confirmForm: {
+  //   visible: false,
+  //   data: {}
+  // },
+  // ajaxStatus: {
+  //   postVotes: {},
+  //   commentVotes: {},
+  //   commentBodies: {}
+  // }
 }

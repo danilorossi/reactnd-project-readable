@@ -2,31 +2,53 @@ import * as types from './types';
 import CommentApi from '../api/mock/commentApi';
 
 
-export function loadCommentsByParentSuccess(parentId, comments) {
+function loadCommentsByParentSuccess(parentId, comments) {
   return { type: types.LOAD_COMMENTS_BY_PARENT_SUCCESS, parentId, comments };
 }
 
 
-export function beginVoteComment(commentId) {
+function beginVoteComment(commentId) {
   return { type: types.BEGIN_VOTE_COMMENT, commentId };
 }
-export function voteCommentSuccess(comment) {
+function voteCommentSuccess(comment) {
   return { type: types.VOTE_COMMENT_SUCCESS, comment };
 }
-export function endVoteComment(commentId) {
+function endVoteComment(commentId) {
   return { type: types.END_VOTE_COMMENT, commentId };
 }
 
+function startEditComment(commentData) {
+  return {
+    type: types.START_EDIT_COMMENT,
+    commentData
+  };
+}
+function startCreateComment(parentId) {
+  return { type: types.START_CREATE_COMMENT, parentId };
+}
+function cancelFormComment() {
+  return { type: types.CANCEL_FORM_COMMENT };
+}
 
-export function beginUpdateComment(commentId) {
-  return { type: types.BEGIN_UPDATE_COMMENT, commentId };
+export function showDeleteCommentModal(commentId) {
+  return { type: types.SHOW_DELETE_COMMENT_MODAL, commentId };
 }
-export function updateCommentSuccess(comment) {
-  return { type: types.UPDATE_COMMENT_SUCCESS, comment };
+export function hideDeleteCommentModal() {
+  return { type: types.HIDE_DELETE_COMMENT_MODAL };
 }
-export function endUpdateComment(commentId) {
-  return { type: types.END_UPDATE_COMMENT, commentId };
-}
+
+// // NOTE note used anymore?
+// function beginUpdateComment(commentId) {
+//   return { type: types.BEGIN_UPDATE_COMMENT, commentId };
+// }// NOTE note used anymore?
+//
+// function updateCommentSuccess(comment) {
+//   return { type: types.UPDATE_COMMENT_SUCCESS, comment };
+// }// NOTE note used anymore?
+//
+// function endUpdateComment(commentId) {
+//   return { type: types.END_UPDATE_COMMENT, commentId };
+// }
 
 
 
@@ -75,15 +97,31 @@ export function voteDown(commentId) {
 }
 
 
-export function updateComment(commentId, body) {
+// export function updateComment(commentId, body) {
+//   return function(dispatch) {
+//     dispatch(beginUpdateComment(commentId));
+//     CommentApi
+//       .updateComment(commentId, body)
+//         .then(({ comment }) => dispatch(updateCommentSuccess(comment)))
+//         .then(() => dispatch(endUpdateComment(commentId)))
+//         .catch(error => {
+//             throw(error);
+//         });
+//   };
+// }
+
+export function editComment(commentData) {
   return function(dispatch) {
-    dispatch(beginUpdateComment(commentId));
-    CommentApi
-      .updateComment(commentId, body)
-        .then(({ comment }) => dispatch(updateCommentSuccess(comment)))
-        .then(() => dispatch(endUpdateComment(commentId)))
-        .catch(error => {
-            throw(error);
-        });
+    dispatch(startEditComment(commentData));
+  };
+}
+export function createComment(parentId) {
+  return function(dispatch) {
+    dispatch(startCreateComment(parentId));
+  };
+}
+export function closeCommentForm() {
+  return function(dispatch) {
+    dispatch(cancelFormComment());
   };
 }

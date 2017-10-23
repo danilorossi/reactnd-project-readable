@@ -1,6 +1,7 @@
 
 import { MOCKED_API_DELAY } from './delay';
 
+
 let DEFAULT_DATA = {
   "894tuq4ut84ut8v4t8wun89g": {
     id: '894tuq4ut84ut8v4t8wun89g',
@@ -109,6 +110,15 @@ class CommentApi {
     };
     return new Promise((resolve, reject) => setTimeout(
         () => resolve({ comment: DEFAULT_DATA[commentId]}), MOCKED_API_DELAY)
+    );
+  }
+
+  static publishComment(comment) {
+    DEFAULT_DATA[comment.id] = {
+      ...comment
+    };
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve({ comment: DEFAULT_DATA[comment.id]}), MOCKED_API_DELAY)
     );
   }
 

@@ -1,19 +1,37 @@
 import React, { Component } from 'react';
+import uuid from 'js-uuid';
+import { connect } from 'react-redux';
+
+import Loader from '../../components/common/loader';
+
+import { publishComment } from '../../actions/commentActions';
+//
+// const defaultState = {
+//   formData: {},
+//   errors: {
+//     body: '',
+//     author: ''
+//   }
+// };
 
 class CommentForm extends Component {
 
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.publishComment = this.publishComment.bind(this);
+    this.saveComment = this.saveComment.bind(this);
   }
   state = {
-    formData: {},
+    formData: {
+      author: '',
+      body: ''
+    },
     errors: {
       body: '',
       author: ''
     }
   }
+
   handleChange(event) {
     this.setState({
       ...this.state,
@@ -26,14 +44,32 @@ class CommentForm extends Component {
     });
   }
 
-  publishComment() {
+  componentWillReceiveProps(nextProps) {
+    if(this.props.savingPost && !nextProps.savingPost) {
+     this.setState({
+       formData: {
+         author: '',
+         body: ''
+       }
+      });
+    }
+  }
+
+  saveComment() {
 
     const { formData } = this.state;
     if(this.validateForm(formData)) {
-      console.log('publish comment');
-      console.log(this.state.formData)
-    } else {
-      console.log('MISSING COMMENT FIELDS!')
+
+      const data = {
+        ...formData,
+        id: uuid.v1(),
+        parentId: this.props.parentId,
+        timestamp: Date.now(),
+        voteScore: 0,
+        deleted: false,
+        parentDeleted: false
+      }
+      this.props.publishNewComment(data);
     }
 
   }
@@ -54,7 +90,7 @@ class CommentForm extends Component {
       errors.body = 'Comment text is required.';
     }
 
-    this.setState({ ...this.state, errors }) 
+    this.setState({ ...this.state, errors })
 
     return validated;
 
@@ -68,40 +104,44 @@ class CommentForm extends Component {
       author: errors.author.trim().length > 0 ? 'error':'',
       body: errors.body.trim().length > 0 ? 'error':''
     }
-    const publishButtonClass = errorClass.author === 'error' || errorClass.body === 'error' ? 'disabled' : '';
+    const publishButtonClass = this.props.savingPost || errorClass.author === 'error' || errorClass.body === 'error' ? 'disabled' : '';
 
-   console.log('RENDER, ', errorClass)
     return (
       <div>
         <h4 className="ui dividing header"></h4>
-
         <form className="ui reply form">
 
-          <div className={`field ${errorClass.body}`}>
-            <label>Leave a comment*</label>
-            <textarea
-              onChange={this.handleChange}
-              value={formData.body}
-              name="body"
-              placeholder="Your comment here!" rows="3"></textarea>
+            {this.props.savingPost && <Loader message="Publishing comment..." />}
+            {!this.props.savingPost &&
+              <div>
 
-          </div>
+              <div className={`field ${errorClass.author}`}>
+               <label>Author*</label>
+               <input
+                onChange={this.handleChange}
+                value={formData.author}
+                name="author"
+                type="text"
+                placeholder="Leave your name!"/>
+              </div>
+
+                <div className={`field ${errorClass.body}`}>
+                  <label>Leave a comment*</label>
+                  <textarea
+                    onChange={this.handleChange}
+                    value={formData.body}
+                    name="body"
+                    placeholder="Your comment here!" rows="3"></textarea>
+
+                </div>
 
 
 
-            <div className={`field ${errorClass.author}`}>
-             <label>Author*</label>
-             <input
-              onChange={this.handleChange}
-              value={formData.author}
-              name="author"
-              type="text"
-              placeholder="Leave your name!"/>
-            </div>
-
-            <div onClick={this.publishComment} className={`fluid ui basic teal submit button ${publishButtonClass}`}>
-              Publish
-            </div>
+                <div onClick={() => this.saveComment()} className={`fluid ui basic teal button ${publishButtonClass}`}>
+                  Publish
+                </div>
+              </div>
+            }
 
 
 
@@ -123,4 +163,19 @@ class CommentForm extends Component {
   }
 }
 
-export default CommentForm;
+function mapStateToProps(state, ownProps) {
+  return {
+    savingPost: state.ajaxStatus.savingComment || false
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    publishNewComment: (comment) => dispatch(publishComment(comment)),
+  }
+}
+
+export default connect (
+  mapStateToProps,
+  mapDispatchToProps
+)(CommentForm);

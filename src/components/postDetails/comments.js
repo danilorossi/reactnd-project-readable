@@ -40,7 +40,7 @@ class Comments extends Component {
 
         </div>
 
-        <CommentForm />
+        <CommentForm parentId={this.props.postId}/>
 
       </div>
     );

@@ -41,6 +41,18 @@ export default function ajaxStatusReducer(state = initialState.ajaxStatus, actio
             }
           };
 
+        case types.START_SAVING_COMMENT:
+          return {
+            ...state,
+            savingComment: true
+          };
+
+        case types.END_SAVING_COMMENT:
+        return {
+          ...state,
+          savingComment: false
+        };
+
         // case types.BEGIN_UPDATE_COMMENT:
         //   return {
         //     ...state,

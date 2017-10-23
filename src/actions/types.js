@@ -28,16 +28,17 @@ export const END_VOTE_COMMENT = Symbol('EndVoteComment');
 // export const UPDATE_COMMENT_SUCCESS = Symbol('UpdateCommentSuccess');
 // export const END_UPDATE_COMMENT = Symbol('EndUpdateComment');
 
-
-
-
 export const START_EDIT_COMMENT = Symbol('StartEditComment');
 export const CANCEL_FORM_COMMENT = Symbol('CancelCommentForm');
-
-
 
 export const SHOW_DELETE_POST_MODAL = Symbol('ShowDeletePostModal');
 export const HIDE_DELETE_POST_MODAL = Symbol('HideDeletePostModal');
 
 export const SHOW_DELETE_COMMENT_MODAL = Symbol('ShowDeleteCommentModal');
 export const HIDE_DELETE_COMMENT_MODAL = Symbol('HideDeleteCommentModal');
+
+
+
+export const START_SAVING_COMMENT = Symbol('StartSavingComment');
+export const SAVING_COMMENT_SUCCESS = Symbol('SavingCommentSuccess');
+export const END_SAVING_COMMENT = Symbol('EndSavingComment');

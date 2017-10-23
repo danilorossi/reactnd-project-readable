@@ -37,6 +37,16 @@ export function hideDeleteCommentModal() {
   return { type: types.HIDE_DELETE_COMMENT_MODAL };
 }
 
+
+function startSavingComment(commentId) {
+  return { type: types.START_SAVING_COMMENT, commentId };
+}
+function savingCommentSuccess(comment) {
+  return { type: types.SAVING_COMMENT_SUCCESS, comment };
+}
+function endSavingComment(commentId) {
+  return { type: types.END_SAVING_COMMENT, commentId };
+}
 // // NOTE note used anymore?
 // function beginUpdateComment(commentId) {
 //   return { type: types.BEGIN_UPDATE_COMMENT, commentId };
@@ -109,6 +119,20 @@ export function voteDown(commentId) {
 //         });
 //   };
 // }
+
+
+export function publishComment(comment) {
+  return function(dispatch) {
+    dispatch(startSavingComment(comment.id));
+    CommentApi
+      .publishComment(comment)
+        .then(({ comment }) => dispatch(savingCommentSuccess(comment)))
+        .then(() => dispatch(endSavingComment(comment.id)))
+        .catch(error => {
+            throw(error);
+        });
+  };
+}
 
 export function editComment(commentData) {
   return function(dispatch) {

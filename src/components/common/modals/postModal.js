@@ -59,11 +59,11 @@ class PostModal extends React.Component {
           <form className="ui form">
             <div className="two fields">
               <div className="field">
-                <label>Your name</label>
-                <input onChange={this.handleChange} value={formData.author} type="text" name="author" placeholder="Don't be shy..."/>
+                <label>Author*</label>
+                <input onChange={this.handleChange} value={formData.author} type="text" name="author" placeholder="Your name"/>
               </div>
               <div className="field">
-                <label>Category</label>
+                <label>Category*</label>
                   <select
                     value={formData.category}
                     name="category"
@@ -75,11 +75,11 @@ class PostModal extends React.Component {
               </div>
             </div>
             <div className="field">
-              <label>Title</label>
+              <label>Title*</label>
               <input onChange={this.handleChange} value={formData.title} type="text" name="title" placeholder="Awesome title for your awesome post!"/>
             </div>
             <div className="field">
-              <label>Text</label>
+              <label>Text*</label>
               <textarea onChange={this.handleChange} name="body" value={formData.body} placeholder="..." rows="4"></textarea>
             </div>
           </form>

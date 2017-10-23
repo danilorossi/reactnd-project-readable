@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import CommentItem from './commentItem';
 import Loader from '../common/loader';
+import CommentForm from './commentForm';
 
 class Comments extends Component {
 
@@ -18,9 +19,11 @@ class Comments extends Component {
 
         <h4 className="ui dividing header">{this.props.comments === null ? '-' : this.props.comments.length} comment(s)</h4>
 
-        {!this.props.comments && <Loader message={"Loading"} />}
 
-        <div className="ui comments">
+
+        <div style={{ position: 'relative'}} className="ui comments">
+
+          {!this.props.comments && <Loader message={"Loading"} />}
 
           {this.props.comments && this.props.comments.length === 0 &&
             <h3>NO COMMENTS</h3>
@@ -37,23 +40,7 @@ class Comments extends Component {
 
         </div>
 
-
-
-            <div>
-          <h4 className="ui dividing header">Leave a comment:</h4>
-
-          <form className="ui reply form">
-            <div className="field">
-              <textarea placeholder="Your comment here!" rows="3"></textarea>
-            </div>
-            <div className="field">
-             <input type="text" placeholder="Leave your name!" name="name" />
-            </div>
-            <div className="ui tiny teal labeled submit icon button right floated">
-              <i className="icon save"></i> Add comment
-            </div>
-          </form>
-            </div>
+        <CommentForm />
 
       </div>
     );

@@ -49,11 +49,11 @@ class CommentModal extends React.Component {
           <pre style={{fontSize:'8px'}}>{JSON.stringify(formData, null, 2)}</pre>
           <form className="ui form">
             <div className="field">
-              <label>Author</label>
+              <label>Author*</label>
               <input onChange={this.handleChange} value={formData.author} type="text" name="author" placeholder="..."/>
             </div>
             <div className="field">
-              <label>Comment</label>
+              <label>Comment*</label>
               <textarea onChange={this.handleChange} name="body" value={formData.body} placeholder="..." rows="4"></textarea>
             </div>
           </form>

@@ -23,7 +23,9 @@ class ConfirmModal extends React.Component {
         onFormClose={this.props.onCloseForm}
         modalClassNames="mini"
       >
+        <br/>
         <p>{this.props.message}</p>
+        <br/>
       </BaseModal>
     );
   }

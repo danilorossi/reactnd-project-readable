@@ -66,7 +66,7 @@ class PostDetailsPage extends Component {
 
         <div className="ui grid">
 
-        <div className="four wide column">
+        <div className="three wide column">
 
           <Votes
             postId={postDetails.id}
@@ -82,7 +82,7 @@ class PostDetailsPage extends Component {
 
         </div>
 
-          <div className="eight wide column">
+          <div className="ten wide column">
 
             <PostDetailsHeader postId={postDetails.id} onEditPost={this.onEditPost}/>
 

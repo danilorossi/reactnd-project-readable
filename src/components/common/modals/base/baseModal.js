@@ -5,6 +5,8 @@ import 'semantic-ui/dist/components/dimmer.min.js';
 import 'semantic-ui/dist/components/transition.min.js';
 import { connect } from 'react-redux';
 
+import Loader from '../../loader';
+
 // TODO switch to portal implementation
 // https://github.com/ryanflorence/react-training/blob/gh-pages/lessons/05-wrapping-dom-libs.md#portals
 class BaseModal extends React.Component {
@@ -45,6 +47,8 @@ class BaseModal extends React.Component {
 
         <ModalHeader message={this.props.title} />
         <div className="content" style={{position:'relative'}}>
+
+        {/*this.props.saving && <Loader message="Please wait" />*/}
 
           {this.props.saving &&
             <div style={{

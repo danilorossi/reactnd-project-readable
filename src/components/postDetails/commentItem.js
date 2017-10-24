@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import TimeAgo from 'react-timeago';
 import { connect } from 'react-redux';
 
+import {
+  showDeleteCommentModal,
+  editComment
+} from '../../actions/commentActions';
+
 // import { updateComment } from '../../actions/commentActions';
 import Votes from '../common/votes';
 
@@ -42,8 +47,8 @@ class CommentItem extends Component {
             </div>
 
             <div className="actions">
-              <a onClick={() => this.props.onEditComment(comment)}>Edit</a>
-              <a onClick={() => this.props.deleteComment(comment.id)}>Delete</a>
+              <a onClick={() => this.props.startEditComment(comment)}>Edit</a>
+              <a onClick={() => this.props.deleteComment(comment)}>Delete</a>
             </div>
 
           </div>
@@ -54,6 +59,8 @@ class CommentItem extends Component {
 
 function mapDispatchToProps (dispatch) {
   return {
+    deleteComment: (comment) => dispatch(showDeleteCommentModal(comment)),
+    startEditComment: (commentData) => dispatch(editComment(commentData))
     // update: (commentId, body) => dispatch(updateComment(commentId, body)),
   }
 }

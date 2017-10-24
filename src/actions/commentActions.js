@@ -17,27 +17,17 @@ function endVoteComment(commentId) {
   return { type: types.END_VOTE_COMMENT, commentId };
 }
 
+
+
 function startEditComment(commentData) {
   return {
     type: types.START_EDIT_COMMENT,
     commentData
   };
 }
-// function startCreateComment(parentId) {
-//   return { type: types.START_CREATE_COMMENT, parentId };
-// }
 function cancelFormComment() {
   return { type: types.CANCEL_FORM_COMMENT };
 }
-
-export function showDeleteCommentModal(commentId) {
-  return { type: types.SHOW_DELETE_COMMENT_MODAL, commentId };
-}
-export function hideDeleteCommentModal() {
-  return { type: types.HIDE_DELETE_COMMENT_MODAL };
-}
-
-
 function startSavingComment(commentId) {
   return { type: types.START_SAVING_COMMENT, commentId };
 }
@@ -61,8 +51,45 @@ function endSavingComment(commentId) {
 // }
 
 
+export function showDeleteCommentModal(comment) {
+ return { type: types.SHOW_DELETE_COMMENT_MODAL, comment };
+}
+export function hideDeleteCommentModal() {
+ return { type: types.HIDE_DELETE_COMMENT_MODAL };
+}
+
+function startDeletingComment(comment) {
+  return { type: types.START_DELETING_COMMENT, comment };
+}
+function deleteCommentSuccess(comment) {
+  return { type: types.DELETE_COMMENT_SUCCESS, comment };
+}
+function endDeletingComment(comment) {
+  return { type: types.END_DELETING_COMMENT, comment };
+}
+
 
 // THUNKs
+
+
+
+export function deleteComment(comment) {
+  return function(dispatch) {
+    dispatch(startDeletingComment(comment));
+    CommentApi
+      .deleteComment(comment)
+        .then(({ comment }) => dispatch(deleteCommentSuccess(comment)))
+        .then(() => dispatch(endDeletingComment(comment)))
+        .then(() => dispatch(hideDeleteCommentModal()))
+        .catch(error => {
+            throw(error);
+        });
+  };
+}
+
+
+
+
 export function loadCommentsByParent(parentId) {
     return function(dispatch) {
       CommentApi
@@ -134,6 +161,9 @@ export function publishComment(comment) {
         });
   };
 }
+
+
+
 
 export function editComment(commentData) {
   return function(dispatch) {

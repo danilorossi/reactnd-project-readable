@@ -102,19 +102,8 @@ class CommentApi {
     );
   }
 
-  // static updateComment(commentId, body) {
-  //   DEFAULT_DATA[commentId] = {
-  //     ...(DEFAULT_DATA[commentId]),
-  //     timestamp: Date.now(),
-  //     body
-  //   };
-  //   return new Promise((resolve, reject) => setTimeout(
-  //       () => resolve({ comment: DEFAULT_DATA[commentId]}), MOCKED_API_DELAY)
-  //   );
-  // }
-
   static publishComment(comment) {
-   
+
     if(!comment.id) {
       comment.id = uuid.v1();
       DEFAULT_DATA[comment.id] = {
@@ -131,6 +120,14 @@ class CommentApi {
 
     return new Promise((resolve, reject) => setTimeout(
         () => resolve({ comment: DEFAULT_DATA[comment.id]}), MOCKED_API_DELAY)
+    );
+  }
+
+  static deleteComment(comment) {
+    delete DEFAULT_DATA[comment.id];
+
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve({ comment }), MOCKED_API_DELAY)
     );
   }
 

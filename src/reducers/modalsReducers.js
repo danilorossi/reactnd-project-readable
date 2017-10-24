@@ -34,7 +34,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         deleteComment: {
           visible: true,
           data: {
-            commentId: action.commentId
+            comment: action.comment
           }
         }
       };
@@ -45,7 +45,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         deleteComment: {
           visible: false,
           data: {
-            commentId: null
+            comment: null
           }
         }
       };

@@ -48,10 +48,24 @@ export default function ajaxStatusReducer(state = initialState.ajaxStatus, actio
           };
 
         case types.END_SAVING_COMMENT:
-        return {
-          ...state,
-          savingComment: false
-        };
+          return {
+            ...state,
+            savingComment: false
+          };
+
+        case types.START_DELETING_COMMENT:
+          return {
+            ...state,
+            deletingComment: true
+          };
+
+        case types.END_DELETING_COMMENT:
+          return {
+            ...state,
+            deletingComment: false
+          };
+
+
 
         // case types.BEGIN_UPDATE_COMMENT:
         //   return {

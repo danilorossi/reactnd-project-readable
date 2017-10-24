@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { hideDeleteCommentModal } from '../../../actions/commentActions';
+import { hideDeleteCommentModal, deleteComment } from '../../../actions/commentActions';
 
 import ConfirmModal from './base/confirmModal';
 
@@ -9,17 +9,17 @@ class DeleteCommentModal extends React.Component {
 
   constructor(props) {
     super(props);
-    this.deleteComment = this.deleteComment.bind(this);
+    this.showDeleteCommentModal = this.showDeleteCommentModal.bind(this);
   }
 
-  deleteComment() {
-    console.log('DELETE COMMENT ID ', this.props.commentId);
+  showDeleteCommentModal() {
+    this.props.startDeleteComment(this.props.comment)
   }
 
   render() {
     return (
       <ConfirmModal
-        onConfirm={this.deleteComment}
+        onConfirm={this.showDeleteCommentModal}
         onCloseForm={this.props.hideModal}
         show={this.props.show}
         saving={this.props.saving}
@@ -32,6 +32,7 @@ class DeleteCommentModal extends React.Component {
 function mapDispatchToProps (dispatch) {
   return {
     hideModal: () => dispatch(hideDeleteCommentModal()),
+    startDeleteComment: (comment) => dispatch(deleteComment(comment)),
   }
 }
 

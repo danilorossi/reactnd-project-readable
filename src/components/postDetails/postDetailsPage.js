@@ -9,8 +9,8 @@ import {
   loadCommentsByParent,
   voteUp as voteCommentUpAPI,
   voteDown as voteCommentDownAPI,
-  showDeleteCommentModal,
-  editComment
+  // showDeleteCommentModal,
+  // editComment
 } from '../../actions/commentActions';
 
 import {
@@ -104,11 +104,10 @@ class PostDetailsPage extends Component {
             <Comments
               voteUp={this.props.voteCommentUp}
               voteDown={this.props.voteCommentDown}
-              deleteComment={this.props.deleteComment}
+
               loadingStatus={this.props.votesAjaxStatus.commentVotes}
               postId={postDetails.id}
               comments={this.props.comments}
-              onEditComment={this.props.startEditComment}
             />
 
 
@@ -138,8 +137,8 @@ function mapDispatchToProps (dispatch) {
     voteCommentDown: (commentId) => dispatch(voteCommentDownAPI(commentId)),
     votePostUp: (postId) => dispatch(votePostUpAPI(postId)),
     votePostDown: (postId) => dispatch(votePostDownAPI(postId)),
-    deleteComment: (commentId) => dispatch(showDeleteCommentModal(commentId)),
-    startEditComment: (commentData) => dispatch(editComment(commentData))
+    // deleteComment: (commentId) => dispatch(showDeleteCommentModal(commentId)),
+    // startEditComment: (commentData) => dispatch(editComment(commentData))
 
   }
 }

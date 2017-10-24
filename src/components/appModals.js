@@ -41,7 +41,7 @@ class AppModals extends Component {
 
         <DeleteCommentModal
           show={deleteCommentModal.visible}
-          commentId={deleteCommentModal.data.commentId}
+          comment={deleteCommentModal.data.comment}
           saving={deleteCommentModal.saving}
         />
       </div>

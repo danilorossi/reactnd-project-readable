@@ -33,8 +33,7 @@ class Comments extends Component {
           {this.props.comments && this.props.comments.map((comment, idx) => (
             <CommentItem
               {...commentVoteScoreAttrs}
-              deleteComment={this.props.deleteComment}
-              onEditComment={this.props.onEditComment}
+
               key={comment.id}
               comment={comment}/>
 

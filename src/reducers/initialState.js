@@ -32,7 +32,7 @@ export default {
     deleteComment: {
       visible: false,
       data: {
-        commentId: null
+        comment: null
       }
     }
   },
@@ -42,7 +42,7 @@ export default {
     savingPost: false,
     savingComment: false,
     deletingPost: false,
-    deletingComment: true
+    deletingComment: false
     //commentBodies: {}
   }
 }

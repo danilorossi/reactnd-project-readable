@@ -42,3 +42,10 @@ export const HIDE_DELETE_COMMENT_MODAL = Symbol('HideDeleteCommentModal');
 export const START_SAVING_COMMENT = Symbol('StartSavingComment');
 export const SAVING_COMMENT_SUCCESS = Symbol('SavingCommentSuccess');
 export const END_SAVING_COMMENT = Symbol('EndSavingComment');
+
+
+
+
+export const START_DELETING_COMMENT = Symbol('START_DELETING_COMMENT');
+export const DELETE_COMMENT_SUCCESS = Symbol('DELETE_COMMENT_SUCCESS');
+export const END_DELETING_COMMENT = Symbol('END_DELETING_COMMENT');

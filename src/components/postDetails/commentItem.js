@@ -37,8 +37,9 @@ class CommentItem extends Component {
           <div className="content">
 
             <div className="metadata" style={{ marginLeft: '0' }}>
-              <a className="author">@{comment.author},</a>
+            <a className="author">@{comment.author},</a>
             <div className="date"><TimeAgo date={comment.timestamp} /></div>
+            {comment.lastModified && <span className="date"> (last modified <TimeAgo date={comment.lastModified} />)</span>}
 
            </div>
 

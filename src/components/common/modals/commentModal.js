@@ -17,12 +17,9 @@ class CommentModal extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   saveForm() {
-    console.log('saving comment form');
     const { formData } = this.state;
-    const data = {
-      ...formData
-    }
-    this.props.updateComment(data);
+
+    this.props.updateComment(formData);
   }
   handleChange(event) {
     this.setState({

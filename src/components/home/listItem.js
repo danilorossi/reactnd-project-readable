@@ -36,7 +36,7 @@ class ListItem extends Component {
 
               <span className="cinema">@{postData.author},</span>
               <span className="cinema"><TimeAgo date={postData.timestamp} /></span>
-
+               
               {this.props.currentCategoryId === 'all' &&
                 <span>in <Link to={`/${postData.category}`}>#{postData.category}</Link></span>
 

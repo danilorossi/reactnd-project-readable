@@ -29,14 +29,17 @@ class Comments extends Component {
             <h3>NO COMMENTS</h3>
           }
 
-          {this.props.comments && this.props.comments.map(comment => (
+          <div className="ui comments">
+          {this.props.comments && this.props.comments.map((comment, idx) => (
             <CommentItem
               {...commentVoteScoreAttrs}
               deleteComment={this.props.deleteComment}
               onEditComment={this.props.onEditComment}
               key={comment.id}
-              comment={comment} />
+              comment={comment}/>
+
           ))}
+            </div>
 
         </div>
 

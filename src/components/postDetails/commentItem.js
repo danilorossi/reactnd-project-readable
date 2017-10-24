@@ -17,8 +17,8 @@ class CommentItem extends Component {
     const comment = this.props.comment;
 
     return (
-      <div className="ui comments">
-        <div className="comment">
+
+      <div className="comment">
         <a className="avatar" style={{ margin: '0' }}>
         <Votes
           type="vertical"
@@ -48,7 +48,6 @@ class CommentItem extends Component {
 
           </div>
         </div>
-      </div>
     );
   }
 }

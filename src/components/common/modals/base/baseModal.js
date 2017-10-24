@@ -17,9 +17,13 @@ class BaseModal extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    props.show && this.activateModal();
+    !this.props.show && props.show && this.activateModal();
+    this.props.show && !props.show && this.closeModal();
   }
 
+  closeModal() {
+     window.$(this.modal).modal('hide');
+  }
   activateModal() {
     const $modal = window.$(this.modal);
     $modal.modal({
@@ -34,7 +38,7 @@ class BaseModal extends React.Component {
   onOkButtonClick() {
     if(!this.props.saving) {
       this.props.onFormSave && this.props.onFormSave();
-      window.$(this.modal).modal('hide');
+    //  window.$(this.modal).modal('hide');
     }
   }
   render() {

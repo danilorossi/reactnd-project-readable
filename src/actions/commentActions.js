@@ -128,6 +128,7 @@ export function publishComment(comment) {
       .publishComment(comment)
         .then(({ comment }) => dispatch(savingCommentSuccess(comment)))
         .then(() => dispatch(endSavingComment(comment.id)))
+        .then(() => dispatch(closeCommentForm()))
         .catch(error => {
             throw(error);
         });

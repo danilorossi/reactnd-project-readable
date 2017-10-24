@@ -1,1 +1,1 @@
-export const MOCKED_API_DELAY = 1500;
+export const MOCKED_API_DELAY = 500;

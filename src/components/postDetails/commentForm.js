@@ -5,14 +5,6 @@ import { connect } from 'react-redux';
 import Loader from '../../components/common/loader';
 
 import { publishComment } from '../../actions/commentActions';
-//
-// const defaultState = {
-//   formData: {},
-//   errors: {
-//     body: '',
-//     author: ''
-//   }
-// };
 
 class CommentForm extends Component {
 
@@ -21,6 +13,7 @@ class CommentForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.saveComment = this.saveComment.bind(this);
   }
+
   state = {
     formData: {
       author: '',
@@ -62,7 +55,7 @@ class CommentForm extends Component {
 
       const data = {
         ...formData,
-        id: uuid.v1(),
+        id: null,
         parentId: this.props.parentId,
         timestamp: Date.now(),
         voteScore: 0,

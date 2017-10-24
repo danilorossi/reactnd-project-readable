@@ -18,10 +18,19 @@ export default function postReducer(state = initialState.commentsByParentId, act
           };
 
         case types.SAVING_COMMENT_SUCCESS:
+
           return {
             ...state,
-            [action.comment.parentId]:  state[action.comment.parentId].concat(action.comment)
+            [action.comment.parentId]:
+              state[action.comment.parentId]
+                .filter(item => item.id !== action.comment.id)
+                .concat(action.comment)
           };
+
+          // return {
+          //   ...state,
+          //   [action.comment.parentId]: state[action.comment.parentId].map(item => item.id === action.comment.id ? action.comment : item)
+          // };
 
         // case types.UPDATE_COMMENT_SUCCESS:
         //   return {

@@ -1,6 +1,6 @@
 
 import { MOCKED_API_DELAY } from './delay';
-
+import uuid from 'js-uuid';
 
 let DEFAULT_DATA = {
   "894tuq4ut84ut8v4t8wun89g": {
@@ -47,7 +47,7 @@ let DEFAULT_DATA = {
     id: 'yyyyyy',
     parentId: "6ni6ok3ym7mf1p33lnez",
     timestamp: 1469479767190,
-    body: 'This is a fake comment!',
+    body: 'This is a fake comment! TEST',
     author: 'thingone',
     voteScore: -101,
     deleted: false,
@@ -102,21 +102,33 @@ class CommentApi {
     );
   }
 
-  static updateComment(commentId, body) {
-    DEFAULT_DATA[commentId] = {
-      ...(DEFAULT_DATA[commentId]),
-      timestamp: Date.now(),
-      body
-    };
-    return new Promise((resolve, reject) => setTimeout(
-        () => resolve({ comment: DEFAULT_DATA[commentId]}), MOCKED_API_DELAY)
-    );
-  }
+  // static updateComment(commentId, body) {
+  //   DEFAULT_DATA[commentId] = {
+  //     ...(DEFAULT_DATA[commentId]),
+  //     timestamp: Date.now(),
+  //     body
+  //   };
+  //   return new Promise((resolve, reject) => setTimeout(
+  //       () => resolve({ comment: DEFAULT_DATA[commentId]}), MOCKED_API_DELAY)
+  //   );
+  // }
 
   static publishComment(comment) {
-    DEFAULT_DATA[comment.id] = {
-      ...comment
-    };
+   
+    if(!comment.id) {
+      comment.id = uuid.v1();
+      DEFAULT_DATA[comment.id] = {
+        ...comment,
+      };
+    } else {
+      DEFAULT_DATA[comment.id] = {
+        ...(DEFAULT_DATA[comment.id]),
+        author: comment.author,
+        body: comment.body,
+        lastModified: Date.now()
+      };
+    }
+
     return new Promise((resolve, reject) => setTimeout(
         () => resolve({ comment: DEFAULT_DATA[comment.id]}), MOCKED_API_DELAY)
     );

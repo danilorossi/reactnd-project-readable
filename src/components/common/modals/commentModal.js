@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { closeCommentForm } from '../../../actions/commentActions';
+import { closeCommentForm, publishComment } from '../../../actions/commentActions';
 
 import BaseModal from './base/baseModal';
 
@@ -18,6 +18,11 @@ class CommentModal extends React.Component {
   }
   saveForm() {
     console.log('saving comment form');
+    const { formData } = this.state;
+    const data = {
+      ...formData
+    }
+    this.props.updateComment(data);
   }
   handleChange(event) {
     this.setState({
@@ -34,6 +39,7 @@ class CommentModal extends React.Component {
     });
   }
 
+  //  <pre style={{fontSize:'8px'}}>{JSON.stringify(formData, null, 2)}</pre>
   render() {
     const { formData } = this.state;
     return (
@@ -46,7 +52,7 @@ class CommentModal extends React.Component {
         onFormSave={this.saveForm}
         onFormClose={this.props.closeForm}>
         <div>
-          <pre style={{fontSize:'8px'}}>{JSON.stringify(formData, null, 2)}</pre>
+
           <form className="ui form">
             <div className="field">
               <label>Author*</label>
@@ -66,11 +72,17 @@ class CommentModal extends React.Component {
 
 function mapDispatchToProps (dispatch) {
   return {
-    closeForm: () => dispatch(closeCommentForm())
+    closeForm: () => dispatch(closeCommentForm()),
+    updateComment: (comment) => dispatch(publishComment(comment)),
   }
+}
+function mapStateToProps(state, ownProps) {
+  return {
+    savingPost: state.ajaxStatus.savingComment || false
+  };
 }
 
 export default connect (
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CommentModal);

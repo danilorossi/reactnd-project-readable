@@ -26,7 +26,7 @@ export default {
     deletePost: {
       visible: false,
       data: {
-        postId: null
+        post: null
       }
     },
     deleteComment: {

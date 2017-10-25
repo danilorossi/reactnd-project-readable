@@ -84,7 +84,7 @@ class PostDetailsPage extends Component {
 
           <div className="ten wide column">
 
-            <PostDetailsHeader postId={postDetails.id} onEditPost={this.onEditPost}/>
+            <PostDetailsHeader post={postDetails} onEditPost={this.onEditPost}/>
 
 
             <h3 className="ui dividing header">

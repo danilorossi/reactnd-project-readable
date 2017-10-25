@@ -1,5 +1,6 @@
 
 import { MOCKED_API_DELAY } from './delay';
+import CommentAPI from './commentApi';
 
 let DEFAULT_DATA = {
   "8xf0y6ziyjabvozdd253nd": {
@@ -29,6 +30,18 @@ class PostApi {
 
   static getAllPosts() {
 
+    const newDefaultData = Object.keys(DEFAULT_DATA)
+      .map(key => DEFAULT_DATA[key])
+      .filter(post => !post.deleted)
+      .reduce((prev, curr) => {
+        return {
+          ...prev,
+          [curr.id]: curr
+        };
+      }, {});
+
+    DEFAULT_DATA = { ...newDefaultData };
+
     return new Promise((resolve, reject) => setTimeout(
         () => resolve(DEFAULT_DATA), MOCKED_API_DELAY)
     );
@@ -36,33 +49,59 @@ class PostApi {
   };
 
   static getPostsByCategory(category) {
+
+    const posts = Object.keys(DEFAULT_DATA)
+      .map(key => DEFAULT_DATA[key])
+      .filter(post => !post.deleted)
+      .filter(post => ( category === 'all' ? true : post.category === category ))
+      .reduce((prev, curr) => {
+        return {
+          ...prev,
+          [curr.id]: curr
+        };
+      }, {});
     return new Promise((resolve, reject) => setTimeout(
-        () => {
-
-          const keys = Object.keys(DEFAULT_DATA);
-
-          switch(category) {
-            case 'all':
-              resolve(DEFAULT_DATA);
-              break;
-
-            case 'react':
-              resolve({ [keys[0]]: DEFAULT_DATA[keys[0]] });
-              break;
-
-            case 'redux':
-              // resolve(DEFAULT_DATA['6ni6ok3ym7mf1p33lnez']);
-              resolve({ [keys[1]]: DEFAULT_DATA[keys[1]] });
-              break;
-
-            default: resolve([]);
-          }
-
-        }, MOCKED_API_DELAY)
+        () => resolve(posts), MOCKED_API_DELAY)
     );
+
+    // return new Promise((resolve, reject) => setTimeout(
+    //     () => {
+    //
+    //       const keys = Object.keys(DEFAULT_DATA);
+    //
+    //       switch(category) {
+    //         case 'all':
+    //           resolve(DEFAULT_DATA);
+    //           break;
+    //
+    //         case 'react':
+    //           resolve({ [keys[0]]: DEFAULT_DATA[keys[0]] });
+    //           break;
+    //
+    //         case 'redux':
+    //           // resolve(DEFAULT_DATA['6ni6ok3ym7mf1p33lnez']);
+    //           resolve({ [keys[1]]: DEFAULT_DATA[keys[1]] });
+    //           break;
+    //
+    //         default: resolve([]);
+    //       }
+    //
+    //     }, MOCKED_API_DELAY)
+    // );
 
   }
 
+  static deletePost(post) {
+    DEFAULT_DATA[post.id] = {
+      ...(DEFAULT_DATA[post.id]),
+      deleted: true,
+      lastModified: Date.now()
+    };
+
+    return new Promise((resolve, reject) => setTimeout(
+        () => CommentAPI.deleteAllCommentsByPostId(post.id).then(() => resolve({ post })), MOCKED_API_DELAY)
+    );
+  }
 
   static votePostUp(postId) {
     const oldScore = DEFAULT_DATA[postId].voteScore;

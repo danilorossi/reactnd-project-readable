@@ -8,7 +8,7 @@ class PostDetailsHeader extends Component {
 
   render() {
 
-    const { postId } = this.props;
+    const { post } = this.props;
 
     return (
 
@@ -30,7 +30,7 @@ class PostDetailsHeader extends Component {
 
         <div className="item right aligned">
 
-        <a onClick={this.props.onEditPost} to={`/manage/${this.props.postId}`} className="ui vertical right  floated teal animated button" tabIndex="0">
+        <a onClick={this.props.onEditPost} to={`/manage/${this.props.post.id}`} className="ui vertical right  floated teal animated button" tabIndex="0">
           <div className="hidden content">
           <i className="edit icon"></i>
           </div>
@@ -43,7 +43,7 @@ class PostDetailsHeader extends Component {
 
         <div className="item">
 
-          <a onClick={() => this.props.deletePost(postId)} className="ui red icon button" tabIndex="2">
+          <a onClick={() => this.props.deletePost(post)} className="ui red icon button" tabIndex="2">
             <i className="delete icon"></i> Delete
           </a>
 

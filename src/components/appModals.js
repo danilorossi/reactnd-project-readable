@@ -35,7 +35,7 @@ class AppModals extends Component {
 
         <DeletePostModal
           show={deletePostModal.visible}
-          postId={deletePostModal.data.postId}
+          post={deletePostModal.data.post}
           saving={deletePostModal.saving}
         />
 

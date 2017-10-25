@@ -24,15 +24,41 @@ function cancelFormPost() {
   return { type: types.CANCEL_FORM_POST };
 }
 
-export function showDeletePostModal(postId) {
-  return { type: types.SHOW_DELETE_POST_MODAL, postId };
+export function showDeletePostModal(post) {
+  return { type: types.SHOW_DELETE_POST_MODAL, post };
 }
 export function hideDeletePostModal() {
   return { type: types.HIDE_DELETE_POST_MODAL };
 }
 
+function startDeletingPost(post) {
+  return { type: types.START_DELETING_POST, post };
+}
+function deletePostSuccess(post) {
+  return { type: types.DELETE_POST_SUCCESS, post };
+}
+function endDeletingPost(post) {
+  return { type: types.END_DELETING_POST, post };
+}
 
 // THUNKs
+
+export function deletePost(post) {
+  return function(dispatch) {
+    dispatch(startDeletingPost(post));
+    PostApi
+      .deletePost(post)
+        .then(({ post }) => dispatch(deletePostSuccess(post)))
+        .then(() => dispatch(endDeletingPost(post)))
+        .then(() => dispatch(hideDeletePostModal()))
+        .catch(error => {
+            throw(error);
+        });
+  };
+}
+
+
+
 export function loadPostsByCategory(category = 'all') {
     return function(dispatch) {
       const postsPromise = category === 'all' ? PostApi.getAllPosts() : /* TODO */ PostApi.getPostsByCategory(category);

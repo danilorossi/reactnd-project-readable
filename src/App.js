@@ -34,9 +34,9 @@ class App extends Component {
           <div>
 
             <Switch>
-              <Route path='/:category/:postId' render={({match}) => <PostDetailsPage postId={match.params.postId}/>}/>
+              <Route exact path='/:category/:postId' render={({match}) => <PostDetailsPage postId={match.params.postId}/>}/>
               <Route exact path='/' render={() => <Redirect to="/all"/>} />
-              <Route path="/:category" component={HomePage} />
+              <Route exact path="/:category" component={HomePage} />
             </Switch>
 
             <AppModals />

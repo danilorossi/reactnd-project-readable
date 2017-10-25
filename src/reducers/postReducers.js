@@ -29,6 +29,26 @@ export default function postReducer(state = initialState.posts, action) {
             }
           }
 
+        case types.DELETE_POST_SUCCESS:
+          const newStore = { ...state.store };
+          delete newStore[action.post.id];
+          return {
+            ...state,
+            store: {
+              ...newStore
+              // ...state.store,
+              // [action.post.id]: state.store[action.post.id].filter(item => item.id != action.post.id)
+            },
+            byCategory: {
+              ...state.byCategory,
+              [action.post.category]: (state.byCategory[action.post.category] ?
+                  state.byCategory[action.post.category].filter(postId => postId != action.post.id) : []),
+              // TODO remove this?
+              ['all']: (state.byCategory['all'] || []).filter(postId => postId != action.post.id)
+            }
+          }
+
+
         default:
             return state;
 

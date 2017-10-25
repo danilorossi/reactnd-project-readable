@@ -39,7 +39,7 @@ class PostsList extends Component {
               <ListItem
                 key={post.id}
                 onEditButtonClick={() => this.onEditButtonClick(post)}
-                onDeletePostButtonClick={() => this.onDeletePostButtonClick(post.id)}
+                onDeletePostButtonClick={() => this.onDeletePostButtonClick(post)}
                 data={post}
                 currentCategoryId={this.props.categoryId}
                 voteUp={this.props.votePostUp}
@@ -58,8 +58,8 @@ class PostsList extends Component {
     this.props.showEditPostModal(post);
   }
 
-  onDeletePostButtonClick(postId) {
-    this.props.deletePost(postId);
+  onDeletePostButtonClick(post) {
+    this.props.deletePost(post);
   }
 
 }
@@ -79,7 +79,7 @@ function mapDispatchToProps (dispatch) {
     votePostUp: (postId) => dispatch(voteUp(postId)),
     votePostDown: (postId) => dispatch(voteDown(postId)),
     showEditPostModal: (postData) => dispatch(editPost(postData)),
-    deletePost: (postId) => dispatch(showDeletePostModal(postId)),
+    deletePost: (post) => dispatch(showDeletePostModal(post)),
   }
 }
 function mapStateToProps(state, ownProps) {

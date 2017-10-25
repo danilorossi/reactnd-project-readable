@@ -123,6 +123,29 @@ class CommentApi {
     );
   }
 
+  static deleteAllCommentsByPostId(postId) {
+
+    const newDefaultData = Object.keys(DEFAULT_DATA)
+      .map(key => DEFAULT_DATA[key])
+      .map(comment => (comment.parentId === postId) ? {
+        ...comment,
+        deleted: true,
+        parentDeleted: true
+      } : comment)
+      .reduce((prev, curr) => {
+        return {
+          ...prev,
+          [curr.id]: curr
+        };
+      }, {});
+
+    console.log('DELETED ALL COMMENTS FOR POST ID', postId, newDefaultData);
+    DEFAULT_DATA = { ...newDefaultData };
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve(), MOCKED_API_DELAY)
+    );
+  }
+
   static deleteComment(comment) {
     // delete DEFAULT_DATA[comment.id];
     DEFAULT_DATA[comment.id] = {

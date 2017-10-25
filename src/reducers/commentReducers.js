@@ -36,7 +36,14 @@ export default function postReducer(state = initialState.commentsByParentId, act
                 .filter(item => item.id !== action.comment.id)
           };
 
-
+        case types.DELETE_POST_SUCCESS:
+          const newState = {
+            ...state
+          };
+          delete newState[action.post.id];
+          return {
+            ...newState
+          };
           // return {
           //   ...state,
           //   [action.comment.parentId]: state[action.comment.parentId].map(item => item.id === action.comment.id ? action.comment : item)

@@ -11,22 +11,30 @@ import Sidebar from './pageLayout/sidebar/sidebar';
 
 class HomePage extends Component {
 
+  historyListener = null;
+
   updateStoreLocation(location) {
 
-      const categoryId = location.pathname.replace('/', '');
-
-            console.log('¡¡¡¡use match param¡¡¡categoryId', categoryId)
+    if(location.pathname.split('/').filter(str => str).length === 1) {
+      const categoryId = location.pathname.replace(/\//g, "")
+      console.log('¡¡¡¡use match param¡¡¡categoryId', categoryId)
       this.props.changeCategory(categoryId);
       this.props.loadPosts(categoryId);
+    }
+
   }
+
   constructor(props) {
 
     super(props);
     const { history } = props;
-    history.listen((location) => this.updateStoreLocation(location));
+    this.historyListener = history.listen((location) => this.updateStoreLocation(location));
     this.updateStoreLocation(history.location)
   }
 
+  componentWillUnmount() {
+    this.historyListener();
+  }
   // componentDidMount() {
   //   this.props.newComment();
   // }

@@ -56,7 +56,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         deletePost: {
           visible: true,
           data: {
-            postId: action.postId
+            post: action.post
           }
         }
       };
@@ -67,7 +67,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         deletePost: {
           visible: false,
           data: {
-            postId: null
+            post: null
           }
         }
       };

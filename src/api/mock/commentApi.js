@@ -124,7 +124,12 @@ class CommentApi {
   }
 
   static deleteComment(comment) {
-    delete DEFAULT_DATA[comment.id];
+    // delete DEFAULT_DATA[comment.id];
+    DEFAULT_DATA[comment.id] = {
+      ...(DEFAULT_DATA[comment.id]),
+      deleted: true,
+      lastModified: Date.now()
+    };
 
     return new Promise((resolve, reject) => setTimeout(
         () => resolve({ comment }), MOCKED_API_DELAY)

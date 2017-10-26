@@ -24,8 +24,8 @@ function cancelFormPost() {
   return { type: types.CANCEL_FORM_POST };
 }
 
-export function showDeletePostModal(post) {
-  return { type: types.SHOW_DELETE_POST_MODAL, post };
+export function showDeletePostModal(post, redirectTo) {
+  return { type: types.SHOW_DELETE_POST_MODAL, post, redirectTo };
 }
 export function hideDeletePostModal() {
   return { type: types.HIDE_DELETE_POST_MODAL };

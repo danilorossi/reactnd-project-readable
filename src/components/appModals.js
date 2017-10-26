@@ -37,6 +37,7 @@ class AppModals extends Component {
           show={deletePostModal.visible}
           post={deletePostModal.data.post}
           saving={deletePostModal.saving}
+          redirectTo={deletePostModal.redirectTo}
         />
 
         <DeleteCommentModal

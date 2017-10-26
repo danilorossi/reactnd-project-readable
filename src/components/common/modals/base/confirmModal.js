@@ -18,6 +18,7 @@ class ConfirmModal extends React.Component {
         koLabel="No"
         okLabel="Yes"
         show={this.props.show}
+        redirectTo={this.props.redirectTo}
         saving={this.props.saving}
         onFormSave={this.props.onConfirm}
         onFormClose={this.props.onCloseForm}

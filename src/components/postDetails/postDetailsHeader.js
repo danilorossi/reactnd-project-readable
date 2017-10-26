@@ -58,7 +58,7 @@ class PostDetailsHeader extends Component {
 // export default PostDetailsHeader;
 function mapDispatchToProps (dispatch) {
   return {
-    deletePost: (data) => dispatch(showDeletePostModal(data)),
+    deletePost: (data) => dispatch(showDeletePostModal(data, '/')),
   }
 }
 

@@ -37,6 +37,13 @@ class PostDetailsPage extends Component {
     // }, 2000);
   }
 
+  // componentWillReceiveProps(newProps) {
+  //
+  //   if(!newProps.postDetails) {
+  //     console.log('asdasdadsadsa', this.props.history.push('/'))
+  //   }
+  // }
+
   onEditPost() {
     this.props.startEditPost(Object.assign({}, this.props.postDetails));
   }
@@ -62,13 +69,13 @@ class PostDetailsPage extends Component {
           pauseOnHover
         />*/}
 
-
+      {postDetails &&
 
         <div className="ui grid">
 
         <div className="three wide column">
 
-          <Votes
+           <Votes
             postId={postDetails.id}
             voteDown={this.props.votePostDown}
             voteUp={this.props.votePostUp}
@@ -113,7 +120,7 @@ class PostDetailsPage extends Component {
 
           </div>
         </div>
-
+      }
 
       </div>
     );

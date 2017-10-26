@@ -55,6 +55,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         ...state,
         deletePost: {
           visible: true,
+          redirectTo: action.redirectTo,
           data: {
             post: action.post
           }

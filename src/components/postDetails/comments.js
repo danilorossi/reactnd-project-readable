@@ -9,7 +9,7 @@ import {
   // showDeleteCommentModal,
   // editComment
 } from '../../actions/commentActions';
-
+import { mapCriteriaToField } from '../../selectors/filterSelectors';
 import { sortedCommentsSelector } from '../../selectors/commentsSelectors';
 import CommentItem from './commentItem';
 import Loader from '../common/loader';
@@ -33,14 +33,8 @@ class Comments extends Component {
     this.changeOrder = this.changeOrder.bind(this);
   }
 
-  mapCriteriaToField(nextCriteria) {
-    switch(nextCriteria) {
-      case 'score': return 'voteScore';
-      case 'creation_date': return 'timestamp';
-    }
-  }
   changeCriteria(nextCriteria) {
-    let criteria = this.mapCriteriaToField(nextCriteria);
+    let criteria = mapCriteriaToField(nextCriteria);
     this.setState({
       sorting: {
         ...this.state.sorting,
@@ -80,7 +74,7 @@ class Comments extends Component {
 
         <h4 style={{ margin: 0 }} className="ui dividing header">{comments === null ? '-' : comments.length} comment(s)</h4>
 
-        <ListSorter onCriteriaChange={this.changeCriteria} onOrderChange={this.changeOrder} />
+        {comments && comments.length > 0 && <ListSorter onCriteriaChange={this.changeCriteria} onOrderChange={this.changeOrder} />}
 
         <div style={{ position: 'relative'}} className="ui comments">
 

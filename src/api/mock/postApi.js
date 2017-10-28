@@ -22,6 +22,36 @@ let DEFAULT_DATA = {
     category: 'redux',
     voteScore: -5,
     deleted: false
+  },
+  "aaaaaaaa": {
+    id: 'aaaaaaaa',
+    timestamp: 1468479767190,
+    title: 'A new fake post!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'unknown',
+    category: 'redux',
+    voteScore: 2,
+    deleted: false
+  },
+  "bbbbbbbb": {
+    id: 'bbbbbbbb',
+    timestamp: 1509188349283,
+    title: 'A new fake post!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'unknown',
+    category: 'udacity',
+    voteScore: 0,
+    deleted: false
+  },
+  "xxxxxx": {
+    id: 'xxxxxx',
+    timestamp: 1509188341888,
+    title: 'A new fake post!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'unknown',
+    category: 'routing',
+    voteScore: -1,
+    deleted: false
   }
 }
 

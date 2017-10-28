@@ -21,7 +21,7 @@ class ListSorter extends Component {
   render() {
 
     return (
-      <h4 className="ui header right aligned" style={{ margin: 0 }}>
+      <h4 className="ui header right aligned" style={{...this.props.style, margin: '0'}}>
 
         <div className="content">
           Sort by

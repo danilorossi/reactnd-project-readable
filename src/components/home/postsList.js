@@ -34,20 +34,23 @@ class PostsList extends Component {
       <div>
         { this.props.posts && this.props.posts.length === 0 && <NoResults categoryId={this.props.categoryId} /> }
         { this.props.posts && this.props.posts.length > 0 && (
-          <div className="ui divided items">
-            {this.props.posts.map( (post, index) => (
-              <ListItem
-                key={post.id}
-                onEditButtonClick={() => this.onEditButtonClick(post)}
-                onDeletePostButtonClick={() => this.onDeletePostButtonClick(post)}
-                data={post}
-                currentCategoryId={this.props.categoryId}
-                voteUp={this.props.votePostUp}
-                voteDown={this.props.votePostDown}
-                loading={this.props.votesAjaxStatus[post.id] || false}
-              />
-            ))}
+          <div>
+            <div className="ui divided items">
+              {this.props.posts.map( (post, index) => (
+                <ListItem
+                  key={post.id}
+                  onEditButtonClick={() => this.onEditButtonClick(post)}
+                  onDeletePostButtonClick={() => this.onDeletePostButtonClick(post)}
+                  data={post}
+                  currentCategoryId={this.props.categoryId}
+                  voteUp={this.props.votePostUp}
+                  voteDown={this.props.votePostDown}
+                  loading={this.props.votesAjaxStatus[post.id] || false}
+                />
+              ))}
 
+
+            </div>
           </div>
         )}
       </div>

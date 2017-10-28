@@ -8,6 +8,7 @@ import PostsList from './postsList';
 import HomeHeader from './pageLayout/homeHeader';
 import Sidebar from './pageLayout/sidebar/sidebar';
 // import PostForm from '../common/postForm';
+import ListSorter from '../common/listSorter';
 
 class HomePage extends Component {
 
@@ -44,8 +45,24 @@ class HomePage extends Component {
     return (
       <div>
         <HomeHeader createPost={this.props.newPost}/>
+
+        <ListSorter style={{
+            top: '48px',
+            width: '100%',
+            right: '0',
+            zIndex: '1',
+            padding: '2px',
+            position: 'fixed',
+            background: 'rgba(86, 182, 173, 0.51)'
+          }} onCriteriaChange={this.changeCriteria} onOrderChange={this.changeOrder} />
+
+
         <Sidebar currentCategoryId={this.props.currentCategoryId} />
+
+
+
         <div className="pusher">
+
 
           <Route path='/:categoryId' render={() => <PostsList categoryId={this.props.currentCategoryId} />} />
         </div>

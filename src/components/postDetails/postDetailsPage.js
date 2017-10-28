@@ -7,10 +7,6 @@ import TimeAgo from 'react-timeago';
 
 import {
   loadCommentsByParent,
-  voteUp as voteCommentUpAPI,
-  voteDown as voteCommentDownAPI,
-  // showDeleteCommentModal,
-  // editComment
 } from '../../actions/commentActions';
 
 import {
@@ -109,12 +105,9 @@ class PostDetailsPage extends Component {
 
             <br />
             <Comments
-              voteUp={this.props.voteCommentUp}
-              voteDown={this.props.voteCommentDown}
-
               loadingStatus={this.props.votesAjaxStatus.commentVotes}
               postId={postDetails.id}
-              comments={this.props.comments}
+
             />
 
 
@@ -131,7 +124,6 @@ class PostDetailsPage extends Component {
 function mapStateToProps(state, ownProps) {
   return { // TODO if not, GET /post/:id
       postDetails: state.posts.store[ownProps.postId] || null,
-      comments: state.commentsByParentId[ownProps.postId] || null,
       votesAjaxStatus: state.ajaxStatus
   };
 }
@@ -140,8 +132,6 @@ function mapDispatchToProps (dispatch) {
   return {
     loadComments: (parentId) => dispatch(loadCommentsByParent(parentId)),
     startEditPost: (postData) => dispatch(editPost(postData)),
-    voteCommentUp: (commentId) => dispatch(voteCommentUpAPI(commentId)),
-    voteCommentDown: (commentId) => dispatch(voteCommentDownAPI(commentId)),
     votePostUp: (postId) => dispatch(votePostUpAPI(postId)),
     votePostDown: (postId) => dispatch(votePostDownAPI(postId)),
     // deleteComment: (commentId) => dispatch(showDeleteCommentModal(commentId)),

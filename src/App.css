@@ -1,9 +1,9 @@
 .pusher {
   width: calc(100% - 260px);
+  margin-top: 50px;
 }
 .pusher .items {
-  padding: 0 20px;
-  padding-top: 70px;
+  padding: 20px;
 }
 .ui.vertical.sidebar {
   top: 48px;

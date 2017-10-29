@@ -29,6 +29,18 @@ export default function postReducer(state = initialState.posts, action) {
             }
           }
 
+        case types.UPDATE_COMMENTS_COUNT:
+          return {
+            ...state,
+            store: {
+              ...state.store,
+              [action.postId]: {
+                ...state.store[action.postId],
+                commentCount: (state.store[action.postId].commentCount + action.amount)
+              }
+            }
+          }
+
         case types.SAVING_POST_SUCCESS:
 
           const isNewPost = !state.store[action.post.id];

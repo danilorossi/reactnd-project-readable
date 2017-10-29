@@ -51,6 +51,7 @@ function endDeletingPost(post) {
   return { type: types.END_DELETING_POST, post };
 }
 
+
 // THUNKs
 
 export function deletePost(post) {

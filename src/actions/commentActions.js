@@ -69,6 +69,12 @@ function endDeletingComment(comment) {
 }
 
 
+
+function incrementCommentsCount(postId, amount) {
+  return { type: types.UPDATE_COMMENTS_COUNT, postId, amount };
+}
+
+
 // THUNKs
 
 
@@ -79,6 +85,7 @@ export function deleteComment(comment) {
     CommentApi
       .deleteComment(comment)
         .then(({ comment }) => dispatch(deleteCommentSuccess(comment)))
+        .then(() => dispatch(incrementCommentsCount(comment.parentId, -1)))
         .then(() => dispatch(endDeletingComment(comment)))
         .then(() => dispatch(hideDeleteCommentModal()))
         .catch(error => {
@@ -154,6 +161,7 @@ export function publishComment(comment) {
     CommentApi
       .publishComment(comment)
         .then(({ comment }) => dispatch(savingCommentSuccess(comment)))
+        .then(() => dispatch(incrementCommentsCount(comment.parentId, 1)))
         .then(() => dispatch(endSavingComment(comment.id)))
         .then(() => dispatch(closeCommentForm()))
         .catch(error => {

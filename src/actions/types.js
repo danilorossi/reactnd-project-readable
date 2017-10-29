@@ -51,6 +51,8 @@ export const START_DELETING_POST = Symbol('START_DELETING_POST');
 export const DELETE_POST_SUCCESS = Symbol('DELETE_POST_SUCCESS');
 export const END_DELETING_POST = Symbol('END_DELETING_POST');
 
+export const UPDATE_COMMENTS_COUNT = Symbol('UPDATE_COMMENTS_COUNT');
+
 
 export const START_SAVING_POST = Symbol('StartSavingPost');
 export const SAVING_POST_SUCCESS = Symbol('SavingPostSuccess');

@@ -77,7 +77,7 @@ class PostsList extends Component {
             zIndex: '1',
             padding: '2px',
             position: 'sticky',
-            background: 'rgba(86, 182, 173, 0.51)'
+            background: 'rgba(86, 182, 173, 0.8)'
           }} onCriteriaChange={this.changeCriteria} onOrderChange={this.changeOrder} />
 
         { posts && posts.length === 0 && <NoResults categoryId={this.props.categoryId} /> }

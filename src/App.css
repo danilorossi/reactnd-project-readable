@@ -5,6 +5,12 @@
 .pusher .items {
   padding: 20px;
 }
+
+.pusher .items .item:not(:first-child) {
+  border-top: 1px solid rgb(27, 28, 29) !important;
+
+}
+
 .ui.vertical.sidebar {
   top: 48px;
 }

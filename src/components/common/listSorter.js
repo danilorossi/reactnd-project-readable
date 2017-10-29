@@ -18,6 +18,11 @@ class ListSorter extends Component {
     });
   }
 
+  componentWillUnmount() {
+    window.$(this.criteriaDropdown).dropdown('destroy');
+    window.$(this.orderDropdown).dropdown('destroy');
+  }
+
   render() {
 
     return (

@@ -36,7 +36,7 @@ class ListItem extends Component {
 
               <span className="cinema">@{postData.author},</span>
               <span className="cinema"><TimeAgo date={postData.timestamp} /></span>
-               
+
               {this.props.currentCategoryId === 'all' &&
                 <span>in <Link to={`/${postData.category}`}>#{postData.category}</Link></span>
 
@@ -58,14 +58,15 @@ class ListItem extends Component {
                 View
               </Link>
 
+              <button onClick={this.props.onEditButtonClick} title="Edit post" className="left floated circular mini basic  ui icon button">
+                <i className="pencil icon"></i>
+              </button>
 
-              <button onClick={this.props.onDeletePostButtonClick} title="Delete post" className="ui right floated mini icon button">
+              <button onClick={this.props.onDeletePostButtonClick} title="Delete post" className="left floated circular mini basic ui icon button">
                 <i className="trash icon"></i>
               </button>
 
-              <button onClick={this.props.onEditButtonClick} title="Edit post" className="ui right floated mini icon button">
-                <i className="edit icon"></i>
-              </button>
+
 
 
             </div>

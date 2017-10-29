@@ -75,7 +75,6 @@ function mapDispatchToProps (dispatch) {
 }
 function mapStateToProps(state, ownProps) {
   return {
-    savingPost: state.ajaxStatus.savingComment || false
   };
 }
 

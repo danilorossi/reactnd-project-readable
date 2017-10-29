@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { closePostForm } from '../../../actions/postActions';
+import { closePostForm, publishPost } from '../../../actions/postActions';
 import 'semantic-ui/dist/components/dropdown.min.js';
 
 import BaseModal from './base/baseModal';
@@ -36,15 +36,15 @@ class PostModal extends React.Component {
   }
 
   saveForm() {
-    console.log('saving post form');
+    const { formData } = this.state;
+    this.props.savePost(formData);
   }
 
   render() {
     const { show, closeForm, categories } = this.props;
     const { formData } = this.state;
 
-    console.warn('TODO select preselect category');
-
+      //<pre style={{fontSize:'8px'}}>{JSON.stringify(formData, null, 2)}</pre>
     return (
       <BaseModal
         title={formData.id ? 'Edit post' : 'New post'}
@@ -55,7 +55,7 @@ class PostModal extends React.Component {
         onFormSave={this.saveForm}
         onFormClose={closeForm}>
         <div>
-          <pre style={{fontSize:'8px'}}>{JSON.stringify(formData, null, 2)}</pre>
+
           <form className="ui form">
             <div className="two fields">
               <div className="field">
@@ -92,7 +92,8 @@ class PostModal extends React.Component {
 
 function mapDispatchToProps (dispatch) {
   return {
-    closeForm: () => dispatch(closePostForm())
+    closeForm: () => dispatch(closePostForm()),
+    savePost: (post) => dispatch(publishPost(post)),
   }
 }
 function mapStateToProps(state, ownProps) {

@@ -29,6 +29,36 @@ export default function postReducer(state = initialState.posts, action) {
             }
           }
 
+        case types.SAVING_POST_SUCCESS:
+
+          const isNewPost = !state.store[action.post.id];
+          const newByCategory = isNewPost ?
+            [...(state.byCategory[action.post.category] || [])].concat(action.post.id) :
+            (state.byCategory[action.post.category] || []);
+          const newAllCategory = isNewPost ?
+            [...(state.byCategory['all'] || [])].concat(action.post.id) :
+            (state.byCategory['all'] || []);
+
+          return {
+            ...state,
+            store: {
+              ...state.store,
+              [action.post.id]: action.post
+            },
+            byCategory: {
+              ...state.byCategory,
+              [action.post.category]: newByCategory,
+              ['all']: newAllCategory
+            }
+          }
+          // return {
+          //   ...state,
+          //   [action.comment.parentId]:
+          //     state[action.comment.parentId]
+          //       .filter(item => item.id !== action.comment.id)
+          //       .concat(action.comment)
+          // };
+
         case types.DELETE_POST_SUCCESS:
           const newStore = { ...state.store };
           delete newStore[action.post.id];

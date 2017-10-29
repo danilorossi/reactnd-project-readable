@@ -43,14 +43,15 @@ export const START_SAVING_COMMENT = Symbol('StartSavingComment');
 export const SAVING_COMMENT_SUCCESS = Symbol('SavingCommentSuccess');
 export const END_SAVING_COMMENT = Symbol('EndSavingComment');
 
-
-
-
 export const START_DELETING_COMMENT = Symbol('START_DELETING_COMMENT');
 export const DELETE_COMMENT_SUCCESS = Symbol('DELETE_COMMENT_SUCCESS');
 export const END_DELETING_COMMENT = Symbol('END_DELETING_COMMENT');
 
-
 export const START_DELETING_POST = Symbol('START_DELETING_POST');
 export const DELETE_POST_SUCCESS = Symbol('DELETE_POST_SUCCESS');
 export const END_DELETING_POST = Symbol('END_DELETING_POST');
+
+
+export const START_SAVING_POST = Symbol('StartSavingPost');
+export const SAVING_POST_SUCCESS = Symbol('SavingPostSuccess');
+export const END_SAVING_POST = Symbol('EndSavingPost');

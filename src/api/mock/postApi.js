@@ -1,4 +1,5 @@
 
+import uuid from 'js-uuid';
 import { MOCKED_API_DELAY } from './delay';
 import CommentAPI from './commentApi';
 
@@ -11,7 +12,8 @@ let DEFAULT_DATA = {
     author: 'thingtwo',
     category: 'react',
     voteScore: 6,
-    deleted: false
+    deleted: false,
+    commentCount: 2
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
@@ -31,7 +33,8 @@ let DEFAULT_DATA = {
     author: 'unknown',
     category: 'redux',
     voteScore: 2,
-    deleted: false
+    deleted: false,
+    commentCount: 2
   },
   "bbbbbbbb": {
     id: 'bbbbbbbb',
@@ -41,7 +44,8 @@ let DEFAULT_DATA = {
     author: 'unknown',
     category: 'udacity',
     voteScore: 0,
-    deleted: false
+    deleted: false,
+    commentCount: 1
   },
   "xxxxxx": {
     id: 'xxxxxx',
@@ -51,12 +55,37 @@ let DEFAULT_DATA = {
     author: 'unknown',
     category: 'routing',
     voteScore: -1,
-    deleted: false
+    deleted: false,
+    commentCount: 0
   }
 }
 
 // TODO this is not managing the DELETE prop
 class PostApi {
+
+  static publishPost(post) {
+
+    if(!post.id) {
+      post.id = uuid.v1();
+      DEFAULT_DATA[post.id] = {
+        ...post,
+      };
+    } else {
+      DEFAULT_DATA[post.id] = {
+        ...(DEFAULT_DATA[post.id]),
+        author: post.author,
+        title: post.title,
+        body: post.body,
+        category: post.category,
+        lastModified: Date.now()
+      };
+    }
+
+    return new Promise((resolve, reject) => setTimeout(
+        () => resolve({ post: DEFAULT_DATA[post.id]}), MOCKED_API_DELAY)
+    );
+
+  }
 
   static getAllPosts() {
 

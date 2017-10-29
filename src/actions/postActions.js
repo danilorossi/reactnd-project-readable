@@ -23,6 +23,16 @@ function startCreatePost() {
 function cancelFormPost() {
   return { type: types.CANCEL_FORM_POST };
 }
+function startSavingPost(postId) {
+  return { type: types.START_SAVING_POST, postId };
+}
+function savingPostSuccess(post) {
+  return { type: types.SAVING_POST_SUCCESS, post };
+}
+function endSavingPost(postId) {
+  return { type: types.END_SAVING_POST, postId };
+}
+
 
 export function showDeletePostModal(post, redirectTo) {
   return { type: types.SHOW_DELETE_POST_MODAL, post, redirectTo };
@@ -96,6 +106,26 @@ export function voteDown(postId) {
         });
   };
 }
+
+
+
+export function publishPost(post) {
+  return function(dispatch) {
+    dispatch(startSavingPost(post.id));
+    PostApi
+      .publishPost(post)
+        .then(({ post }) => dispatch(savingPostSuccess(post)))
+        .then(() => dispatch(endSavingPost(post.id)))
+        .then(() => dispatch(closePostForm()))
+        .catch(error => {
+            throw(error);
+        });
+  };
+}
+
+
+
+
 
 export function editPost(postData) {
   return function(dispatch) {

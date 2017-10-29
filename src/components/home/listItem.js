@@ -42,6 +42,8 @@ class ListItem extends Component {
 
               }
 
+              <span className="cinema" title={`${postData.commentCount || 0} comment(s) in this post`}> - {postData.commentCount || 0} <i className="medium comment outline icon"/></span>
+
             </div>
 
 

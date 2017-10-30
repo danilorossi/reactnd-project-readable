@@ -19,6 +19,15 @@ class PostApi {
     })
   };
 
+  static getPostDetails(postId) {
+    return new Promise((resolve, reject) => {
+      fetch(`/api/posts/${postId}`, { headers: { ...AUTH_HEADER } }) // GET the expected route
+      .then(data => data.json()) // Convert result to json
+      .then(jsonData => resolve(jsonData))
+      .catch(error => reject(error)); // Or reject with error
+    })
+  };
+
   static getPostsByCategory(category) {
     return new Promise((resolve, reject) => {
       fetch(`/api/${category}/posts`, { headers: { ...AUTH_HEADER } }) // GET the expected route

@@ -20,6 +20,12 @@ export default function postReducer(state = initialState.posts, action) {
             }
           };
 
+        // case types.LOAD_POST_DETAILS_SUCCESS:
+        //
+        //   console.log('POST REDUCERS ', action);
+        //   return state;
+        //   break;
+
         case types.VOTE_POST_SUCCESS:
           return {
             ...state,

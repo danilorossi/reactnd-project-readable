@@ -12,7 +12,8 @@ import {
 import {
   voteUp as votePostUpAPI,
   voteDown as votePostDownAPI,
-  editPost
+  editPost,
+  loadPostDetails
 } from '../../actions/postActions';
 
 import PostDetailsHeader from './postDetailsHeader';
@@ -27,7 +28,18 @@ class PostDetailsPage extends Component {
     this.onEditPost = this.onEditPost.bind(this);
   }
   componentDidMount() {
-    this.props.loadComments(this.props.postDetails.id);
+    const postId = this.props.postDetails ? this.props.postDetails.id : this.props.postId;
+
+    if(!this.props.postDetails) {
+      console.log('WE SHOULD LOAD POST ' + this.props.postId);
+      this.props.loadPost(postId); 
+      // this.props.loadComments(this.props.postId);
+    } else {
+      // this.props.loadComments(this.props.postDetails.id);
+    }
+    this.props.loadComments(postId);
+
+
     // setTimeout(() => {
     //   toast.info('You can edit the post and the comments by clicking on them.');
     // }, 2000);
@@ -134,6 +146,7 @@ function mapDispatchToProps (dispatch) {
     startEditPost: (postData) => dispatch(editPost(postData)),
     votePostUp: (postId) => dispatch(votePostUpAPI(postId)),
     votePostDown: (postId) => dispatch(votePostDownAPI(postId)),
+    loadPost: (postId) => dispatch(loadPostDetails(postId)),
     // deleteComment: (commentId) => dispatch(showDeleteCommentModal(commentId)),
     // startEditComment: (commentData) => dispatch(editComment(commentData))
 

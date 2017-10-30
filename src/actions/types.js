@@ -57,3 +57,6 @@ export const UPDATE_COMMENTS_COUNT = Symbol('UPDATE_COMMENTS_COUNT');
 export const START_SAVING_POST = Symbol('StartSavingPost');
 export const SAVING_POST_SUCCESS = Symbol('SavingPostSuccess');
 export const END_SAVING_POST = Symbol('EndSavingPost');
+
+
+// export const LOAD_POST_DETAILS_SUCCESS = Symbol('LoadPostDetailsSuccess');

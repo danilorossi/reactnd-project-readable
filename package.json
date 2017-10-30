@@ -1,6 +1,7 @@
 {
   "name": "reactnd-project-readable",
   "author": "Danilo Rossi <contact@danilorossi.me> (http://danilorossi.me/)",
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "js-uuid": "0.0.6",
     "react": "^15.6.1",

@@ -61,7 +61,7 @@ let DEFAULT_DATA = {
 }
 
 // TODO this is not managing the DELETE prop
-class PostApi {
+class MockedPostAPI {
 
   static publishPost(post) {
 
@@ -191,4 +191,4 @@ class PostApi {
   }
 }
 
-export default PostApi;
+export default MockedPostAPI;

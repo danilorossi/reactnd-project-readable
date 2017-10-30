@@ -1,5 +1,5 @@
 import * as types from './types';
-import CategoryApi from '../api/mock/categoryApi';
+import CategoryApi from '../api/categoryApi';
 
 export function updateCurrentCategory(category) {
   return {

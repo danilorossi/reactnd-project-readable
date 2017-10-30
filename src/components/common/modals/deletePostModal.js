@@ -13,7 +13,6 @@ class DeletePostModal extends React.Component {
   }
 
   showDeletePostModal() {
-    console.log('DELETE POST ID ', this.props.post);
     this.props.startDeletePost(this.props.post)
   }
 

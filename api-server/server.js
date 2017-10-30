@@ -206,7 +206,6 @@ app.delete('/api/posts/:id', (req, res) => {
 })
 
 app.post('/api/posts/:id', bodyParser.json(), (req, res) => {
-  console.log(req.body, req.params)
     const { option } = req.body
     const id = req.params.id
     posts.vote(req.token, id, option)

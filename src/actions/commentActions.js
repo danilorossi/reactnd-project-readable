@@ -1,5 +1,5 @@
 import * as types from './types';
-import CommentApi from '../api/mock/commentApi';
+import CommentApi from '../api/commentApi';
 
 
 function loadCommentsByParentSuccess(parentId, comments) {

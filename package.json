@@ -3,6 +3,7 @@
   "author": "Danilo Rossi <contact@danilorossi.me> (http://danilorossi.me/)",
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "concurrently": "3.5.0",
     "js-uuid": "0.0.6",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -10,13 +11,13 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.13",
     "react-timeago": "3.4.3",
-    "react-toastify": "2.0.0",
     "redux": "^3.7.2",
     "redux-immutable-state-invariant": "^2.0.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui": "2.2.13"
   },
   "scripts": {
+    "start-all": "concurrently \"node ./scripts/start-server\" \"react-scripts start\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

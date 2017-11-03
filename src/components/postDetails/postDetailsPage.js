@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.min.css';
 
 import {
   loadCommentsByParent,
@@ -31,26 +29,11 @@ class PostDetailsPage extends Component {
     const postId = this.props.postDetails ? this.props.postDetails.id : this.props.postId;
 
     if(!this.props.postDetails) {
-      console.log('WE SHOULD LOAD POST ' + this.props.postId);
-      this.props.loadPost(postId); 
-      // this.props.loadComments(this.props.postId);
-    } else {
-      // this.props.loadComments(this.props.postDetails.id);
+      this.props.loadPost(postId);
     }
+
     this.props.loadComments(postId);
-
-
-    // setTimeout(() => {
-    //   toast.info('You can edit the post and the comments by clicking on them.');
-    // }, 2000);
   }
-
-  // componentWillReceiveProps(newProps) {
-  //
-  //   if(!newProps.postDetails) {
-  //     console.log('asdasdadsadsa', this.props.history.push('/'))
-  //   }
-  // }
 
   onEditPost() {
     this.props.startEditPost(Object.assign({}, this.props.postDetails));
@@ -66,16 +49,6 @@ class PostDetailsPage extends Component {
 
     return (
       <div style={{ padding: '60px 40px'}}>
-
-      {/*<ToastContainer
-          position="top-right"
-          type="default"
-          autoClose={15000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          pauseOnHover
-        />*/}
 
       {postDetails &&
 

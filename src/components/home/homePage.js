@@ -15,7 +15,7 @@ class HomePage extends Component {
   historyListener = null;
 
   updateStoreLocation(location) {
-
+    console.log(this.props.match.params);
     if(location.pathname.split('/').filter(str => str).length === 1) {
       const categoryId = location.pathname.replace(/\//g, "")
       console.log('¡¡¡¡use match param¡¡¡categoryId', categoryId)
@@ -26,13 +26,17 @@ class HomePage extends Component {
   }
 
   constructor(props) {
-
     super(props);
-    const { history } = props;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', this.props.match.params);
+  }
+  componentDidMount() {
+    const { history } = this.props;
     this.historyListener = history.listen((location) => this.updateStoreLocation(location));
     this.updateStoreLocation(history.location)
   }
-
   componentWillUnmount() {
     this.historyListener();
   }
@@ -46,7 +50,7 @@ class HomePage extends Component {
       <div>
         <HomeHeader createPost={this.props.newPost}/>
 
-      
+
 
         <Sidebar currentCategoryId={this.props.currentCategoryId} />
 

@@ -17,11 +17,32 @@ export default {
   modals: {
     post: {
       visible: false,
-      data: {}
+      data: {
+        id: null,
+        timestamp: null,
+        title: '',
+        body: '',
+        author: '',
+        category: '',
+        voteScore: 0,
+        deleted: false
+      },
+      errors: {},
+      formError: null,
+      valid: true
     },
     comment: {
       visible: false,
-      data: {}
+      data: {
+        id: null,
+        parentId: null,
+        timestamp: null,
+        body: '',
+        author: '',
+        voteScore: 0,
+        deleted: false,
+        parentDeleted: false
+      }
     },
     deletePost: {
       visible: false,

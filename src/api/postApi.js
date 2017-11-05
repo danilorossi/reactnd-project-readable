@@ -84,14 +84,14 @@ class PostApi {
 
     if(!post.id) {
 
-      post.id = uuid.v1();
-      post.timestamp = Date.now();
       return new Promise((resolve, reject) => {
         fetch(`/api/posts`, {
           method: 'POST',
           headers: new Headers({ ...AUTH_HEADER, ...JSON_CONTENT_HEADER }),
           body: JSON.stringify({
-        		...post
+        		...post,
+            id: uuid.v1(),
+            timestamp: Date.now()
         	})
         }) // GET the expected route
         .then(data => data.json()) // Convert result to json
@@ -103,13 +103,13 @@ class PostApi {
 
     } else {
 
-      post.lastModified = Date.now();
       return new Promise((resolve, reject) => {
         fetch(`/api/posts/${post.id}`, {
           method: 'PUT',
           headers: new Headers({ ...AUTH_HEADER, ...JSON_CONTENT_HEADER }),
           body: JSON.stringify({
-        		...post
+        		...post,
+            lastModified: Date.now()
         	})
         }) // GET the expected route
         .then(data => data.json()) // Convert result to json

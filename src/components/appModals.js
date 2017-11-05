@@ -31,6 +31,8 @@ class AppModals extends Component {
           show={postModal.visible}
           data={postModal.data}
           saving={postModal.saving}
+          valid={postModal.valid}
+          errors={postModal.errors}
         />
 
         <DeletePostModal

@@ -1,6 +1,7 @@
 
 import * as types from '../actions/types';
 import initialState from './initialState';
+import { validateField, validateForm } from '../utils/postFormValidators';
 
 const POST_TEMPLATE = {
   id: null,
@@ -101,7 +102,9 @@ export default function commentFormReducer(state = initialState.modals, action) 
           visible: true,
           data: {
             ...action.postData
-          }
+          },
+          errors: {},
+          valid: true
         }
       };
 
@@ -110,7 +113,9 @@ export default function commentFormReducer(state = initialState.modals, action) 
         ...state,
         post: {
           visible: true,
-          data: POST_TEMPLATE
+          data: POST_TEMPLATE,
+          errors: {},
+          valid: false
         }
       };
 
@@ -119,7 +124,33 @@ export default function commentFormReducer(state = initialState.modals, action) 
         ...state,
         post: {
           visible: false,
-          data: {}
+          data: {
+            ...POST_TEMPLATE // avoid controlled/uncontrolled input warning
+          }
+        }
+      };
+
+    case types.POST_FORM_UPDATED:
+      const { field, nextValue } = action;
+      const fieldResult = validateField(field, nextValue);
+      const formResult = validateForm({
+        ...state.post.data,
+        [field]: nextValue
+      });
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          data: {
+            ...state.post.data,
+            [field]: nextValue
+          },
+          errors: {
+            ...state.post.errors,
+            [field]: (fieldResult.valid ? null : fieldResult.error)
+          },
+          formError: (formResult.valid ? null : formResult.error),
+          valid: fieldResult.valid && formResult.valid
         }
       };
 

@@ -9,6 +9,7 @@ export const LOAD_POSTS_SUCCESS = Symbol('LoadPostSuccess');
 export const START_EDIT_POST = Symbol('StartEditPost');
 export const START_CREATE_POST = Symbol('StartCreatePost');
 export const CANCEL_FORM_POST = Symbol('CancelFromPost');
+export const POST_FORM_UPDATED = Symbol('POST_FORM_UPDATED');
 
 // [vote posts]
 export const BEGIN_VOTE_POST = Symbol('BeginVotePost');

@@ -37,6 +37,9 @@ function endSavingPost(postId) {
   return { type: types.END_SAVING_POST, postId };
 }
 
+export function postFormUpdated(field, nextValue) {
+  return { type: types.POST_FORM_UPDATED, field, nextValue };
+}
 
 export function showDeletePostModal(post, redirectTo) {
   return { type: types.SHOW_DELETE_POST_MODAL, post, redirectTo };

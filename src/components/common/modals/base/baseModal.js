@@ -44,7 +44,8 @@ class BaseModal extends React.Component {
   }
   render() {
     const dimmerClass = this.props.saving ? 'active' : '';
-    const buttonClass = this.props.saving ? 'disabled' : '';
+    const buttonsClass = this.props.saving ? 'disabled' : '';
+    const saveButtonClass = (typeof this.props.valid !== 'undefined' && !this.props.valid) ? 'disabled' : '';
     return (
       <div ref={(modal) => { this.modal = modal; }} className={`ui modal ${this.props.modalClassNames || ''}`}>
 
@@ -71,10 +72,10 @@ class BaseModal extends React.Component {
 
         <div className="actions">
 
-          <div className={`ui grey deny button ${buttonClass}`}>
+          <div className={`ui grey deny button ${buttonsClass}`}>
             {this.props.koLabel || 'Cancel'}
           </div>
-          <div onClick={this.onOkButtonClick} className={`ui teal right labeled icon button ${buttonClass}`}>
+          <div onClick={this.onOkButtonClick} className={`ui teal right labeled icon button ${buttonsClass} ${saveButtonClass}`}>
             {this.props.okLabel || 'Save'}
             <i className="checkmark icon"></i>
           </div>

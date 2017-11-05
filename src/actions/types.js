@@ -31,6 +31,7 @@ export const END_VOTE_COMMENT = Symbol('EndVoteComment');
 
 export const START_EDIT_COMMENT = Symbol('StartEditComment');
 export const CANCEL_FORM_COMMENT = Symbol('CancelCommentForm');
+export const COMMENT_FORM_UPDATED = Symbol('COMMENT_FORM_UPDATED');
 
 export const SHOW_DELETE_POST_MODAL = Symbol('ShowDeletePostModal');
 export const HIDE_DELETE_POST_MODAL = Symbol('HideDeletePostModal');

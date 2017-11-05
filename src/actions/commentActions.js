@@ -50,6 +50,11 @@ function endSavingComment(commentId) {
 //   return { type: types.END_UPDATE_COMMENT, commentId };
 // }
 
+export function commentFormUpdated(field, nextValue) {
+  return { type: types.COMMENT_FORM_UPDATED, field, nextValue };
+}
+
+
 
 export function showDeleteCommentModal(comment) {
  return { type: types.SHOW_DELETE_COMMENT_MODAL, comment };

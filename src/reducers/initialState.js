@@ -42,7 +42,10 @@ export default {
         voteScore: 0,
         deleted: false,
         parentDeleted: false
-      }
+      },
+      errors: {},
+      formError: null,
+      valid: true
     },
     deletePost: {
       visible: false,

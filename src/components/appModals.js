@@ -25,6 +25,8 @@ class AppModals extends Component {
           show={commentModal.visible}
           data={commentModal.data}
           saving={commentModal.saving}
+          valid={commentModal.valid}
+          errors={commentModal.errors}
         />
 
         <PostModal

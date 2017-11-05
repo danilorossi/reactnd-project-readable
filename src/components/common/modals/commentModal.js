@@ -1,15 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { closeCommentForm, publishComment } from '../../../actions/commentActions';
+import { closeCommentForm, publishComment, commentFormUpdated } from '../../../actions/commentActions';
 
 import BaseModal from './base/baseModal';
+import TextField from '../forms/textField';
+import TextAreaField from '../forms/textAreaField';
 
 class CommentModal extends React.Component {
-
-  state = {
-    formData: {}
-  }
 
   constructor(props) {
     super(props);
@@ -17,49 +15,59 @@ class CommentModal extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   saveForm() {
-    const { formData } = this.state;
-
-    this.props.updateComment(formData);
+    const { valid, data } = this.props;
+    // Button will be disabled anyway
+    valid && this.props.saveComment(data);
   }
   handleChange(event) {
-    this.setState({
-      ...this.state,
-      formData: {
-        ...this.state.formData,
-        [event.target.name]: event.target.value
-      }
-    });
-  }
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      formData: {...nextProps.data}
-    });
+    const { name, value } = event.target;
+    this.props.updateFormData(name, value);
   }
 
-  //  <pre style={{fontSize:'8px'}}>{JSON.stringify(formData, null, 2)}</pre>
   render() {
-    const { formData } = this.state;
+
+    const {
+      show,
+      closeForm,
+      valid,
+      data,
+      saving
+    } = this.props;
+
+    const errors = this.props.errors || {};
+
     return (
       <BaseModal
         title="Edit comment"
         koLabel="Cancel"
         okLabel="Save changes"
-        show={this.props.show}
-        saving={this.props.saving}
+        show={show}
+        saving={saving}
+        valid={valid}
         onFormSave={this.saveForm}
-        onFormClose={this.props.closeForm}>
+        onFormClose={closeForm}>
         <div>
 
           <form className="ui form">
-            <div className="field">
-              <label>Author*</label>
-              <input onChange={this.handleChange} value={formData.author} type="text" name="author" placeholder="..."/>
-            </div>
-            <div className="field">
-              <label>Comment*</label>
-              <textarea onChange={this.handleChange} name="body" value={formData.body} placeholder="..." rows="4"></textarea>
-            </div>
+
+            <TextField
+              title="Author*"
+              placeholder="Your name"
+              name="author"
+              value={data.author}
+              error={errors.author}
+              onChangeHandler={this.handleChange}/>
+
+            <TextAreaField
+              title="Comment*"
+              placeholder="..."
+              name="body"
+              value={data.body}
+              error={errors.body}
+              onChangeHandler={this.handleChange}/>
+
           </form>
+          
         </div>
       </BaseModal>
     );
@@ -70,7 +78,8 @@ class CommentModal extends React.Component {
 function mapDispatchToProps (dispatch) {
   return {
     closeForm: () => dispatch(closeCommentForm()),
-    updateComment: (comment) => dispatch(publishComment(comment)),
+    saveComment: (comment) => dispatch(publishComment(comment)),
+    updateFormData: (field, value) => dispatch(commentFormUpdated(field, value))
   }
 }
 function mapStateToProps(state, ownProps) {

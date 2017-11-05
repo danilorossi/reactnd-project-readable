@@ -2,6 +2,11 @@
 import * as types from '../actions/types';
 import initialState from './initialState';
 import { validateField, validateForm } from '../utils/postFormValidators';
+import {
+  validateField as validateCommandField,
+  validateForm as validateCommandForm
+} from '../utils/commentFormValidators';
+
 
 const POST_TEMPLATE = {
   id: null,
@@ -81,7 +86,10 @@ export default function commentFormReducer(state = initialState.modals, action) 
           visible: true,
           data: {
             ...action.commentData
-          }
+          },
+          errors: {},
+          formError: null,
+          valid: true
         }
       };
 
@@ -90,7 +98,12 @@ export default function commentFormReducer(state = initialState.modals, action) 
         ...state,
         comment: {
           visible: false,
-          data: {}
+          data: {
+            ...COMMENT_TEMPLATE // avoid controlled/uncontrolled input warning
+          },
+          errors: {},
+          formError: null,
+          valid: true
         }
       };
 
@@ -104,6 +117,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
             ...action.postData
           },
           errors: {},
+          formError: null,
           valid: true
         }
       };
@@ -115,6 +129,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
           visible: true,
           data: POST_TEMPLATE,
           errors: {},
+          formError: null,
           valid: false
         }
       };
@@ -126,7 +141,10 @@ export default function commentFormReducer(state = initialState.modals, action) 
           visible: false,
           data: {
             ...POST_TEMPLATE // avoid controlled/uncontrolled input warning
-          }
+          },
+          errors: {},
+          formError: null,
+          valid: true
         }
       };
 
@@ -151,6 +169,32 @@ export default function commentFormReducer(state = initialState.modals, action) 
           },
           formError: (formResult.valid ? null : formResult.error),
           valid: fieldResult.valid && formResult.valid
+        }
+      };
+
+    case types.COMMENT_FORM_UPDATED:
+      const commentField = action.field;
+      const commentNextValue = action.nextValue;
+      const commentFieldResult = validateCommandField(commentField, commentNextValue);
+      const commentFormResult = validateCommandForm({
+        ...state.comment.data,
+        [commentField]: commentNextValue
+      });
+
+      return {
+        ...state,
+        comment: {
+          ...state.comment,
+          data: {
+            ...state.comment.data,
+            [commentField]: commentNextValue
+          },
+          errors: {
+            ...state.comment.errors,
+            [commentField]: (commentFieldResult.valid ? null : commentFieldResult.error)
+          },
+          formError: (commentFormResult.valid ? null : commentFormResult.error),
+          valid: commentFieldResult.valid && commentFormResult.valid
         }
       };
 

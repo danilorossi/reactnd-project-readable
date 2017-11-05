@@ -53,14 +53,14 @@ class CommentApi {
   static publishComment(comment) {
     if(!comment.id) {
 
-      comment.id = uuid.v1();
-      comment.timestamp = Date.now();
       return new Promise((resolve, reject) => {
         fetch(`/api/comments`, {
           method: 'POST',
           headers: new Headers({ ...AUTH_HEADER, ...JSON_CONTENT_HEADER }),
           body: JSON.stringify({
-        		...comment
+        		...comment,
+            timestamp: Date.now(),
+            id: uuid.v1()
         	})
         }) // GET the expected route
         .then(data => data.json()) // Convert result to json
@@ -72,13 +72,13 @@ class CommentApi {
 
     } else {
 
-      comment.lastModified = Date.now();
       return new Promise((resolve, reject) => {
         fetch(`/api/comments/${comment.id}`, {
           method: 'PUT',
           headers: new Headers({ ...AUTH_HEADER, ...JSON_CONTENT_HEADER }),
           body: JSON.stringify({
-        		...comment
+        		...comment,
+            lastModified: Date.now()
         	})
         }) // GET the expected route
         .then(data => data.json()) // Convert result to json

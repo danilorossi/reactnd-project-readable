@@ -29,6 +29,7 @@ export const END_VOTE_COMMENT = Symbol('EndVoteComment');
 // export const UPDATE_COMMENT_SUCCESS = Symbol('UpdateCommentSuccess');
 // export const END_UPDATE_COMMENT = Symbol('EndUpdateComment');
 
+export const START_CREATE_COMMENT = Symbol('StartCreateComment');
 export const START_EDIT_COMMENT = Symbol('StartEditComment');
 export const CANCEL_FORM_COMMENT = Symbol('CancelCommentForm');
 export const COMMENT_FORM_UPDATED = Symbol('COMMENT_FORM_UPDATED');

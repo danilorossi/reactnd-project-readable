@@ -93,6 +93,22 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
+    case types.START_CREATE_COMMENT:
+      return {
+        ...state,
+        comment: {
+          visible: false,
+          data: {
+            ...COMMENT_TEMPLATE,
+            parentId: action.parentId
+          },
+          errors: {},
+          formError: null,
+          valid: false
+        }
+      };
+
+
     case types.CANCEL_FORM_COMMENT:
       return {
         ...state,
@@ -103,7 +119,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
           },
           errors: {},
           formError: null,
-          valid: true
+          valid: false
         }
       };
 

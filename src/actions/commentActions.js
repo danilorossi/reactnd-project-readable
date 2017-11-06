@@ -25,6 +25,13 @@ function startEditComment(commentData) {
     commentData
   };
 }
+
+export function startCreateComment(parentId) {
+  return {
+    type: types.START_CREATE_COMMENT,
+    parentId
+  };
+}
 function cancelFormComment() {
   return { type: types.CANCEL_FORM_COMMENT };
 }

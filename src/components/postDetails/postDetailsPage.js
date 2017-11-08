@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
 
@@ -39,6 +39,12 @@ class PostDetailsPage extends Component {
     this.props.startEditPost(Object.assign({}, this.props.postDetails));
   }
 
+  componentWillReceiveProps(nextProps) {
+    if( this.props.postDetails === null && nextProps.postDetails && Object.keys(nextProps.postDetails).length == 0) {
+      // TODO this should managed from rest service api
+      this.props.history.replace('/')
+    }
+  }
   render() {
 
     const authorStyle = {
@@ -132,5 +138,5 @@ function mapDispatchToProps (dispatch) {
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(PostDetailsPage);
+)(withRouter(PostDetailsPage));
 // export default PostDetailsPage;

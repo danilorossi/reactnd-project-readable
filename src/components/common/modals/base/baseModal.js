@@ -3,7 +3,6 @@ import { PropTypes } from 'prop-types';
 import 'semantic-ui/dist/components/modal.min.js';
 import 'semantic-ui/dist/components/dimmer.min.js';
 import 'semantic-ui/dist/components/transition.min.js';
-import { withRouter } from 'react-router-dom';
 
 import Loader from '../../loader';
 
@@ -23,7 +22,6 @@ class BaseModal extends React.Component {
 
   closeModal() {
      window.$(this.modal).modal('hide');
-     this.props.redirectTo && this.props.history.replace(this.props.redirectTo);
   }
   activateModal() {
     const $modal = window.$(this.modal);
@@ -97,4 +95,4 @@ const ModalHeader = ({ message }) => {
 }
 
 
-export default withRouter(BaseModal);
+export default BaseModal;

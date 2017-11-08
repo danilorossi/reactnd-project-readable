@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { hideDeletePostModal, deletePost } from '../../../actions/postActions';
 
 import ConfirmModal from './base/confirmModal';
@@ -13,7 +14,8 @@ class DeletePostModal extends React.Component {
   }
 
   showDeletePostModal() {
-    this.props.startDeletePost(this.props.post)
+    this.props.startDeletePost(this.props.post);
+    this.props.redirectTo && this.props.history.replace(this.props.redirectTo);
   }
 
   render() {
@@ -22,7 +24,6 @@ class DeletePostModal extends React.Component {
         onConfirm={this.showDeletePostModal}
         onCloseForm={this.props.hideModal}
         show={this.props.show}
-        redirectTo={this.props.redirectTo}
         saving={this.props.saving}
         title="DELETE POST"
         message="Are you sure you want to delete this post?"/>
@@ -40,5 +41,5 @@ function mapDispatchToProps (dispatch) {
 export default connect (
   null,
   mapDispatchToProps
-)(DeletePostModal);
+)(withRouter(DeletePostModal));
 // export default DeletePostModal;

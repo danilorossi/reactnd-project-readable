@@ -2,15 +2,21 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import styled from 'styled-components';
+
+const StyledSidebar = styled.div`
+  top: 48px;
+`;
 
 class Sidebar extends Component {
+
   render() {
 
-    const countTagClass = (path) => (path === this.props.categories.current ? 'teal' : 'grey');
-    // const counterClass = `ui label ${this.props.currentCategoryId}`
+    const countTagClass = path => path === this.props.categories.current ? 'teal' : 'grey';
+
     return (
 
-      <div className="ui vertical inverted left visible sidebar menu">
+      <StyledSidebar className="ui vertical inverted left visible sidebar menu">
 
         <NavLink activeClassName="active" exact to='/all' className="item">
           All categories
@@ -29,7 +35,7 @@ class Sidebar extends Component {
           </NavLink>
         ))}
 
-      </div>
+      </StyledSidebar>
 
     );
   }

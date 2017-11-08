@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import styled from 'styled-components';
+
+const Wrapper = styled.h4`
+  margin: 0 !important;
+`;
 
 class ListSorter extends Component {
 
@@ -26,7 +30,7 @@ class ListSorter extends Component {
   render() {
 
     return (
-      <h4 className="ui header right aligned" style={{...this.props.style, margin: '0'}}>
+      <Wrapper className={`${this.props.className} ui header right aligned`}>
 
         <div className="content">
           Sort by
@@ -47,7 +51,8 @@ class ListSorter extends Component {
             </div>
           </div>
         </div>
-      </h4>
+
+      </Wrapper>
     );
 
   }

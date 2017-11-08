@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import 'semantic-ui/dist/components/dropdown.min.js';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import {
-  loadCommentsByParent,
   voteUp as voteCommentUpAPI,
   voteDown as voteCommentDownAPI,
-  // showDeleteCommentModal,
-  // editComment
 } from '../../actions/commentActions';
 import { mapCriteriaToField } from '../../selectors/filterSelectors';
 import { sortedCommentsSelector } from '../../selectors/commentsSelectors';
@@ -16,6 +14,13 @@ import Loader from '../common/loader';
 import CommentForm from './commentForm';
 import ListSorter from '../common/listSorter';
 
+
+const StyledComments = styled.div`
+  position: relative;
+`;
+const StyledHeader = styled.h4`
+  margin: 0 !important;
+`;
 
 class Comments extends Component {
 
@@ -72,30 +77,34 @@ class Comments extends Component {
 
       <div>
 
-        <h4 style={{ margin: 0 }} className="ui dividing header">{comments === null ? '-' : comments.length} comment(s)</h4>
+        <StyledHeader className="ui dividing header">{comments === null ? '-' : comments.length} comment(s)</StyledHeader>
 
-        {comments && comments.length > 0 && <ListSorter onCriteriaChange={this.changeCriteria} onOrderChange={this.changeOrder} />}
+        { comments && comments.length > 0 &&
+          <ListSorter onCriteriaChange={this.changeCriteria} onOrderChange={this.changeOrder} />
+        }
 
-        <div style={{ position: 'relative'}} className="ui comments">
+        <StyledComments>
 
-          {!comments && <Loader message={"Loading"} />}
+          {!comments &&
+            <Loader message={"Loading"} />
+          }
 
           {comments && comments.length === 0 &&
             <h3>NO COMMENTS</h3>
           }
 
           <div className="ui comments">
-          {comments && comments.map((comment, idx) => (
-            <CommentItem
-              {...commentVoteScoreAttrs}
+            {comments && comments.map((comment, idx) => (
+              <CommentItem
+                {...commentVoteScoreAttrs}
+                key={comment.id}
+                comment={comment}/>
 
-              key={comment.id}
-              comment={comment}/>
+            ))}
+            <br/>
+          </div>
 
-          ))}
-            </div>
-
-        </div>
+        </StyledComments>
 
         <CommentForm parentId={this.props.postId}/>
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { closeCommentForm, publishComment, commentFormUpdated } from '../../../actions/commentActions';
 
@@ -67,7 +66,7 @@ class CommentModal extends React.Component {
               onChangeHandler={this.handleChange}/>
 
           </form>
-          
+
         </div>
       </BaseModal>
     );

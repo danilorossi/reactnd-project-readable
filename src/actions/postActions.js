@@ -1,14 +1,10 @@
 import * as types from './types';
 import PostApi from '../api/postApi';
-import CommentApi from '../api/commentApi';
-// import { loadCommentsByParent } from './commentActions';
 
 function loadPostsByCategorySuccess(category, posts) {
   return { type: types.LOAD_POSTS_SUCCESS, category, posts };
 }
-// function loadPostDetailsSuccess(post, comments) {
-//   return { type: types.LOAD_POST_DETAILS_SUCCESS, post, comments };
-// }
+
 function beginVotePost(postId) {
   return { type: types.BEGIN_VOTE_POST, postId };
 }

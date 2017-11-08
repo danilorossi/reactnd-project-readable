@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import {
   Router,
   Route,
@@ -10,8 +10,6 @@ import {
 import createHistory from 'history/createBrowserHistory'
 
 import configureStore from './store/configureStore';
-
-import './App.css';
 
 import { loadCategories } from './actions/categoryActions';
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
+import styled from 'styled-components';
 
 import {
   loadCommentsByParent,
@@ -18,6 +19,20 @@ import PostDetailsHeader from './postDetailsHeader';
 import Comments from './comments';
 // import PostForm from '../common/postForm';
 import Votes from '../common/votes';
+
+const Wrapper = styled.div`
+  padding: 60px 40px;
+`;
+const StyledMeta = styled.div`
+  fontSize: 0.9em;
+  margin: 0 0 1em;
+`;
+
+const VoteWrapper = styled(Votes)`
+  position: absolute;
+  right: 0;
+  top: 37px;
+`;
 
 class PostDetailsPage extends Component {
 
@@ -40,21 +55,17 @@ class PostDetailsPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if( this.props.postDetails === null && nextProps.postDetails && Object.keys(nextProps.postDetails).length == 0) {
+    if( this.props.postDetails === null && nextProps.postDetails && Object.keys(nextProps.postDetails).length === 0) {
       // TODO this should managed from rest service api
       this.props.history.replace('/');
     }
   }
   render() {
 
-    const authorStyle = {
-      fontSize: '0.9em',
-      margin: '0 0 1em'
-    };
     const postDetails = this.props.postDetails;
 
     return (
-      <div style={{ padding: '60px 40px'}}>
+      <Wrapper>
 
       {postDetails &&
 
@@ -62,17 +73,13 @@ class PostDetailsPage extends Component {
 
         <div className="three wide column">
 
-           <Votes
+           <VoteWrapper
             postId={postDetails.id}
             voteDown={this.props.votePostDown}
             voteUp={this.props.votePostUp}
             loading={this.props.votesAjaxStatus.postVotes[postDetails.id] || false}
             voteScore={postDetails.voteScore}
-            style={{
-              position: 'absolute',
-              right: '0',
-              top: '37px'
-          }}/>
+          />
 
         </div>
 
@@ -85,12 +92,11 @@ class PostDetailsPage extends Component {
               {postDetails.title}
             </h3>
 
-            <div className="meta" style={authorStyle}>
-
+            <StyledMeta className="meta">
               <span className="cinema">@{postDetails.author}, </span>
               <span className="cinema"><TimeAgo date={postDetails.timestamp} /></span>
               <span> in <Link to={`/${postDetails.category}`}>#{postDetails.category}</Link></span>
-            </div>
+            </StyledMeta>
 
             <div className="ui message">{postDetails.body}</div>
 
@@ -106,7 +112,7 @@ class PostDetailsPage extends Component {
         </div>
       }
 
-      </div>
+      </Wrapper>
     );
   }
 }
@@ -126,9 +132,6 @@ function mapDispatchToProps (dispatch) {
     votePostUp: (postId) => dispatch(votePostUpAPI(postId)),
     votePostDown: (postId) => dispatch(votePostDownAPI(postId)),
     loadPost: (postId) => dispatch(loadPostDetails(postId)),
-    // deleteComment: (commentId) => dispatch(showDeleteCommentModal(commentId)),
-    // startEditComment: (commentData) => dispatch(editComment(commentData))
-
   }
 }
 
@@ -139,4 +142,3 @@ export default connect (
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(PostDetailsPage));
-// export default PostDetailsPage;

@@ -1,13 +1,22 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import styled from 'styled-components';
+
+const StyledLoader = styled.div`
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
+`;
 
 const Loader = ({ message }) => {
   return (
-    <div className="ui blurring segment" style={{ minHeight: '100px' }}>
+    <StyledLoader className="ui blurring segment">
       <div className="ui active inverted dimmer">
         <div className="ui text loader">{message}</div>
       </div>
-    </div>
+    </StyledLoader>
   );
 }
 export default Loader;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 
 const SelectField = ({ title, name, value, error, onChangeHandler, classNames = '', children }) => {
   return (

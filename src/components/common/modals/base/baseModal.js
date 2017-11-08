@@ -1,5 +1,4 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import 'semantic-ui/dist/components/modal.min.js';
 import 'semantic-ui/dist/components/dimmer.min.js';
 import 'semantic-ui/dist/components/transition.min.js';
@@ -41,7 +40,7 @@ class BaseModal extends React.Component {
     }
   }
   render() {
-    const dimmerClass = this.props.saving ? 'active' : '';
+    const { children } = this.props;
     const buttonsClass = this.props.saving ? 'disabled' : '';
     const saveButtonClass = (typeof this.props.valid !== 'undefined' && !this.props.valid) ? 'disabled' : '';
     return (
@@ -50,22 +49,10 @@ class BaseModal extends React.Component {
         {!this.props.saving && <i className="close icon"></i>}
 
         <ModalHeader message={this.props.title} />
+
         <div className="content" style={{position:'relative'}}>
-
-        {/*this.props.saving && <Loader message="Please wait" />*/}
-
-          {this.props.saving &&
-            <div style={{
-              position:'absolute',
-              top: '0', left: '0',
-              width:'100%', height:'100%'
-            }} className="ui blurring segment">
-              <div className={`ui inverted dimmer ${dimmerClass}`}>
-                <div className="ui text loader">Please wait</div>
-              </div>
-            </div>
-          }
-          {this.props.children}
+          {this.props.saving && <Loader message="Please wait" />}
+          {children}
         </div>
 
         <div className="actions">

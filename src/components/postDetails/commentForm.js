@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import uuid from 'js-uuid';
 import { connect } from 'react-redux';
 
 import Loader from '../../components/common/loader';
@@ -36,8 +35,6 @@ class CommentForm extends Component {
   render() {
 
     const {
-      show,
-      closeForm,
       valid,
       data,
       saving
@@ -49,7 +46,7 @@ class CommentForm extends Component {
 
     return (
       <div>
-        <h4 className="ui dividing header"></h4>
+        <h4 className="ui dividing header"> </h4> 
         <form className="ui reply form">
 
             {saving && <Loader message="Publishing comment..." />}

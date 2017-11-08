@@ -1,82 +1,86 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import TimeAgo from 'react-timeago';
+import styled from 'styled-components';
 
 import Votes from '../common/votes';
 
-class ListItem extends Component {
-  render() {
+const StyledItem = styled.div`
+  :not(:first-child) {
+    border-top: 1px solid rgb(27, 28, 29) !important;
+  }
+`;
 
-    const postData = this.props.data;
+const StyledMeta = styled.div`
+  fontSize: 0.9em;
+  margin: 0 0 1em;
+`;
 
-    const authorStyle = {
-      fontSize: '0.9em',
-      margin: '0 0 1em'
-    };
+const ListItem = ({
+  data,
+  voteDown,
+  voteUp,
+  loading,
+  voteScore,
+  currentCategoryId,
+  onEditButtonClick,
+  onDeletePostButtonClick
+}) => {
 
-    return (
+  return (
 
-        <div className="item">
+      <StyledItem className="item">
 
-          <div className="content">
+        <div className="content">
 
-            <Link to={`/${postData.category}/${postData.id}`} title="View post details" className="header">
-              {postData.title}
+          <Link to={`/${data.category}/${data.id}`} title="View post details" className="header">
+            {data.title}
+          </Link>
+
+          <Votes
+            postId={data.id}
+            voteDown={voteDown}
+            voteUp={voteUp}
+            loading={loading}
+            voteScore={data.voteScore}/>
+
+          <StyledMeta className="meta">
+
+            <span className="cinema">@{data.author},</span>
+            <span className="cinema"><TimeAgo date={data.timestamp} /></span>
+
+            {currentCategoryId === 'all' &&
+              <span>in <Link to={`/${data.category}`}>#{data.category}</Link></span>
+            }
+
+            <span className="cinema" title={`${data.commentCount || 0} comment(s) in this post`}> - {data.commentCount || 0} <i className="medium comment outline icon"/></span>
+
+          </StyledMeta>
+
+          <div className="ui message">
+            <p>{data.body}</p>
+          </div>
+
+          <div className="extra">
+
+            <Link to={`/${data.category}/${data.id}`} className="ui left floated mini orange button">
+              View
             </Link>
 
-            <Votes
-              postId={postData.id}
-              voteDown={this.props.voteDown}
-              voteUp={this.props.voteUp}
-              loading={this.props.loading}
-              voteScore={postData.voteScore}/>
+            <button onClick={onEditButtonClick} title="Edit post" className="left floated circular mini basic  ui icon button">
+              <i className="pencil icon"></i>
+            </button>
 
-            <div className="meta" style={authorStyle}>
+            <button onClick={onDeletePostButtonClick} title="Delete post" className="left floated circular mini basic ui icon button">
+              <i className="trash icon"></i>
+            </button>
 
-
-              <span className="cinema">@{postData.author},</span>
-              <span className="cinema"><TimeAgo date={postData.timestamp} /></span>
-
-              {this.props.currentCategoryId === 'all' &&
-                <span>in <Link to={`/${postData.category}`}>#{postData.category}</Link></span>
-
-              }
-
-              <span className="cinema" title={`${postData.commentCount || 0} comment(s) in this post`}> - {postData.commentCount || 0} <i className="medium comment outline icon"/></span>
-
-            </div>
-
-
-
-
-            <div className="ui message">
-              <p>{postData.body}</p>
-            </div>
-
-
-            <div className="extra">
-
-              <Link to={`/${postData.category}/${postData.id}`} className="ui left floated mini orange button">
-                View
-              </Link>
-
-              <button onClick={this.props.onEditButtonClick} title="Edit post" className="left floated circular mini basic  ui icon button">
-                <i className="pencil icon"></i>
-              </button>
-
-              <button onClick={this.props.onDeletePostButtonClick} title="Delete post" className="left floated circular mini basic ui icon button">
-                <i className="trash icon"></i>
-              </button>
-
-
-
-
-            </div>
           </div>
         </div>
 
-    );
-  }
+      </StyledItem>
+
+  );
 }
 
 export default ListItem;

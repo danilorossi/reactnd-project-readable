@@ -1,100 +1,109 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const Votes = ({ type, voteScore, style, loading, voteUp, voteDown, postId }) => {
+const StyledButton = styled.button`
+  margin: 0 !important;
+  background: transparent !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-right: ${props => (props['data-left'] && props.type === 'normal') ? '3px' : '-'} !important;
+  padding-left: ${props => (props['data-right'] && props.type === 'normal') ? '3px' : '-'} !important;
+`;
 
-  let counterStyle = {};
-  let buttonLeft = {};
-  let buttonRight = {};
-  let showIcon = true;
-  let score = +voteScore;
-  let mainColor = 'green';
-  if(score === 0) {
-    mainColor = 'grey';
-  } else if(score < 0) {
-    mainColor = 'red';
+const Wrapper = styled.div`
+  display: inline-block;
+  textAlign: center;
+`;
+
+const getScoreLabel = score => {
+  if(score >= 10) {
+    return '> 9'
+  } else if(score <= -10) {
+    return '< -9'
+  } else {
+    return score;
   }
+};
 
+const getMainColor = score => {
+  if(score === 0) {
+    return 'grey';
+  } else if(score < 0) {
+    return 'red';
+  } else {
+    return 'green';
+  }
+}
+
+const getCounterPadding = (voteScore, loading, type) => {
   switch(type) {
 
     case 'vertical':
-      buttonLeft = { padding: '0' };
-      buttonRight = { padding: '0' };
-      showIcon = false;
-      if(score >= 10) {
-        counterStyle = { padding: '5px' };
-        score = '> 9';
-      } else if(score <= -10) {
-        counterStyle = { padding: '5px' };
-        score = '< -9';
+      if(+voteScore >= 10) {
+        return '5px';
+      } else if(+voteScore <= -10) {
+        return '5px';
       } else {
-        counterStyle = { padding: `${loading?'2px':'3px'} ${loading?'5px':'10px'}`  };
+        return `${loading?'2px':'3px'} ${loading?'5px':'10px'}`;
       }
-      break;
 
     default:
-      counterStyle = { padding: `${loading?'4px':'5px'} 7px`};
-      buttonLeft = { paddingRight: '3px' };
-      buttonRight = { paddingLeft: '3px' };
-
+      return `${loading?'4px':'5px'} 7px`;
   }
+}
 
-  const spinnerStyle={
-    display: 'inline-block',
-    marginRight: type === 'vertical' ? '0' : '6px'
+const Votes = ({ className, type, voteScore, style, loading, voteUp, voteDown, postId }) => {
+
+  const showIcon = type !== 'vertical';
+  const score = getScoreLabel(voteScore);
+  const mainColor = getMainColor(voteScore);
+
+  const CounterWrapper = styled.div`
+    margin: 0;
+    verticalAlign: middle;
+    padding: ${getCounterPadding(voteScore, loading, type)} !important;
+  `;
+
+  const SpinnerWrapper = styled.div`
+    display: inline-block !important;
+    marginRight: ${type === 'vertical' ? '0' : '6px'} !important;
+  `;
+
+  const buttonExtraAttrs = {
+    [loading ? 'disabled':'enabled']: true,
+    type: type || 'normal'
   };
 
-  const buttonExtraAttrs = {};
-  if(loading) buttonExtraAttrs.disabled = true;
-
   return (
-    <div className="right floated" style={{ display: 'inline-block', textAlign: 'center', ...(style || {}) }}>
+    <Wrapper className={`${className} right floated`}>
 
-    <button
-      {...buttonExtraAttrs}
-      title="Vote up"
-      onClick={() => voteUp(postId)}
-      style={{
-        margin: '0',
-        borderTopRightRadius: '0',
-        borderBottomRightRadius: '0',
-        background: 'transparent',
-        ...buttonLeft
-      }}
-      className="ui icon mini button">
-      <i className={`plus ${mainColor} icon`}></i>
-    </button>
+      <StyledButton data-left
+        {...buttonExtraAttrs}
+        title="Vote up"
+        onClick={() => voteUp(postId)}
+        className="ui icon mini button">
+        <i className={`plus ${mainColor} icon`}></i>
+      </StyledButton>
 
-      <div
+      <CounterWrapper
         title={`${voteScore} votes`}
-        style={{
-          margin: '0',
-          verticalAlign: 'middle',
-          ...counterStyle,
-        }}
         className={`ui basic mini button ${mainColor}`}>
+
         {!loading && showIcon && <i className="heart icon"></i>}
-        {loading && <div style={spinnerStyle} className={`ui active mini ${mainColor} centered inline loader`}></div>}
+        {loading && <SpinnerWrapper className={`ui active mini ${mainColor} centered inline loader`}></SpinnerWrapper>}
         {!loading && score}
-        {loading && showIcon && '-'}
 
-      </div>
+      </CounterWrapper>
 
-      <button
+      <StyledButton data-right
         {...buttonExtraAttrs}
         title="Vote down"
         onClick={() => voteDown(postId)}
-        style={{
-          margin: '0',
-          borderTopLeftRadius: '0',
-          borderBottomLeftRadius: '0',
-          background: 'transparent',
-          ...buttonRight
-        }}
         className="ui icon mini button">
         <i className={`minus ${mainColor} icon`}></i>
-      </button>
+      </StyledButton>
 
-    </div>
+    </Wrapper>
 
   )
 }

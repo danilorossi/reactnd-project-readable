@@ -1,16 +1,13 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import styled from 'styled-components';
+
+const NoResultsWrapper = styled.div`
+  padding-top: 10%;
+`;
 
 const NoResults = ({ categoryId }) => {
   return (
-    <div>
-
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+    <NoResultsWrapper>
 
       <div className="ui center aligned container">
 
@@ -26,7 +23,7 @@ const NoResults = ({ categoryId }) => {
 
       </div>
 
-    </div>
+    </NoResultsWrapper>
   );
 }
 export default NoResults;

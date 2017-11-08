@@ -1,7 +1,6 @@
 import * as types from '../actions/types';
 import initialState from './initialState';
 
-//export default function postReducer(state = initialState.postsByCategory, action) {
 export default function postReducer(state = initialState.posts, action) {
 
     switch(action.type) {
@@ -19,12 +18,6 @@ export default function postReducer(state = initialState.posts, action) {
               [action.category]: Object.keys(action.posts)
             }
           };
-
-        // case types.LOAD_POST_DETAILS_SUCCESS:
-        //
-        //   console.log('POST REDUCERS ', action);
-        //   return state;
-        //   break;
 
         case types.VOTE_POST_SUCCESS:
           return {
@@ -66,7 +59,7 @@ export default function postReducer(state = initialState.posts, action) {
             byCategory: {
               ...state.byCategory,
               [action.post.category]: newByCategory,
-              ['all']: newAllCategory
+              all: newAllCategory
             }
           }
           // return {
@@ -90,9 +83,8 @@ export default function postReducer(state = initialState.posts, action) {
             byCategory: {
               ...state.byCategory,
               [action.post.category]: (state.byCategory[action.post.category] ?
-                  state.byCategory[action.post.category].filter(postId => postId != action.post.id) : []),
-              // TODO remove this?
-              ['all']: (state.byCategory['all'] || []).filter(postId => postId != action.post.id)
+                  state.byCategory[action.post.category].filter(postId => postId !== action.post.id) : []),
+              all: (state.byCategory['all'] || []).filter(postId => postId !== action.post.id)
             }
           }
 

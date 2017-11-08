@@ -1,5 +1,4 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 
 const TextAreaField = ({ title, name, value, placeholder, error, onChangeHandler }) => {
   return (

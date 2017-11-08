@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import { showDeletePostModal } from '../../actions/postActions';
 
@@ -17,6 +18,20 @@ import { sortedCommentsSelector } from '../../selectors/commentsSelectors';
 import ListItem from './listItem';
 import NoResults from './noResults';
 import ListSorter from '../common/listSorter';
+
+const StyledItems = styled.div`
+  padding: 20px;
+`;
+
+const StyledListSorter = styled(ListSorter)`
+  background: rgba(86, 182, 173, 0.8);
+  top: 48px;
+  width: 100%;
+  right: 0;
+  z-index: 1;
+  padding: 2px;
+  position: sticky;
+`;
 
 class PostsList extends Component {
 
@@ -35,7 +50,6 @@ class PostsList extends Component {
     this.changeCriteria = this.changeCriteria.bind(this);
     this.changeOrder = this.changeOrder.bind(this);
   }
-
 
   changeCriteria(nextCriteria) {
     let criteria = mapCriteriaToField(nextCriteria);
@@ -70,20 +84,13 @@ class PostsList extends Component {
 
     return (
       <div>
-        <ListSorter style={{
-            top: '48px',
-            width: '100%',
-            right: '0',
-            zIndex: '1',
-            padding: '2px',
-            position: 'sticky',
-            background: 'rgba(86, 182, 173, 0.8)'
-          }} onCriteriaChange={this.changeCriteria} onOrderChange={this.changeOrder} />
+        <StyledListSorter onCriteriaChange={this.changeCriteria} onOrderChange={this.changeOrder} />
 
         { posts && posts.length === 0 && <NoResults categoryId={this.props.categoryId} /> }
         { posts && posts.length > 0 && (
           <div>
-            <div className="ui divided items">
+
+            <StyledItems className="ui divided items">
               {posts.map( (post, index) => (
                 <ListItem
                   key={post.id}
@@ -96,9 +103,8 @@ class PostsList extends Component {
                   loading={this.props.votesAjaxStatus[post.id] || false}
                 />
               ))}
+            </StyledItems>
 
-
-            </div>
           </div>
         )}
       </div>

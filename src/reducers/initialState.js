@@ -67,6 +67,5 @@ export default {
     savingComment: false,
     deletingPost: false,
     deletingComment: false
-    //commentBodies: {}
   }
 }

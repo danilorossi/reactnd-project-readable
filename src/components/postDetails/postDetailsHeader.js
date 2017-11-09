@@ -1,68 +1,57 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-import { showDeletePostModal } from '../../actions/postActions';
+import Header from '../common/headerBar';
 
 class PostDetailsHeader extends Component {
 
   render() {
 
-    const { post } = this.props;
+    const { post, onDeletePost, onEditPost } = this.props;
 
     return (
 
-      <div className="ui top inverted teal fixed fluid one menu">
+      <Header.Bar>
 
-      <div className="item left aligned">
+        <Header.LeftItem>
 
-        <Link to="/" className="ui vertical right  floated teal animated button" tabIndex="0">
-          <div className="hidden content">
-          <i className="chevron left icon"></i>
-          </div>
-          <div className="visible content">
-            Back
-          </div>
-        </Link>
+          <Link to="/" className="ui vertical right  floated teal animated button" tabIndex="0">
+            <div className="hidden content">
+            <i className="chevron left icon"></i>
+            </div>
+            <div className="visible content">
+              Back
+            </div>
+          </Link>
 
-      </div>
+        </Header.LeftItem>
 
 
-        <div className="item right aligned">
+        <Header.RightItem>
 
-        <a onClick={this.props.onEditPost} to={`/manage/${this.props.post.id}`} className="ui vertical right  floated teal animated button" tabIndex="0">
-          <div className="hidden content">
-          <i className="edit icon"></i>
-          </div>
-          <div className="visible content">
-            Edit
-          </div>
-        </a>
+          <a onClick={() => onEditPost(post)} to={`/manage/${this.props.post.id}`} className="ui vertical right  floated teal animated button" tabIndex="0">
+            <div className="hidden content">
+            <i className="edit icon"></i>
+            </div>
+            <div className="visible content">
+              Edit
+            </div>
+          </a>
 
-        </div>
+        </Header.RightItem>
 
-        <div className="item">
+        <Header.Item>
 
-          <a onClick={() => this.props.deletePost(post)} className="ui red icon button" tabIndex="2">
+          <a onClick={() => onDeletePost(post)} className="ui red icon button" tabIndex="2">
             <i className="delete icon"></i> Delete
           </a>
 
-        </div>
+        </Header.Item>
 
-      </div>
+      </Header.Bar>
 
     );
   }
 }
 
-// export default PostDetailsHeader;
-function mapDispatchToProps (dispatch) {
-  return {
-    deletePost: (data) => dispatch(showDeletePostModal(data, '/')),
-  }
-}
-
-export default connect (
-  null,
-  mapDispatchToProps
-)(PostDetailsHeader);
+export default PostDetailsHeader;

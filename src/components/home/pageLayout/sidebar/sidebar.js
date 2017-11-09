@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledSidebar = styled.div`
-  top: 48px;
+  top: 48px !important;
 `;
 
 class Sidebar extends Component {

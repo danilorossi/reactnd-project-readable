@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import TimeAgo from 'react-timeago';
 import styled from 'styled-components';
 
 import {
@@ -12,20 +11,17 @@ import {
   voteUp as votePostUpAPI,
   voteDown as votePostDownAPI,
   editPost,
-  loadPostDetails
+  loadPostDetails,
+  showDeletePostModal
 } from '../../actions/postActions';
 
 import PostDetailsHeader from './postDetailsHeader';
 import Comments from './comments';
-// import PostForm from '../common/postForm';
+import PostData from './postData';
 import Votes from '../common/votes';
 
 const Wrapper = styled.div`
   padding: 60px 40px;
-`;
-const StyledMeta = styled.div`
-  fontSize: 0.9em;
-  margin: 0 0 1em;
 `;
 
 const VoteWrapper = styled(Votes)`
@@ -34,12 +30,15 @@ const VoteWrapper = styled(Votes)`
   top: 37px;
 `;
 
+const Grid = ({ children }) => {
+  return <div className="ui grid">{ children }</div>
+}
+const Column = ({ children, size }) => {
+  return <div className={`${size} wide column`}>{ children }</div>
+}
+
 class PostDetailsPage extends Component {
 
-  constructor(props) {
-    super(props);
-    this.onEditPost = this.onEditPost.bind(this);
-  }
   componentDidMount() {
     const postId = this.props.postDetails ? this.props.postDetails.id : this.props.postId;
 
@@ -50,9 +49,6 @@ class PostDetailsPage extends Component {
     this.props.loadComments(postId);
   }
 
-  onEditPost() {
-    this.props.startEditPost(Object.assign({}, this.props.postDetails));
-  }
 
   componentWillReceiveProps(nextProps) {
     if( this.props.postDetails === null && nextProps.postDetails && Object.keys(nextProps.postDetails).length === 0) {
@@ -60,6 +56,7 @@ class PostDetailsPage extends Component {
       this.props.history.replace('/');
     }
   }
+
   render() {
 
     const postDetails = this.props.postDetails;
@@ -69,47 +66,39 @@ class PostDetailsPage extends Component {
 
       {postDetails &&
 
-        <div className="ui grid">
+        <Grid>
 
-        <div className="three wide column">
+          <Column size="three">
 
-           <VoteWrapper
-            postId={postDetails.id}
-            voteDown={this.props.votePostDown}
-            voteUp={this.props.votePostUp}
-            loading={this.props.votesAjaxStatus.postVotes[postDetails.id] || false}
-            voteScore={postDetails.voteScore}
-          />
+             <VoteWrapper
+              postId={postDetails.id}
+              voteDown={this.props.votePostDown}
+              voteUp={this.props.votePostUp}
+              loading={this.props.votesAjaxStatus.postVotes[postDetails.id] || false}
+              voteScore={postDetails.voteScore}
+            />
 
-        </div>
+          </Column>
 
-          <div className="ten wide column">
+          <Column size="ten">
 
-            <PostDetailsHeader post={postDetails} onEditPost={this.onEditPost}/>
+            <PostDetailsHeader
+              post={postDetails}
+              onEditPost={this.props.startEditPost}
+              onDeletePost={this.props.deletePost}/>
 
-
-            <h3 className="ui dividing header">
-              {postDetails.title}
-            </h3>
-
-            <StyledMeta className="meta">
-              <span className="cinema">@{postDetails.author}, </span>
-              <span className="cinema"><TimeAgo date={postDetails.timestamp} /></span>
-              <span> in <Link to={`/${postDetails.category}`}>#{postDetails.category}</Link></span>
-            </StyledMeta>
-
-            <div className="ui message">{postDetails.body}</div>
+            <PostData data={postDetails} />
 
             <br />
+
             <Comments
               loadingStatus={this.props.votesAjaxStatus.commentVotes}
               postId={postDetails.id}
-
             />
 
+          </Column>
 
-          </div>
-        </div>
+        </Grid>
       }
 
       </Wrapper>
@@ -127,11 +116,12 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    loadPost: (postId) => dispatch(loadPostDetails(postId)),
     loadComments: (parentId) => dispatch(loadCommentsByParent(parentId)),
     startEditPost: (postData) => dispatch(editPost(postData)),
+    deletePost: (data) => dispatch(showDeletePostModal(data, '/')),
     votePostUp: (postId) => dispatch(votePostUpAPI(postId)),
     votePostDown: (postId) => dispatch(votePostDownAPI(postId)),
-    loadPost: (postId) => dispatch(loadPostDetails(postId)),
   }
 }
 

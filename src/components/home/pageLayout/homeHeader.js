@@ -1,32 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Header from '../../common/headerBar';
 
-class HomeHeader extends Component {
-  render() {
-    return (
+const HomeHeader = ({ createPost }) => {
 
-      <div className="ui top inverted teal fixed fluid one menu">
+  return (
+    <Header.Bar>
 
-        <div className="header  item">
-          <i className="comment icon"></i> Readable Project
-        </div>
+      <Header.Title>
+        <i className="comment icon"></i> Readable Project
+      </Header.Title>
 
-        <div className="item right aligned">
+      <Header.RightItem>
 
-          <a onClick={this.props.createPost} className="ui vertical right  floated teal animated button" tabIndex="0">
-            <div className="hidden content">
-            <i className="plus icon"></i>
-            </div>
-            <div className="visible content">
-              New Post
-            </div>
-          </a>
+        <a onClick={createPost} className="ui vertical right  floated teal animated button" tabIndex="0">
+          <div className="hidden content">
+          <i className="plus icon"></i>
+          </div>
+          <div className="visible content">
+            New Post
+          </div>
+        </a>
 
-        </div>
+      </Header.RightItem>
 
-      </div>
+    </Header.Bar>
 
-    );
-  }
+  );
 }
 
 export default HomeHeader;

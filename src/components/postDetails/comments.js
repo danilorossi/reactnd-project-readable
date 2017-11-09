@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import {
   voteUp as voteCommentUpAPI,
   voteDown as voteCommentDownAPI,
+  showDeleteCommentModal,
+  editComment
 } from '../../actions/commentActions';
 import { mapCriteriaToField } from '../../selectors/filterSelectors';
 import { sortedCommentsSelector } from '../../selectors/commentsSelectors';
@@ -67,11 +69,7 @@ class Comments extends Component {
   render() {
     const { comments } = this.state;
 
-    const commentVoteScoreAttrs = {
-      voteUp: this.props.voteCommentUp,
-      voteDown: this.props.voteCommentDown,
-      loadingStatus: this.props.loadingStatus
-    };
+    const { postId, voteCommentUp, voteCommentDown, loadingStatus, deleteComment, startEditComment } = this.props;
 
     return (
 
@@ -94,19 +92,27 @@ class Comments extends Component {
           }
 
           <div className="ui comments">
+
             {comments && comments.map((comment, idx) => (
+
               <CommentItem
-                {...commentVoteScoreAttrs}
+                voteUp={voteCommentUp}
+                voteDown={voteCommentDown}
+                loadingStatus={loadingStatus}
+                onDelete={deleteComment}
+                onEdit={startEditComment}
                 key={comment.id}
                 comment={comment}/>
 
             ))}
+
             <br/>
+
           </div>
 
         </StyledComments>
 
-        <CommentForm parentId={this.props.postId}/>
+        <CommentForm parentId={postId}/>
 
       </div>
     );
@@ -123,7 +129,9 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps (dispatch) {
   return {
     voteCommentUp: (commentId) => dispatch(voteCommentUpAPI(commentId)),
-    voteCommentDown: (commentId) => dispatch(voteCommentDownAPI(commentId))
+    voteCommentDown: (commentId) => dispatch(voteCommentDownAPI(commentId)),
+    deleteComment: (comment) => dispatch(showDeleteCommentModal(comment)),
+    startEditComment: (commentData) => dispatch(editComment(commentData))
   }
 }
 

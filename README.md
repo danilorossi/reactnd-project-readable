@@ -2,11 +2,18 @@
 
 This is the final assessment project for [Udacity's React course](https://www.udacity.com/course/react-nanodegree--nd019) - React & Redux section.
 
-## Project overview
+Contents:
+
+* [Project overview](#project-overview)
+* [Running the project](#running-the-project)
+* [Dev notes and improvements](#dev-notes-and-improvements)
+
+
+## 1. Project overview
 
 This is a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments (along the lines of Hacker News and Reddit).
 
-## Running the project
+## 2. Running the project
 
 This react project include a minimal nodejs project in the `api-server/` folder, cloned from the course's [starter server repository](https://github.com/udacity/reactnd-project-readable-starter).
 
@@ -37,4 +44,11 @@ You can do it manually, by running `npm run start` in both folder (the root one,
 
 Using `concurrently`package, it will run the server and the client server at the same time. The client server is configured as a proxy to redirect the APi calls to the nodejs server, that will be listening on a different port.
 
-**NOTE**: Work In Progress!
+## 3. Dev notes and improvements
+
+This is a **work in progress** project, there are a few important missing things that were not target of the course:
+
+* *no unit/integration testing*
+* *no Prop-Types or flow-type integration*
+
+I plan to work on the previous points, and migrate from `thunk`to `saga` middleware.

@@ -53,3 +53,4 @@ This is a **work in progress** project, there are a few important missing things
 * *no Prop-Types or flow-type integration*
 * *no robust forms validation*
 * *data caching*
+* *no performance analysis e.g. slow networks*

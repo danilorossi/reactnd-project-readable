@@ -5,58 +5,51 @@ export default function postReducer(state = initialState.commentsByParentId, act
 
     switch(action.type) {
 
-        case types.LOAD_COMMENTS_BY_PARENT_SUCCESS:
-          return {
-            ...state,
-            [action.parentId]: action.comments
-          };
+      // update comments list
+      case types.LOAD_COMMENTS_BY_PARENT_SUCCESS:
+        return {
+          ...state,
+          [action.parentId]: action.comments
+        };
 
-        case types.VOTE_COMMENT_SUCCESS:
-          return {
-            ...state,
-            [action.comment.parentId]: state[action.comment.parentId].map(item => item.id === action.comment.id ? action.comment : item)
-          };
+      // replace the voted comment with the updated one returned by the server
+      case types.VOTE_COMMENT_SUCCESS:
+        return {
+          ...state,
+          [action.comment.parentId]: state[action.comment.parentId].map(item => item.id === action.comment.id ? action.comment : item)
+        };
 
-        case types.SAVING_COMMENT_SUCCESS:
+      // replace the updated comment with the updated one returned by the server
+      case types.SAVING_COMMENT_SUCCESS:
+        return {
+          ...state,
+          [action.comment.parentId]:
+            state[action.comment.parentId]
+              .filter(item => item.id !== action.comment.id)
+              .concat(action.comment)
+        };
 
-          return {
-            ...state,
-            [action.comment.parentId]:
-              state[action.comment.parentId]
-                .filter(item => item.id !== action.comment.id)
-                .concat(action.comment)
-          };
+      // remove the deleted comment
+      case types.DELETE_COMMENT_SUCCESS:
+        return {
+          ...state,
+          [action.comment.parentId]:
+            state[action.comment.parentId]
+              .filter(item => item.id !== action.comment.id)
+        };
 
-        case types.DELETE_COMMENT_SUCCESS:
+      // delete all comments in the store if parent is deleted
+      case types.DELETE_POST_SUCCESS:
+        const newState = {
+          ...state
+        };
+        delete newState[action.post.id];
+        return {
+          ...newState
+        };
 
-          return {
-            ...state,
-            [action.comment.parentId]:
-              state[action.comment.parentId]
-                .filter(item => item.id !== action.comment.id)
-          };
-
-        case types.DELETE_POST_SUCCESS:
-          const newState = {
-            ...state
-          };
-          delete newState[action.post.id];
-          return {
-            ...newState
-          };
-          // return {
-          //   ...state,
-          //   [action.comment.parentId]: state[action.comment.parentId].map(item => item.id === action.comment.id ? action.comment : item)
-          // };
-
-        // case types.UPDATE_COMMENT_SUCCESS:
-        //   return {
-        //     ...state,
-        //     [action.comment.parentId]: state[action.comment.parentId].map(item => item.id === action.comment.id ? action.comment : item)
-        //   };
-
-        default:
-            return state;
+      default:
+          return state;
 
     }
 

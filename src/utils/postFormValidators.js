@@ -1,17 +1,21 @@
-export function validateField(field, nextValue) {
+import { isEmpty } from './strings';
 
-  // NOTE Validation here is just an example, non empty string,
-  // but we can make it as complex as needed.
+/** Validate a specific post form field */
+export function validateField(field, nextValue) {
+  // NOTE Validation here is just an example, no empty string
   return isEmpty(nextValue) ?
     { valid: false, error: `${field} can't be an empty string` } :
     { valid: true };
 }
 
+/**
+* Validate the whole form, as there may be rules that need to
+* take into account multiple fields at the same time e.g.
+* - two fields cannot have the same value
+* - there can´t be any empty value
+*/
 export function validateForm(formData) {
 
-  // NOTE this is for form level validation checks
-  // e.g. two fields cannot have the same value
-  // or there can´t be any empty value
   const valid =
     !isEmpty(formData.title) &&
     !isEmpty(formData.body) &&
@@ -21,9 +25,4 @@ export function validateForm(formData) {
   return valid ?
     { valid: true } :
     { valid: false, error: `No empty fields allowed` };
-
-}
-
-function isEmpty(string) {
-  return !string || string.trim().length === 0;
 }

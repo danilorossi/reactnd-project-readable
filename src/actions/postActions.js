@@ -4,7 +4,6 @@ import PostApi from '../api/postApi';
 function loadPostsByCategorySuccess(category, posts) {
   return { type: types.LOAD_POSTS_SUCCESS, category, posts };
 }
-
 function beginVotePost(postId) {
   return { type: types.BEGIN_VOTE_POST, postId };
 }
@@ -32,18 +31,6 @@ function savingPostSuccess(post) {
 function endSavingPost(postId) {
   return { type: types.END_SAVING_POST, postId };
 }
-
-export function postFormUpdated(field, nextValue) {
-  return { type: types.POST_FORM_UPDATED, field, nextValue };
-}
-
-export function showDeletePostModal(post, redirectTo) {
-  return { type: types.SHOW_DELETE_POST_MODAL, post, redirectTo };
-}
-export function hideDeletePostModal() {
-  return { type: types.HIDE_DELETE_POST_MODAL };
-}
-
 function startDeletingPost(post) {
   return { type: types.START_DELETING_POST, post };
 }
@@ -54,16 +41,33 @@ function endDeletingPost(post) {
   return { type: types.END_DELETING_POST, post };
 }
 
+/** Update the post form state */
+export function postFormUpdated(field, nextValue) {
+  return { type: types.POST_FORM_UPDATED, field, nextValue };
+}
+/** Show the delete post modal */
+export function showDeletePostModal(post, redirectTo) {
+  return { type: types.SHOW_DELETE_POST_MODAL, post, redirectTo };
+}
+/** Hide the delete post modal */
+export function hideDeletePostModal() {
+  return { type: types.HIDE_DELETE_POST_MODAL };
+}
 
 // THUNKs
 
+/** Delete a post */
 export function deletePost(post) {
   return function(dispatch) {
-    dispatch(startDeletingPost(post));
+    dispatch(startDeletingPost(post)); // ajax status
     PostApi
+      // server API
       .deletePost(post)
+        // update store
         .then(({ post }) => dispatch(deletePostSuccess(post)))
+        // ajax status
         .then(() => dispatch(endDeletingPost(post)))
+        // hide modal
         .then(() => dispatch(hideDeletePostModal()))
         .catch(error => {
             throw(error);
@@ -71,12 +75,13 @@ export function deletePost(post) {
   };
 }
 
-
-
+/** Load all posts by category */
 export function loadPostsByCategory(category = 'all') {
     return function(dispatch) {
-      const postsPromise = category === 'all' ? PostApi.getAllPosts() : /* TODO */ PostApi.getPostsByCategory(category);
+      // get posts
+      const postsPromise = category === 'all' ? PostApi.getAllPosts() : PostApi.getPostsByCategory(category);
       postsPromise.then(result => {
+          // update store
           dispatch(loadPostsByCategorySuccess(category, result));
       }).catch(error => {
           throw(error);
@@ -85,10 +90,13 @@ export function loadPostsByCategory(category = 'all') {
     };
 }
 
+/** Load a post by id */
 export function loadPostDetails(postId) {
   return function(dispatch) {
+    // server API
     PostApi.getPostDetails(postId)
       .then(post => {
+        // update state
         dispatch(loadPostsByCategorySuccess(post.category, { [postId]: post }));
       })
       .catch(error => {
@@ -97,12 +105,17 @@ export function loadPostDetails(postId) {
   };
 }
 
+/** Vote a post UP */
 export function voteUp(postId) {
   return function(dispatch) {
+    // ajax status
     dispatch(beginVotePost(postId));
     PostApi
+      // server API
       .votePostUp(postId)
+        // update state
         .then(({ post }) => dispatch(votePostSuccess(post)))
+        // ajax status
         .then(() => dispatch(endVotePost(postId)))
         .catch(error => {
             throw(error);
@@ -110,12 +123,17 @@ export function voteUp(postId) {
   };
 }
 
+/** Vote a post DOWN */
 export function voteDown(postId) {
   return function(dispatch) {
+    // ajax status
     dispatch(beginVotePost(postId));
     PostApi
+      // server API
       .votePostDown(postId)
+        // update state
         .then(({ post }) => dispatch(votePostSuccess(post)))
+        // ajax status
         .then(() => dispatch(endVotePost(postId)))
         .catch(error => {
             throw(error);
@@ -123,15 +141,19 @@ export function voteDown(postId) {
   };
 }
 
-
-
+/** Save or update a post */
 export function publishPost(post) {
   return function(dispatch) {
+    // ajax status
     dispatch(startSavingPost(post.id));
     PostApi
+      // server API
       .publishPost(post)
+        // update state
         .then(({ post }) => dispatch(savingPostSuccess(post)))
+        // ajax status
         .then(() => dispatch(endSavingPost(post.id)))
+        // hide modal
         .then(() => dispatch(closePostForm()))
         .catch(error => {
             throw(error);
@@ -139,20 +161,21 @@ export function publishPost(post) {
   };
 }
 
-
-
-
-
+/** Start editing a post */
 export function editPost(postData) {
   return function(dispatch) {
     dispatch(startEditPost(postData));
   };
 }
+
+/** Start a new post */
 export function createPost() {
   return function(dispatch) {
     dispatch(startCreatePost());
   };
 }
+
+/** Close post modal - edit or new */
 export function closePostForm() {
   return function(dispatch) {
     dispatch(cancelFormPost());

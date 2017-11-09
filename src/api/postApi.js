@@ -5,7 +5,7 @@ class PostApi {
 
   static getAllPosts() {
     return new Promise((resolve, reject) => {
-      fetch('/api/posts', { headers: { ...AUTH_HEADER } }) // GET the expected route
+      fetch('/api/posts', { headers: { ...AUTH_HEADER } })
       .then(data => data.json()) // Convert result to json
       .then(jsonData => {
         resolve(jsonData.reduce((prev, curr) => {
@@ -21,7 +21,7 @@ class PostApi {
 
   static getPostDetails(postId) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/posts/${postId}`, { headers: { ...AUTH_HEADER } }) // GET the expected route
+      fetch(`/api/posts/${postId}`, { headers: { ...AUTH_HEADER } })
       .then(data => data.json()) // Convert result to json
       .then(jsonData => resolve(jsonData))
       .catch(error => reject(error)); // Or reject with error
@@ -30,7 +30,7 @@ class PostApi {
 
   static getPostsByCategory(category) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/${category}/posts`, { headers: { ...AUTH_HEADER } }) // GET the expected route
+      fetch(`/api/${category}/posts`, { headers: { ...AUTH_HEADER } })
       .then(data => data.json()) // Convert result to json
       .then(jsonData => {
         resolve(jsonData.reduce((prev, curr) => {
@@ -46,7 +46,7 @@ class PostApi {
 
   static deletePost(post) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/posts/${post.id}`, { method: 'DELETE', headers: { ...AUTH_HEADER } }) // GET the expected route
+      fetch(`/api/posts/${post.id}`, { method: 'DELETE', headers: { ...AUTH_HEADER } })
       .then(data => data.json()) // Convert result to json
       .then(post => {
         resolve({ post });
@@ -63,7 +63,7 @@ class PostApi {
         body: JSON.stringify({
       		option: vote
       	})
-      }) // GET the expected route
+      })
       .then(data => data.json()) // Convert result to json
       .then(post => {
         resolve({ post });
@@ -82,6 +82,7 @@ class PostApi {
 
   static publishPost(post) {
 
+    // saving new post
     if(!post.id) {
 
       return new Promise((resolve, reject) => {
@@ -90,10 +91,10 @@ class PostApi {
           headers: new Headers({ ...AUTH_HEADER, ...JSON_CONTENT_HEADER }),
           body: JSON.stringify({
         		...post,
-            id: uuid.v1(),
-            timestamp: Date.now()
+            id: uuid.v1(), // add unique ID
+            timestamp: Date.now() // and timestamp
         	})
-        }) // GET the expected route
+        })
         .then(data => data.json()) // Convert result to json
         .then(post => {
           resolve({ post });
@@ -101,7 +102,7 @@ class PostApi {
         .catch(error => reject(error)); // Or reject with error
       })
 
-    } else {
+    } else { // updating exiting post
 
       return new Promise((resolve, reject) => {
         fetch(`/api/posts/${post.id}`, {
@@ -109,9 +110,9 @@ class PostApi {
           headers: new Headers({ ...AUTH_HEADER, ...JSON_CONTENT_HEADER }),
           body: JSON.stringify({
         		...post,
-            lastModified: Date.now()
+            lastModified: Date.now() // adding a last modified field
         	})
-        }) // GET the expected route
+        })
         .then(data => data.json()) // Convert result to json
         .then(post => {
           resolve({ post });

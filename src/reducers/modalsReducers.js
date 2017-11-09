@@ -8,7 +8,7 @@ import {
 } from '../utils/commentFormValidators';
 
 
-const POST_TEMPLATE = {
+const POST_TEMPLATE = Object.freeze({
   id: null,
   timestamp: null,
   title: '',
@@ -17,9 +17,9 @@ const POST_TEMPLATE = {
   category: '',
   voteScore: 0,
   deleted: false
-};
+});
 
-const COMMENT_TEMPLATE = {
+const COMMENT_TEMPLATE = Object.freeze({
   id: null,
   parentId: null,
   timestamp: null,
@@ -28,12 +28,13 @@ const COMMENT_TEMPLATE = {
   voteScore: 0,
   deleted: false,
   parentDeleted: false
-}
+});
 
 export default function commentFormReducer(state = initialState.modals, action) {
 
   switch(action.type) {
 
+    // show the delete comment modal and pass the required data
     case types.SHOW_DELETE_COMMENT_MODAL:
       return {
         ...state,
@@ -45,6 +46,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
+    // hide the delete comment modal
     case types.HIDE_DELETE_COMMENT_MODAL:
       return {
         ...state,
@@ -56,11 +58,13 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
+    // show the delete post modal and pass the required data
     case types.SHOW_DELETE_POST_MODAL:
       return {
         ...state,
         deletePost: {
           visible: true,
+          // when on post details page, on delete we will head back to the home page
           redirectTo: action.redirectTo,
           data: {
             post: action.post
@@ -68,6 +72,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
+    // hide the delete page modal
     case types.HIDE_DELETE_POST_MODAL:
       return {
         ...state,
@@ -79,6 +84,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
+    // show the edit comment modal and pass the required data
     case types.START_EDIT_COMMENT:
       return {
         ...state,
@@ -93,6 +99,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
+    // init the create comment form
     case types.START_CREATE_COMMENT:
       return {
         ...state,
@@ -108,7 +115,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
-
+    // hide the comment form and initi form data
     case types.CANCEL_FORM_COMMENT:
       return {
         ...state,
@@ -123,7 +130,7 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
-
+    // show the edit post modal and pass the required data
     case types.START_EDIT_POST:
       return {
         ...state,
@@ -138,18 +145,20 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
+    // show the create post modal and pass the required data
     case types.START_CREATE_POST:
       return {
         ...state,
         post: {
           visible: true,
-          data: POST_TEMPLATE,
+          data: POST_TEMPLATE, // avoid controlled/uncontrolled input warning
           errors: {},
           formError: null,
           valid: false
         }
       };
 
+    // hide the post modal
     case types.CANCEL_FORM_POST:
       return {
         ...state,
@@ -164,6 +173,8 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
+    // update the post form field data in the redux store
+    // plus check for errors and mark the form as valid or not
     case types.POST_FORM_UPDATED:
       const { field, nextValue } = action;
       const fieldResult = validateField(field, nextValue);
@@ -188,6 +199,8 @@ export default function commentFormReducer(state = initialState.modals, action) 
         }
       };
 
+    // update the comment form field data in the redux store
+    // plus check for errors and mark the form as valid or not
     case types.COMMENT_FORM_UPDATED:
       const commentField = action.field;
       const commentNextValue = action.nextValue;

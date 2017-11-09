@@ -19,7 +19,6 @@ import PostDetailsPage from './components/postDetails/postDetailsPage';
 
 const store = configureStore();
 
-
 const history = createHistory()
 
 store.dispatch(loadCategories());

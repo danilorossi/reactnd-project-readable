@@ -5,7 +5,7 @@ class CommentApi {
 
   static getByParent(postId) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/posts/${postId}/comments`, { headers: { ...AUTH_HEADER } }) // GET the expected route
+      fetch(`/api/posts/${postId}/comments`, { headers: { ...AUTH_HEADER } })
       .then(data => data.json()) // Convert result to json
       .then(jsonData => {
         resolve({ [postId]: jsonData });
@@ -22,7 +22,7 @@ class CommentApi {
         body: JSON.stringify({
       		option: vote
       	})
-      }) // GET the expected route
+      })
       .then(data => data.json()) // Convert result to json
       .then(comment => {
         resolve({ comment });
@@ -41,7 +41,7 @@ class CommentApi {
 
   static deleteComment(comment) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/comments/${comment.id}`, { method: 'DELETE', headers: { ...AUTH_HEADER } }) // GET the expected route
+      fetch(`/api/comments/${comment.id}`, { method: 'DELETE', headers: { ...AUTH_HEADER } })
       .then(data => data.json()) // Convert result to json
       .then(comment => {
         resolve({ comment });
@@ -51,6 +51,8 @@ class CommentApi {
   }
 
   static publishComment(comment) {
+
+    // saving new comment
     if(!comment.id) {
 
       return new Promise((resolve, reject) => {
@@ -59,10 +61,10 @@ class CommentApi {
           headers: new Headers({ ...AUTH_HEADER, ...JSON_CONTENT_HEADER }),
           body: JSON.stringify({
         		...comment,
-            timestamp: Date.now(),
-            id: uuid.v1()
+            timestamp: Date.now(), // adding timestamp
+            id: uuid.v1() // generating ID
         	})
-        }) // GET the expected route
+        })
         .then(data => data.json()) // Convert result to json
         .then(comment => {
           resolve({ comment });
@@ -70,7 +72,7 @@ class CommentApi {
         .catch(error => reject(error)); // Or reject with error
       })
 
-    } else {
+    } else { // updating existing entity
 
       return new Promise((resolve, reject) => {
         fetch(`/api/comments/${comment.id}`, {
@@ -78,9 +80,9 @@ class CommentApi {
           headers: new Headers({ ...AUTH_HEADER, ...JSON_CONTENT_HEADER }),
           body: JSON.stringify({
         		...comment,
-            lastModified: Date.now()
+            lastModified: Date.now() // adding a last modified field
         	})
-        }) // GET the expected route
+        })
         .then(data => data.json()) // Convert result to json
         .then(comment => {
           resolve({ comment });

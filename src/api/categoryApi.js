@@ -1,5 +1,3 @@
-
-
 import { AUTH_HEADER } from './globals';
 
 class CategoryApi {

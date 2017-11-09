@@ -4,23 +4,25 @@ import initialState from './initialState';
 
 export default function categoryReducer(state = initialState.categories, action) {
 
-    switch(action.type) {
+  switch(action.type) {
 
-        case types.UPDATE_CURRENT_CATEGORY:
-            return {
-              ...state,
-              current: action.category
-            };
+    // current selected category
+    case types.UPDATE_CURRENT_CATEGORY:
+      return {
+        ...state,
+        current: action.category
+      };
 
-        case types.LOAD_CATEGORIES_SUCCESS:
-          return {
-            ...state,
-            list: (action.categories || [])
-          };
+    // update category list
+    case types.LOAD_CATEGORIES_SUCCESS:
+      return {
+        ...state,
+        list: (action.categories || [])
+      };
 
-        default:
-            return state;
+    default:
+        return state;
 
-    }
+  }
 
 }

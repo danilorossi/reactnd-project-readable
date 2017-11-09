@@ -46,9 +46,10 @@ Using `concurrently`package, it will run the server and the client server at the
 
 ## 3. Dev notes and improvements
 
-This is a **work in progress** project, there are a few important missing things that were not target of the course:
+This is a **work in progress** project, there are a few important missing things that are not a requirement for the course, but that I will be working on as I have time:
 
+* *no init/splash screen*
 * *no unit/integration testing*
 * *no Prop-Types or flow-type integration*
-
-I plan to work on the previous points, and migrate from `thunk`to `saga` middleware.
+* *no robust forms validation*
+* *data caching*

@@ -1,5 +1,4 @@
-
-
+/** Sort comments by criteria and order */
 export function sortedCommentsSelector(list, criteria, order) {
   if(!list) return list;
   const ascending = order === 'ascending';

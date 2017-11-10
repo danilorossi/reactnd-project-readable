@@ -122,7 +122,9 @@ export default function commentFormReducer(state = initialState.modals, action) 
         comment: {
           visible: false,
           data: {
-            ...COMMENT_TEMPLATE // avoid controlled/uncontrolled input warning
+            ...COMMENT_TEMPLATE, // avoid controlled/uncontrolled input warning
+            // do not replace parentID, used in add comment form
+            parentId: state.comment.data.parentId
           },
           errors: {},
           formError: null,

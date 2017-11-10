@@ -46,7 +46,7 @@ class CommentForm extends Component {
 
     return (
       <div>
-        <h4 className="ui dividing header"> </h4> 
+        <h4 className="ui dividing header"> </h4>
         <form className="ui reply form">
 
             {saving && <Loader message="Publishing comment..." />}

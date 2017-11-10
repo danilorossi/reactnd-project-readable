@@ -53,7 +53,7 @@ class PostDetailsPage extends Component {
   componentWillReceiveProps(nextProps) {
     if( this.props.postDetails === null && nextProps.postDetails && Object.keys(nextProps.postDetails).length === 0) {
       // TODO this should managed from rest service api
-      this.props.history.replace('/');
+      this.props.history.replace('/not-found');
     }
   }
 

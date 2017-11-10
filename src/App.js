@@ -16,6 +16,7 @@ import { loadCategories } from './actions/categoryActions';
 import AppModals from './components/appModals';
 import HomePage from './components/home/homePage';
 import PostDetailsPage from './components/postDetails/postDetailsPage';
+import ErrorPage from './ErrorPage';
 
 const store = configureStore();
 
@@ -31,6 +32,7 @@ class App extends Component {
           <div>
 
             <Switch>
+              <Route exact path="/not-found" component={ErrorPage} />
               <Route exact path='/:category/:postId' render={({match}) => <PostDetailsPage postId={match.params.postId}/>}/>
               <Route exact path='/' render={() => <Redirect to="/all"/>} />
               <Route exact path="/:category" component={HomePage} />
